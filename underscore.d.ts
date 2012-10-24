@@ -4,6 +4,25 @@
 //     For all details and documentation:
 //     https://github.com/jbaldwin/underscore.d.ts
 
+/**
+* Notes:
+* 2012.10.24 -- Generics would be very useful, until typescript supports them I will be adding bindings
+*               for basic types, otherwise the Object or any type and casting will have to be done to
+*               allow a user to use custom classes.
+*               example now:
+*                   each(
+*                       list: string[], 
+*                       fn: (element: string, index?: number, list: string[]) => any,
+*                       context?: any): void;
+*               example with how generics could work:
+*                   T => The type of the elements in the Array
+*                   C => The type of the context object, would be optional ?? (might need 2 definitions)
+*                   each<T, C>(
+*                       list: T[],
+*                       fn: (el: T, index?: number, list: T[]) => T,
+*                       context?: C): void;
+**/
+
 interface Underscore {
 
 	/**************
@@ -286,16 +305,224 @@ interface Underscore {
 		iterator: (element: any, index?: number, list?: any[]) => bool,
 		context?: any): any[];
 
-
+	/**
+	* Returns true if all of the values in the list pass the iterator truth test. Delegates to the
+	* native method every, if present.
+	**/
+	all(
+		list: string[],
+		iterator: (element: string, index?: number, list?: string[]) => bool,
+		context?: any): bool;
+	all(
+		list: number[],
+		iterator: (element: number, index?: number, list?: string[]) => bool,
+		context?: any): bool;
 	all(
 		list: any[],
-		iterator: (element: string, index?: number, list?: any[]) => bool,
+		iterator: (element: any, index?: number, list?: any[]) => bool,
 		context?: any): bool;
 
+	/**
+	* Alias for 'all'.
+	**/
+	every(
+		list: string[],
+		iterator: (element: string, index?: number, list?: string[]) => bool,
+		context?: any): bool;
+	every(
+		list: number[],
+		iterator: (element: number, index?: number, list?: string[]) => bool,
+		context?: any): bool;
 	every(
 		list: any[],
-		iterator: (element: string, index?: number, list?: any[]) => bool,
+		iterator: (element: any, index?: number, list?: any[]) => bool,
 		context?: any): bool;
+
+	/**
+	* Returns true if any of the values in the list pass the iterator truth test. Short-circuits and
+	* stops traversing the list if a true element is found. Delegates to the native method some, if present.
+	**/
+	any(
+		list: string[],
+		iterator: (element: string, index?: number, list?: string[]) => bool,
+		context?: any): bool;
+	any(
+		list: number[],
+		iterator: (element: number, index?: number, list?: string[]) => bool,
+		context?: any): bool;
+	any(
+		list: any[],
+		iterator: (element: any, index?: number, list?: any[]) => bool,
+		context?: any): bool;
+
+	/**
+	* Alias for 'any'.
+	**/
+	some(
+		list: string[],
+		iterator: (element: string, index?: number, list?: string[]) => bool,
+		context?: any): bool;
+	some(
+		list: number[],
+		iterator: (element: number, index?: number, list?: string[]) => bool,
+		context?: any): bool;
+	some(
+		list: any[],
+		iterator: (element: any, index?: number, list?: any[]) => bool,
+		context?: any): bool;
+
+	/**
+	* Returns true if the value is present in the list. Uses indexOf internally,
+	* if list is an Array.
+	**/
+	contains(list: string[], value: string): bool;
+	contains(list: number[], value: number): bool;
+	contains(list: any[], value: any): bool;
+
+	/**
+	* Alias for 'contains'.
+	**/
+	include(list: string[], value: string): bool;
+	include(list: number[], value: number): bool;
+	include(list: any[], value: any): bool;
+
+	/**
+	* Calls the method named by methodName on each value in the list. Any extra arguments passed to
+	* invoke will be forwarded on to the method invocation.
+	**/
+	invoke(list: any[], methodName: string, ...arguments: any[]): void;
+
+	/**
+	* A convenient version of what is perhaps the most common use-case for map: extracting a list of
+	* property values.
+	**/
+	pluck(list: Object[], propertyName: string): any[];
+
+	/**
+	* Returns the maximum value in list. If iterator is passed, it will be used on each value to generate
+	* the criterion by which the value is ranked.
+	**/
+	max(list: number[]): number;
+	max(
+		list: Object[],
+		iterator: (element: Object, index?: number, list?: Object[]) => number,
+		context?: any): Object;
+
+	/**
+	* Returns the minimum value in list. If iterator is passed, it will be used on each value to generate
+	* the criterion by which the value is ranked.
+	**/
+	min(list: number[]): number;
+	min(
+		list: Object[],
+		iterator: (obj: Object, index?: number, list?: Object[]) => number,
+		context?: any): Object;
+
+	/**
+	* Returns a sorted copy of list, ranked in ascending order by the results of running each value
+	* through iterator. Iterator may also be the string name of the property to sort by (eg. length).
+	**/
+	sortBy(
+		list: string[],
+		iterator: (element: string, index?: number, list?: string[]) => number,
+		context?: any): any[];
+	sortBy(
+		list: number[],
+		iterator: (element: number, index?: number, list?: number[]) => number,
+		context?: any): any[];
+	sortBy(
+		list: any[],
+		iterator: (element: any, index?: number, list?: any[]) => number,
+		context?: any): any[];
+	sortBy(
+		list: string[],
+		iterator: string,
+		context?: any): string[];
+	sortBy(
+		list: number[],
+		iterator: string,
+		context?: any): number[];
+	sortBy(
+		list: any[],
+		iterator: string,
+		context?: any): any[];
+
+	/**
+	* Splits a collection into sets, grouped by the result of running each value through iterator.
+	* If iterator is a string instead of a function, groups by the property named by iterator on
+	* each of the values.
+	**/
+	groupBy(
+		list: string[],
+		iterator: (element: string, index?: number, list?: string[]) => string,
+		context?: any): { [key: string]: string[]; };
+	groupBy(
+		list: number[],
+		iterator: (element: number, index?: number, list?: number[]) => string,
+		context?: any): { [key: string]: number[]; };
+	groupBy(
+		list: any[],
+		iterator: (element: any, index?: number, list?: any[]) => string,
+		context?: any): { [key: string]: any[]; };
+	groupBy(
+		list: string[],
+		iterator: string,
+		context?: any): { [key: string]: string[]; };
+	groupBy(
+		list: number[],
+		iterator: string,
+		context?: any): { [key: string]: number[]; };
+	groupBy(
+		list: any[],
+		iterator: string,
+		context?: any): { [key: string]: any[]; };
+
+	/**
+	* Sorts a list into groups and returns a count for the number of objects in each group. Similar
+	* to groupBy, but instead of returning a list of values, returns a count for the number of values
+	* in that group.
+	**/
+	countBy(
+		list: string[],
+		iterator: (element: string, index?: number, list?: string[]) => string,
+		context?: any): { [key: string]: number };
+	countBy(
+		list: number[],
+		iterator: (element: number, index?: number, list?: number[]) => string,
+		context?: any): { [key: string]: number; };
+	countBy(
+		list: any[],
+		iterator: (element: any, index?: number, list?: any[]) => string,
+		context?: any): { [key: string]: number; };
+	countBy(
+		list: string[],
+		iterator: string,
+		context?: any): { [key: string]: number; };
+	countBy(
+		list: number[],
+		iterator: string,
+		context?: any): { [key: string]: number; };
+	countBy(
+		list: any[],
+		iterator: string,
+		context?: any): { [key: string]: number; };
+
+	/**
+	* Returns a shuffled copy of the list, using a version of the Fisher-Yates shuffle.
+	**/
+	shuffle(list: string[]): string[];
+	shuffle(list: number[]): number[];
+	shuffle(list: any[]): any[];
+
+	/**
+	* Converts the list (anything that can be iterated over), into a real Array. Useful for transmuting the arguments object.
+	**/
+	toArray(list: any): any[];
+
+	/**
+	* Return the number of values in the list.
+	**/
+	size(list: any): number;
 }
 
 declare var _: Underscore;
