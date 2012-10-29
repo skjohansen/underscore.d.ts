@@ -36,16 +36,16 @@ interface Underscore {
 	* (value, key, list). Delegates to the native forEach function if it exists.
 	**/
 	each(
-		list: string[], 
-		iterator: (element: string, index?: number, list?: string[]) => any, 
+		list: string[],
+		iterator: (element: string, index?: number, list?: string[]) => any,
 		context?: any): void;
 	each(
-		list: number[], 
-		iterator: (element: number, index?: number, list?: number[]) => any, 
+		list: number[],
+		iterator: (element: number, index?: number, list?: number[]) => any,
 		context?: any): void;
 	each(
-		list: any[], 
-		iterator: (element: any, index?: number, list?: any[]) => any, 
+		list: any[],
+		iterator: (element: any, index?: number, list?: any[]) => any,
 		context?: any): void;
 	each(
 		list: Object,
@@ -56,16 +56,16 @@ interface Underscore {
 	* Alias for 'each'.
 	**/
 	forEach(
-		list: string[], 
-		iterator: (element: string, index?: number, list?: string[]) => any, 
+		list: string[],
+		iterator: (element: string, index?: number, list?: string[]) => any,
 		context?: any): void;
 	forEach(
-		list: number[], 
-		iterator: (element: number, index?: number, list?: number[]) => any, 
+		list: number[],
+		iterator: (element: number, index?: number, list?: number[]) => any,
 		context?: any): void;
 	forEach(
-		list: any[], 
-		iterator: (element: any, index?: number, list?: any[]) => any, 
+		list: any[],
+		iterator: (element: any, index?: number, list?: any[]) => any,
 		context?: any): void;
 	forEach(
 		list: Object,
@@ -78,16 +78,16 @@ interface Underscore {
 	* object, iterator's arguments will be (value, key, list).
 	**/
 	map(
-		list: string[], 
-		iterator: (element: any, index?: number, list?: any[]) => any, 
+		list: string[],
+		iterator: (element: any, index?: number, list?: any[]) => any,
 		context?: any): string[];
 	map(
-		list: number[], 
-		iterator: (element: any, index?: number, list?: any[]) => any, 
+		list: number[],
+		iterator: (element: any, index?: number, list?: any[]) => any,
 		context?: any): number[];
 	map(
-		list: any[], 
-		iterator: (element: any, index?: number, list?: any[]) => any, 
+		list: any[],
+		iterator: (element: any, index?: number, list?: any[]) => any,
 		context?: any): any[];
 	map(
 		list: Object,
@@ -98,16 +98,16 @@ interface Underscore {
 	* Alias for 'map'.
 	**/
 	collect(
-		list: string[], 
-		iterator: (element: any, index?: number, list?: any[]) => any, 
+		list: string[],
+		iterator: (element: any, index?: number, list?: any[]) => any,
 		context?: any): string[];
 	collect(
-		list: number[], 
-		iterator: (element: any, index?: number, list?: any[]) => any, 
+		list: number[],
+		iterator: (element: any, index?: number, list?: any[]) => any,
 		context?: any): number[];
 	collect(
-		list: any[], 
-		iterator: (element: any, index?: number, list?: any[]) => any, 
+		list: any[],
+		iterator: (element: any, index?: number, list?: any[]) => any,
 		context?: any): any[];
 	collect(
 		list: Object,
@@ -121,17 +121,17 @@ interface Underscore {
 	* and index (or key) of the iteration, and finally a reference to the entire list.
 	**/
 	reduce(
-		list: string[], 
+		list: string[],
 		iterator: (element: string, index?: number, list?: string[]) => string,
 		memo: string,
 		context?: any): string;
 	reduce(
-		list: number[], 
+		list: number[],
 		iterator: (element: number, index?: number, list?: number[]) => number,
 		memo: number,
 		context?: any): number;
 	reduce(
-		list: any[], 
+		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => any,
 		memo: any,
 		context?: any): any;
@@ -140,17 +140,17 @@ interface Underscore {
 	* Alias for 'reduce'.
 	**/
 	inject(
-		list: string[], 
+		list: string[],
 		iterator: (element: string, index?: number, list?: string[]) => string,
 		memo: string,
 		context?: any): string;
 	inject(
-		list: number[], 
+		list: number[],
 		iterator: (element: number, index?: number, list?: number[]) => number,
 		memo: number,
 		context?: any): number;
 	inject(
-		list: any[], 
+		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => any,
 		memo: any,
 		context?: any): any;
@@ -159,17 +159,17 @@ interface Underscore {
 	* Alias for 'reduce'.
 	**/
 	foldl(
-		list: string[], 
+		list: string[],
 		iterator: (element: string, index?: number, list?: string[]) => string,
 		memo: string,
 		context?: any): string;
 	foldl(
-		list: number[], 
+		list: number[],
 		iterator: (element: number, index?: number, list?: number[]) => number,
 		memo: number,
 		context?: any): number;
 	foldl(
-		list: any[], 
+		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => any,
 		memo: any,
 		context?: any): any;
@@ -180,17 +180,17 @@ interface Underscore {
 	* language with lazy evaluation.
 	**/
 	reduceRight(
-		list: string[], 
+		list: string[],
 		iterator: (element: string, index?: number, list?: string[]) => string,
 		memo: string,
 		context?: any): string;
 	reduceRight(
-		list: number[], 
+		list: number[],
 		iterator: (element: number, index?: number, list?: number[]) => number,
 		memo: number,
 		context?: any): number;
 	reduceRight(
-		list: any[], 
+		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => any,
 		memo: any,
 		context?: any): any;
@@ -199,17 +199,17 @@ interface Underscore {
 	* Alias for 'reduceRight'.
 	**/
 	foldr(
-		list: string[], 
+		list: string[],
 		iterator: (element: string, index?: number, list?: string[]) => string,
 		memo: string,
 		context?: any): string;
 	foldr(
-		list: number[], 
+		list: number[],
 		iterator: (element: number, index?: number, list?: number[]) => number,
 		memo: number,
 		context?: any): number;
 	foldr(
-		list: any[], 
+		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => any,
 		memo: any,
 		context?: any): any;
@@ -220,15 +220,15 @@ interface Underscore {
 	* and doesn't traverse the entire list.
 	**/
 	find(
-		list: string[], 
+		list: string[],
 		iterator: (element: string, index?: number, list?: string[]) => bool,
 		context?: any): string;
 	find(
-		list: number[], 
+		list: number[],
 		iterator: (element: number, index?: number, list?: number[]) => bool,
 		context?: any): number;
 	find(
-		list: any[], 
+		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => bool,
 		context?: any): any;
 
@@ -236,15 +236,15 @@ interface Underscore {
 	* Alias for 'find'.
 	**/
 	detect(
-		list: string[], 
+		list: string[],
 		iterator: (element: string, index?: number, list?: string[]) => bool,
 		context?: any): string;
 	detect(
-		list: number[], 
+		list: number[],
 		iterator: (element: number, index?: number, list?: number[]) => bool,
 		context?: any): number;
 	detect(
-		list: any[], 
+		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => bool,
 		context?: any): any;
 
@@ -254,15 +254,15 @@ interface Underscore {
 	* test (iterator). Delegates to the native filter method, if it exists.
 	**/
 	filter(
-		list: string[], 
+		list: string[],
 		iterator: (element: string, index?: number, list?: string[]) => bool,
 		context?: any): string[];
 	filter(
-		list: number[], 
+		list: number[],
 		iterator: (element: number, index?: number, list?: number[]) => bool,
 		context?: any): number[];
 	filter(
-		list: any[], 
+		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => bool,
 		context?: any): any[];
 
@@ -270,15 +270,15 @@ interface Underscore {
 	* Alias for 'filter'.
 	**/
 	select(
-		list: string[], 
+		list: string[],
 		iterator: (element: string, index?: number, list?: string[]) => bool,
 		context?: any): string[];
 	select(
-		list: number[], 
+		list: number[],
 		iterator: (element: number, index?: number, list?: number[]) => bool,
 		context?: any): number[];
 	select(
-		list: any[], 
+		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => bool,
 		context?: any): any[];
 
@@ -293,15 +293,15 @@ interface Underscore {
 	* The opposite of filter.
 	**/
 	reject(
-		list: string[], 
+		list: string[],
 		iterator: (element: string, index?: number, list?: string[]) => bool,
 		context?: any): string[];
 	reject(
-		list: number[], 
+		list: number[],
 		iterator: (element: number, index?: number, list?: number[]) => bool,
 		context?: any): number[];
 	reject(
-		list: any[], 
+		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => bool,
 		context?: any): any[];
 
@@ -515,7 +515,8 @@ interface Underscore {
 	shuffle(list: any[]): any[];
 
 	/**
-	* Converts the list (anything that can be iterated over), into a real Array. Useful for transmuting the arguments object.
+	* Converts the list (anything that can be iterated over), into a real Array. Useful for transmuting
+	* the arguments object.
 	**/
 	toArray(list: any): any[];
 
@@ -523,6 +524,216 @@ interface Underscore {
 	* Return the number of values in the list.
 	**/
 	size(list: any): number;
+
+	/*********
+	* Arrays *
+	**********/
+
+	/**
+	* Returns the first element of an array. Passing n will return the first n elements of the array.
+	**/
+	first(array: string[]): string;
+	first(array: string[], n: number): string[];
+	first(array: number[]): number;
+	first(array: number[], n: number): number[];
+	first(array: any[]): any;
+	first(array: any[], n: number): any[];
+
+	/**
+	* Alias for 'first'.
+	**/
+	head(array: string[]): string;
+	head(array: string[], n: number): string[];
+	head(array: number[]): number;
+	head(array: number[], n: number): number[];
+	head(array: any[]): any;
+	head(array: any[], n: number): any[];
+
+	/**
+	* Alias for 'first'.
+	**/
+	take(array: string[]): string;
+	take(array: string[], n: number): string[];
+	take(array: number[]): number;
+	take(array: number[], n: number): number[];
+	take(array: any[]): any;
+	take(array: any[], n: number): any[];
+
+	/**
+	* Returns everything but the last entry of the array. Especially useful on the arguments object.
+	* Pass n to exclude the last n elements from the result.
+	**/
+	initial(array: string[], n?: number): string[];
+	initial(array: number[], n?: number): number[];
+	initial(array: any[], n?: number): any[];
+
+	/**
+	* Returns the last element of an array. Passing n will return the last n elements of the array.
+	**/
+	last(array: string[]): string;
+	last(array: string[], n: number): string[];
+	last(array: number[]): number;
+	last(array: number[], n: number): number[];
+	last(array: any[]): any;
+	last(array: any[], n: number): any[];
+
+	/**
+	* Returns the rest of the elements in an array. Pass an index to return the values of the array
+	* from that index onward.
+	**/
+	rest(array: string[], index?: number): string[];
+	rest(array: number[], index?: number): number[];
+	rest(array: any[], index?: number): any[];
+
+	/**
+	* Alias for 'rest'.
+	**/
+	tail(array: string[], index?: number): string[];
+	tail(array: number[], index?: number): number[];
+	tail(array: any[], index?: number): any[];
+
+	/**
+	* Alias for 'rest'.
+	**/
+	drop(array: string[], index?: number): string[];
+	drop(array: number[], index?: number): number[];
+	drop(array: any[], index?: number): any[];
+
+	/**
+	* Returns a copy of the array with all falsy values removed. In JavaScript, false, null, 0, "",
+	* undefined and NaN are all falsy.
+	**/
+	compact(array: string[]): string[];
+	compact(array: number[]): number[];
+	compact(array: bool[]): bool[];
+	compact(array: any[]): any[];
+
+	/**
+	* Flattens a nested array (the nesting can be to any depth). If you pass shallow, the array will
+	* only be flattened a single level.
+	**/
+	flatten(array: string[], shallow?: bool): string[];
+	flatten(array: number[], shallow?: bool): number[];
+	flatten(array: any[], shallow?: bool): any[];
+
+	/**
+	* Returns a copy of the array with all instances of the values removed.
+	**/
+	without(array: string[], ...values: string[]): string[];
+	without(array: number[], ...values: number[]): number[];
+	without(array: any[], ...values: any[]): any[];
+
+	/**
+	* Computes the union of the passed-in arrays: the list of unique items, in order, that are
+	* present in one or more of the arrays.
+	**/
+	union(...arrays: string[][]): string[];
+	union(...arrays: number[][]): number[];
+	union(...arrays: any[][]): any[];
+
+	/**
+	* Computes the list of values that are the intersection of all the arrays. Each value in the result
+	* is present in each of the arrays.
+	**/
+	intersection(...arrays: string[][]): string[];
+	intersection(...arrays: number[][]): number[];
+	intersection(...arrays: any[][]): any[];
+
+	/**
+	* Similar to without, but returns the values from array that are not present in the other arrays.
+	**/
+	difference(array: string[], ...others: string[]): string[];
+	difference(array: number[], ...others: number[]): number[];
+	difference(array: any[], ...others: any[]): any[];
+
+	/**
+	* Produces a duplicate-free version of the array, using === to test object equality. If you know in
+	* advance that the array is sorted, passing true for isSorted will run a much faster algorithm. If
+	* you want to compute unique items based on a transformation, pass an iterator function.
+	**/
+	uniq(array: string[], isSorted?: bool, iterator?: (element: string, index?: number, list?: string[]) => string): string[];
+	uniq(array: number[], isSorted?: bool, iterator?: (element: number, index?: number, list?: number[]) => number): number[];
+	uniq(array: any[], isSorted?: bool, iterator?: (element: any, index?: number, list?: any[]) => any): any[];
+
+	/**
+	* Alias for 'uniq'.
+	**/
+	unique(array: string[], isSorted?: bool, iterator?: (element: string, index?: number, list?: string[]) => string): string[];
+	unique(array: number[], isSorted?: bool, iterator?: (element: number, index?: number, list?: number[]) => number): number[];
+	unique(array: any[], isSorted?: bool, iterator?: (element: any, index?: number, list?: any[]) => any): any[];
+
+	/**
+	* Merges together the values of each of the arrays with the values at the corresponding position.
+	* Useful when you have separate data sources that are coordinated through matching array indexes.
+	* If you're working with a matrix of nested arrays, zip.apply can transpose the matrix in a similar fashion.
+	**/
+	zip(...arrays: string[][]): string[][];
+	zip(...arrays: number[][]): number[][];
+	zip(...arrays: any[][]): any[][];
+
+	/**
+	* Converts arrays into objects. Pass either a single list of [key, value] pairs, or a
+	* list of keys, and a list of values.
+	**/
+	object(keys: string[], values: any[]): Object;
+	object(...keyValuePairs: any[][]): Object;
+
+	/**
+	* Returns the index at which value can be found in the array, or -1 if value is not present in the array.
+	* Uses the native indexOf function unless it's missing. If you're working with a large array, and you know
+	* that the array is already sorted, pass true for isSorted to use a faster binary search ... or, pass a number
+	* as the third argument in order to look for the first matching value in the array after the given index.
+	**/
+	indexOf(array: string[], value: string, isSorted?: bool): number;
+	indexOf(array: number[], value: number, isSorted?: bool): number;
+	indexOf(array: any[], value: any,isSorted?: bool): number;
+
+	/**
+	* Returns the index of the last occurrence of value in the array, or -1 if value is not present. Uses the
+	* native lastIndexOf function if possible. Pass fromIndex to start your search at a given index.
+	**/
+	lastIndexOf(array: string[], value: string, isSorted?: bool): number;
+	lastIndexOf(array: number[], value: number, isSorted?: bool): number;
+	lastIndexOf(array: any[], value: any,isSorted?: bool): number;
+
+	/**
+	* Uses a binary search to determine the index at which the value should be inserted into the list in order
+	* to maintain the list's sorted order. If an iterator is passed, it will be used to compute the sort ranking
+	* of each value, including the value you pass.
+	**/
+	sortedIndex(list: string[], value: string, iterator?: (element: string) => number): number;
+	sortedIndex(list: number[], value: number, iterator?: (element: number) => number): number;
+	sortedIndex(list: any[], value: any, iterator?: (element: any) => number): number;
+
+	/**
+	* A function to create flexibly-numbered lists of integers, handy for each and map loops. start, if omitted,
+	* defaults to 0; step defaults to 1. Returns a list of integers from start to stop, incremented (or decremented)
+	* by step, exclusive.
+	**/
+	range(start: number, stop: number, step?: number): number[];
+	// If start is not specified the implementation will never pull the step (step = arguments[2] || 0)
+	range(stop: number): number[];
+
+
+
+
+
+
+	/************
+	* Functions *
+	*************/
+
+	/**********
+	* Objects *
+	***********/
+
+	/**********
+	* Utility *
+	***********/
+
+	/***********
+	* Chaining *
+	************/
 }
 
 declare var _: Underscore;
