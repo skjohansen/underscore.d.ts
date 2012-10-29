@@ -686,7 +686,7 @@ interface Underscore {
 	**/
 	indexOf(array: string[], value: string, isSorted?: bool): number;
 	indexOf(array: number[], value: number, isSorted?: bool): number;
-	indexOf(array: any[], value: any,isSorted?: bool): number;
+	indexOf(array: any[], value: any, isSorted?: bool): number;
 
 	/**
 	* Returns the index of the last occurrence of value in the array, or -1 if value is not present. Uses the
@@ -694,7 +694,7 @@ interface Underscore {
 	**/
 	lastIndexOf(array: string[], value: string, isSorted?: bool): number;
 	lastIndexOf(array: number[], value: number, isSorted?: bool): number;
-	lastIndexOf(array: any[], value: any,isSorted?: bool): number;
+	lastIndexOf(array: any[], value: any, isSorted?: bool): number;
 
 	/**
 	* Uses a binary search to determine the index at which the value should be inserted into the list in order
@@ -801,10 +801,162 @@ interface Underscore {
 	**/
 	compose(...functions: Function[]): Function;
 
-
 	/**********
 	* Objects *
 	***********/
+
+	/**
+	* Retrieve all the names of the object's properties.
+	**/
+	keys(object: Object): string[];
+
+	/**
+	* Return all of the values of the object's properties.
+	**/
+	values(object: Object): any[];
+
+	/**
+	* Convert an object into a list of [key, value] pairs.
+	**/
+	pairs(object: Object): any[][];
+
+	/**
+	* Returns a copy of the object where the keys have become the values and the values the keys.
+	* For this to work, all of your object's values should be unique and string serializable.
+	**/
+	invert(object: Object): Object;
+
+	/**
+	* Returns a sorted list of the names of every method in an object — that is to say,
+	* the name of every function property of the object.
+	**/
+	functions(object: Object): string[];
+
+	/**
+	* Copy all of the properties in the source objects over to the destination object, and return
+	* the destination object. It's in-order, so the last source will override properties of the
+	* same name in previous arguments.
+	**/
+	extend(destination: Object, ...sources: Object[]): Object;
+
+	/**
+	* Return a copy of the object, filtered to only have values for the whitelisted keys
+	* (or array of valid keys).
+	**/
+	pick(object: Object, ...keys: string[]): Object;
+
+	/**
+	* Return a copy of the object, filtered to omit the blacklisted keys (or array of keys).
+	**/
+	omit(object: Object, ...keys: string[]): Object;
+
+	/**
+	* Fill in null and undefined properties in object with values from the defaults objects,
+	* and return the object. As soon as the property is filled, further defaults will have no effect.
+	**/
+	defaults(object: Object, ...defaults: Object[]): Object;
+
+	/**
+	* Create a shallow-copied clone of the object.
+	* Any nested objects or arrays will be copied by reference, not duplicated.
+	**/
+	clone(object: Object): Object;
+
+	/**
+	* Invokes interceptor with the object, and then returns object. The primary purpose of this method
+	* is to "tap into" a method chain, in order to perform operations on intermediate results within the chain.
+	**/
+	tap(object: Object, intercepter: Function): Object;
+
+	/**
+	* Does the object contain the given key? Identical to object.hasOwnProperty(key), but uses a safe
+	* reference to the hasOwnProperty function, in case it's been overridden accidentally.
+	**/
+	has(object: Object, key: string): bool;
+
+	/**
+	* Performs an optimized deep comparison between the two objects,
+	* to determine if they should be considered equal.
+	**/
+	isEqual(object: Object, other: Object): bool;
+
+	/**
+	* Returns true if object contains no values.
+	**/
+	isEmpty(object: Object): bool;
+
+	/**
+	* Returns true if object is a DOM element.
+	**/
+	isElement(object: any): bool;
+
+	/**
+	* Returns true if object is an Array.
+	**/
+	isArray(object: any): bool;
+
+	/**
+	* Returns true if value is an Object. Note that JavaScript arrays and functions are objects,
+	* while (normal) strings and numbers are not.
+	**/
+	isObject(object: any): bool;
+
+	/**
+	* Returns true if object is an Arguments object.
+	**/
+	isArguments(object: any): bool;
+
+	/**
+	* Returns true if object is a Function.
+	**/
+	isFunction(object: any): bool;
+
+	/**
+	* Returns true if object is a String.
+	**/
+	isString(object: any): bool;
+
+	/**
+	* Returns true if object is a Number (including NaN).
+	**/
+	isNumber(object: any): bool;
+
+	/**
+	* Returns true if object is a finite Number.
+	**/
+	isFinite(object: any): bool;
+
+	/**
+	* Returns true if object is either true or false.
+	**/
+	isBoolean(object: any): bool;
+
+	/**
+	* Returns true if object is a Date.
+	**/
+	isDate(object: any): bool;
+
+	/**
+	* Returns true if object is a RegExp.
+	**/
+	isRegExp(object: any): bool;
+
+	/**
+	* Returns true if object is NaN.
+	* Note: this is not the same as the native isNaN function,
+	* which will also return true if the variable is undefined.
+	**/
+	isNaN(object: any): bool;
+
+	/**
+	* Returns true if the value of object is null.
+	**/
+	isNull(object: any): bool;
+
+	/**
+	* Returns true if value is undefined.
+	**/
+	isUndefined(object: any): bool;
 
 	/**********
 	* Utility *
