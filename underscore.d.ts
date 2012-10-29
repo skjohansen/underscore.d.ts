@@ -79,11 +79,11 @@ interface Underscore {
 	**/
 	map(
 		list: string[],
-		iterator: (element: any, index?: number, list?: any[]) => any,
+		iterator: (element: string, index?: number, list?: string[]) => string,
 		context?: any): string[];
 	map(
 		list: number[],
-		iterator: (element: any, index?: number, list?: any[]) => any,
+		iterator: (element: number, index?: number, list?: number[]) => number,
 		context?: any): number[];
 	map(
 		list: any[],
@@ -99,11 +99,11 @@ interface Underscore {
 	**/
 	collect(
 		list: string[],
-		iterator: (element: any, index?: number, list?: any[]) => any,
+		iterator: (element: string, index?: number, list?: string[]) => string,
 		context?: any): string[];
 	collect(
 		list: number[],
-		iterator: (element: any, index?: number, list?: any[]) => any,
+		iterator: (element: number, index?: number, list?: number[]) => number,
 		context?: any): number[];
 	collect(
 		list: any[],
@@ -962,9 +962,123 @@ interface Underscore {
 	* Utility *
 	***********/
 
+	/**
+	* Give control of the "_" variable back to its previous owner.
+	* Returns a reference to the Underscore object.
+	**/
+	noConflict(): Underscore;
+
+	/**
+	* Returns the same value that is used as the argument. In math: f(x) = x
+	* This function looks useless, but is used throughout Underscore as a default iterator.
+	**/
+	identity(value: string): string;
+	identity(value: string[]): string[];
+	identity(value: number): number;
+	identity(value: number[]): number[];
+	identity(value: bool): bool;
+	identity(value: any): any;
+
+	/**
+	* Invokes the given iterator function n times.
+	* Each invocation of iterator is called with an index argument.
+	* @example
+	*
+	* _(3).times(function(n){ genie.grantWishNumber(n); });
+	*
+	**/
+	times(iterator: (n: number) => void , context?: any): void;
+	times(n: number, iterator: (n: number) => void , context?: any): void;
+
+	/**
+	* Returns a random integer between min and max, inclusive. If you only pass one argument,
+	* it will return a number between 0 and that number.
+	**/
+	random(max: number): number;
+	random(min: number, max: number): number;
+
+	/**
+	* Allows you to extend Underscore with your own utility functions. Pass a hash of
+	* {name: function} definitions to have your functions added to the Underscore object,
+	* as well as the OOP wrapper.
+	* @example
+	*
+	* _.mixin({
+	*     capitalize : function(string) {
+	*         return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+	*     }
+	* });
+	* _("fabio").capitalize();
+	* => "Fabio"
+	*
+	**/
+	mixin(object: Object): void;
+
+	/**
+	* Generate a globally-unique id for client-side models or DOM elements that need one.
+	* If prefix is passed, the id will be appended to it. Without prefix, returns an integer.
+	**/
+	uniqueId(): number;
+	uniqueId(prefix: string): string;
+
+	/**
+	* Escapes a string for insertion into HTML, replacing &, <, >, ", ', and / characters.
+	**/
+	escape(str: string): string;
+
+	/**
+	* If the value of the named property is a function then invoke it; otherwise, return it.
+	**/
+	result(object: Object, property: string): any;
+
+	/**
+	* Compiles JavaScript templates into functions that can be evaluated for rendering. Useful
+	* for rendering complicated bits of HTML from JSON data sources. Template functions can both
+	* interpolate variables, using <%= … %>, as well as execute arbitrary JavaScript code, with
+	* <% … %>. If you wish to interpolate a value, and have it be HTML-escaped, use <%- … %> When
+	* you evaluate a template function, pass in a data object that has properties corresponding to
+	* the template's free variables. If you're writing a one-off, you can pass the data object as
+	* the second parameter to template in order to render immediately instead of returning a template
+	* function. The settings argument should be a hash containing any _.templateSettings that should
+	* be overridden.
+	**/
+	template(templateString: string, data?: Object, settings?: UnderscoreTemplateSettings): any;
+
+	// By default, Underscore uses ERB-style template delimiters, change the
+	// following template settings to use alternative delimiters.
+	templateSettings: UnderscoreTemplateSettings;
+
 	/***********
 	* Chaining *
 	************/
+
+	/**
+	* Returns a wrapped object. Calling methods on this object will continue to return wrapped objects
+	* until value is used.
+	**/
+	chain(obj: Object): Object;
+
+	/**
+	* Extracts the value of a wrapped object.
+	**/
+	value(): any;
+	value(obj: Object): any;
+
+	/**************
+	* OOP Wrapper *
+	**************/
+	(key: string): Underscore;		// Call function or property
+	(n: number): Underscore;		// Call 'times', etc
+}
+
+/**
+* underscore.js template settings, set templateSettings or pass as an argument 
+* to 'template()' to overide defaults.
+**/
+interface UnderscoreTemplateSettings {
+	evaluate: RegExp;
+	interpolate: RegExp;
+	escape: RegExp;
 }
 
 declare var _: Underscore;
