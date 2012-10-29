@@ -714,14 +714,93 @@ interface Underscore {
 	// If start is not specified the implementation will never pull the step (step = arguments[2] || 0)
 	range(stop: number): number[];
 
-
-
-
-
-
 	/************
 	* Functions *
 	*************/
+
+	/**
+	* Bind a function to an object, meaning that whenever the function is called, the value of this will
+	* be the object. Optionally, bind arguments to the function to pre-fill them, also known as partial application.
+	**/
+	bind(fn: Function, object: any, ...arguments: any[]): Function;
+
+
+	/**
+	* Binds a number of methods on the object, specified by methodNames, to be run in the context of that object
+	* whenever they are invoked. Very handy for binding functions that are going to be used as event handlers,
+	* which would otherwise be invoked with a fairly useless this. If no methodNames are provided, all of the
+	* object's function properties will be bound to it.
+	**/
+	bindAll(object: any, ...methodNames: string[]): void;
+
+	/**
+	* Memoizes a given function by caching the computed result. Useful for speeding up slow-running computations.
+	* If passed an optional hashFunction, it will be used to compute the hash key for storing the result, based
+	* on the arguments to the original function. The default hashFunction just uses the first argument to the
+	* memoized function as the key.
+	**/
+	memoize(fn: Function, hashFn?: (n: any) => string): Function;
+
+	/**
+	* Much like setTimeout, invokes function after wait milliseconds. If you pass the optional arguments,
+	* they will be forwarded on to the function when it is invoked.
+	**/
+	delay(fn: Function, waitMS: number, ...arguments: any[]): void;
+
+	/**
+	* Defers invoking the function until the current call stack has cleared, similar to using setTimeout
+	* with a delay of 0. Useful for performing expensive computations or HTML rendering in chunks without
+	* blocking the UI thread from updating. If you pass the optional arguments, they will be forwarded on
+	* to the function when it is invoked.
+	**/
+	defer(fn: Function, ...arguments: any[]): void;
+
+	/**
+	* Creates and returns a new, throttled version of the passed function, that, when invoked repeatedly,
+	* will only actually call the original function at most once per every wait milliseconds. Useful for
+	* rate-limiting events that occur faster than you can keep up with.
+	**/
+	throttle(fn: Function, waitMS: number): Function;
+
+	/**
+	* Creates and returns a new debounced version of the passed function that will postpone its execution
+	* until after wait milliseconds have elapsed since the last time it was invoked. Useful for implementing
+	* behavior that should only happen after the input has stopped arriving. For example: rendering a preview
+	* of a Markdown comment, recalculating a layout after the window has stopped being resized, and so on.
+	*
+	* Pass true for the immediate parameter to cause debounce to trigger the function on the leading instead
+	* of the trailing edge of the wait interval. Useful in circumstances like preventing accidental double
+	*-clicks on a "submit" button from firing a second time.
+	**/
+	debounce(fn: Function, waitMS: number, immediate?: bool): Function;
+
+	/**
+	* Creates a version of the function that can only be called one time. Repeated calls to the modified
+	* function will have no effect, returning the value from the original call. Useful for initialization
+	* functions, instead of having to set a boolean flag and then check it later.
+	**/
+	once(fn: Function): Function;
+
+	/**
+	* Creates a version of the function that will only be run after first being called count times. Useful
+	* for grouping asynchronous responses, where you want to be sure that all the async calls have finished,
+	* before proceeding.
+	**/
+	after(count: number, fn: Function): Function;
+
+	/**
+	* Wraps the first function inside of the wrapper function, passing it as the first argument. This allows
+	* the wrapper to execute code before and after the function runs, adjust the arguments, and execute it
+	* conditionally.
+	**/
+	wrap(fn: Function, wrapper: (fn: Function, ...args: any[]) => any): Function;
+
+	/**
+	* Returns the composition of a list of functions, where each function consumes the return value of the
+	* function that follows. In math terms, composing the functions f(), g(), and h() produces f(g(h())).
+	**/
+	compose(...functions: Function[]): Function;
+
 
 	/**********
 	* Objects *
