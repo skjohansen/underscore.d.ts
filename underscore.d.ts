@@ -21,6 +21,9 @@
 *                       list: T[],
 *                       fn: (el: T, index?: number, list: T[]) => T,
 *                       context?: C): void;
+*
+* 2012.10.29 -- How to implement the OOP wrapper?
+*               Each function is going to require its own set of definitions minus the first arg.
 **/
 
 interface Underscore {
