@@ -16,14 +16,18 @@ Notes
               for basic types, otherwise the Object or any type and casting will have to be done to
               allow a user to use custom classes.
               example now:
-                  each(
-                      list: string[], 
-                      fn: (element: string, index?: number, list: string[]) => any,
-                      context?: any): void;
-              example with how generics could work:
-                  T => The type of the elements in the Array
-                  C => The type of the context object, would be optional ?? (might need 2 definitions)
-                  each<T, C>(
-                      list: T[],
-                      fn: (el: T, index?: number, list: T[]) => T,
-                      context?: C): void;
+<pre>
+each(
+    list: string[], 
+    fn: (element: string, index?: number, list: string[]) => any,
+    context?: any): void;
+</pre>
+eample with how generics could work:
+<pre>
+T => The type of the elements in the Array
+C => The type of the context object, would be optional ?? (might need 2 definitions)
+each<T, C>(
+    list: T[],
+    fn: (el: T, index?: number, list: T[]) => T,
+    context?: C): void;
+</pre>
