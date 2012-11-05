@@ -894,6 +894,7 @@ interface Underscore {
 	* Returns true if object contains no values.
 	**/
 	isEmpty(object: Object): bool;
+	isEmpty(list: any[]): bool;
 
 	/**
 	* Returns true if object is a DOM element.
@@ -1621,6 +1622,11 @@ interface UnderscoreStringArrayOOPWrapper {
 	clone(): string[];
 
 	/**
+	* Returns true if object contains no values.
+	**/
+	isEmpty(): bool;
+
+	/**
 	* Returns true if object is a DOM element.
 	**/
 	isElement(): bool;
@@ -2241,6 +2247,11 @@ interface UnderscoreNumberArrayOOPWrapper {
 	* Any nested objects or arrays will be copied by reference, not duplicated.
 	**/
 	clone(list: number[]): number[];
+
+	/**
+	* Returns true if object contains no values.
+	**/
+	isEmpty(): bool;
 
 	/**
 	* Returns true if object is a DOM element.
@@ -2992,6 +3003,11 @@ interface UnderscoreObjectArrayOOPWrapper {
 	* Any nested objects or arrays will be copied by reference, not duplicated.
 	**/
 	clone(list: any[]): any[];
+
+	/**
+	* Returns true if object contains no values.
+	**/
+	isEmpty(): bool;
 
 	/**
 	* Returns true if object is a DOM element.
