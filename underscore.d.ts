@@ -699,9 +699,9 @@ interface Underscore {
 	* Returns the index of the last occurrence of value in the array, or -1 if value is not present. Uses the
 	* native lastIndexOf function if possible. Pass fromIndex to start your search at a given index.
 	**/
-	lastIndexOf(array: string[], value: string, isSorted?: bool): number;
-	lastIndexOf(array: number[], value: number, isSorted?: bool): number;
-	lastIndexOf(array: any[], value: any, isSorted?: bool): number;
+	lastIndexOf(array: string[], value: string, from?: number): number;
+	lastIndexOf(array: number[], value: number, from?: number): number;
+	lastIndexOf(array: any[], value: any, from?: number): number;
 
 	/**
 	* Uses a binary search to determine the index at which the value should be inserted into the list in order
@@ -1596,7 +1596,7 @@ interface UnderscoreStringArrayOOPWrapper {
 	* Returns the index of the last occurrence of value in the array, or -1 if value is not present. Uses the
 	* native lastIndexOf function if possible. Pass fromIndex to start your search at a given index.
 	**/
-	lastIndexOf(value: string, isSorted?: bool): number;
+	lastIndexOf(value: string, from?: number): number;
 
 	/**
 	* Uses a binary search to determine the index at which the value should be inserted into the list in order
@@ -2223,7 +2223,7 @@ interface UnderscoreNumberArrayOOPWrapper {
 	* Returns the index of the last occurrence of value in the array, or -1 if value is not present. Uses the
 	* native lastIndexOf function if possible. Pass fromIndex to start your search at a given index.
 	**/
-	lastIndexOf(value: number, isSorted?: bool): number;
+	lastIndexOf(value: number, from?: number): number;
 
 	/**
 	* Uses a binary search to determine the index at which the value should be inserted into the list in order
@@ -2979,7 +2979,7 @@ interface UnderscoreObjectArrayOOPWrapper {
 	* Returns the index of the last occurrence of value in the array, or -1 if value is not present. Uses the
 	* native lastIndexOf function if possible. Pass fromIndex to start your search at a given index.
 	**/
-	lastIndexOf(value: Object, isSorted?: bool): number;
+	lastIndexOf(value: Object, from?: number): number;
 
 	/**
 	* Uses a binary search to determine the index at which the value should be inserted into the list in order
