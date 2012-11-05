@@ -4,30 +4,6 @@
 //     For all details and documentation:
 //     https://github.com/jbaldwin/underscore.d.ts
 
-/**
-* Notes:
-* 2012.10.24 -- Generics would be very useful, until typescript supports them I will be adding bindings
-*               for basic types, otherwise the any or any type and casting will have to be done to
-*               allow a user to use custom classes.
-*               example now:
-*                   each(
-*                       list: string[], 
-*                       fn: (element: string, index?: number, list: string[]) => any,
-*                       context?: any): void;
-*               example with how generics could work:
-*                   T => The type of the elements in the Array
-*                   C => The type of the context object, would be optional ?? (might need 2 definitions)
-*                   each<T, C>(
-*                       list: T[],
-*                       fn: (el: T, index?: number, list: T[]) => T,
-*                       context?: C): void;
-*
-* 2012.10.29 -- How to implement the OOP wrapper?
-*               Each function is going to require its own set of definitions minus the first arg.
-*
-* 2012.11.02 -- Implementing OOP wrapper through individual interfaces, one per object type.
-**/
-
 interface Underscore {
 
 	/**************
@@ -52,6 +28,10 @@ interface Underscore {
 		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => any,
 		context?: any): void;
+	each(
+		obj: Object,
+		iterator: (value: any, key?: string, object?: Object) => any,
+		context?: any): void;
 
 	/**
 	* Alias for 'each'.
@@ -67,6 +47,10 @@ interface Underscore {
 	forEach(
 		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => any,
+		context?: any): void;
+	forEach(
+		obj: Object,
+		iterator: (value: any, key?: string, object?: Object) => any,
 		context?: any): void;
 
 	/**
@@ -86,6 +70,10 @@ interface Underscore {
 		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => any,
 		context?: any): any[];
+	map(
+		obj: Object,
+		iterator: (value: any, key?: string, object?: Object) => any,
+		context?: any): void;
 
 	/**
 	* Alias for 'map'.
@@ -102,6 +90,10 @@ interface Underscore {
 		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => any,
 		context?: any): any[];
+	collect(
+		obj: Object,
+		iterator: (value: any, key?: string, object?: Object) => any,
+		context?: any): void;
 
 	/**
 	* Also known as inject and foldl, reduce boils down a list of values into a single value.
@@ -111,17 +103,17 @@ interface Underscore {
 	**/
 	reduce(
 		list: string[],
-		iterator: (element: string, index?: number, list?: string[]) => string,
+		iterator: (memo: string, element: string, index?: number, list?: string[]) => string,
 		memo: string,
 		context?: any): string;
 	reduce(
 		list: number[],
-		iterator: (element: number, index?: number, list?: number[]) => number,
+		iterator: (memo: number, element: number, index?: number, list?: number[]) => number,
 		memo: number,
 		context?: any): number;
 	reduce(
 		list: any[],
-		iterator: (element: any, index?: number, list?: any[]) => any,
+		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
 		memo: any,
 		context?: any): any;
 
@@ -130,17 +122,17 @@ interface Underscore {
 	**/
 	inject(
 		list: string[],
-		iterator: (element: string, index?: number, list?: string[]) => string,
+		iterator: (memo: string, element: string, index?: number, list?: string[]) => string,
 		memo: string,
 		context?: any): string;
 	inject(
 		list: number[],
-		iterator: (element: number, index?: number, list?: number[]) => number,
+		iterator: (memo: number, element: number, index?: number, list?: number[]) => number,
 		memo: number,
 		context?: any): number;
 	inject(
 		list: any[],
-		iterator: (element: any, index?: number, list?: any[]) => any,
+		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
 		memo: any,
 		context?: any): any;
 
@@ -149,17 +141,17 @@ interface Underscore {
 	**/
 	foldl(
 		list: string[],
-		iterator: (element: string, index?: number, list?: string[]) => string,
+		iterator: (memo: string, element: string, index?: number, list?: string[]) => string,
 		memo: string,
 		context?: any): string;
 	foldl(
 		list: number[],
-		iterator: (element: number, index?: number, list?: number[]) => number,
+		iterator: (memo: number, element: number, index?: number, list?: number[]) => number,
 		memo: number,
 		context?: any): number;
 	foldl(
 		list: any[],
-		iterator: (element: any, index?: number, list?: any[]) => any,
+		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
 		memo: any,
 		context?: any): any;
 
@@ -170,17 +162,17 @@ interface Underscore {
 	**/
 	reduceRight(
 		list: string[],
-		iterator: (element: string, index?: number, list?: string[]) => string,
+		iterator: (memo: string, element: string, index?: number, list?: string[]) => string,
 		memo: string,
 		context?: any): string;
 	reduceRight(
 		list: number[],
-		iterator: (element: number, index?: number, list?: number[]) => number,
+		iterator: (memo: number, element: number, index?: number, list?: number[]) => number,
 		memo: number,
 		context?: any): number;
 	reduceRight(
 		list: any[],
-		iterator: (element: any, index?: number, list?: any[]) => any,
+		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
 		memo: any,
 		context?: any): any;
 
@@ -189,17 +181,17 @@ interface Underscore {
 	**/
 	foldr(
 		list: string[],
-		iterator: (element: string, index?: number, list?: string[]) => string,
+		iterator: (memo: string, element: string, index?: number, list?: string[]) => string,
 		memo: string,
 		context?: any): string;
 	foldr(
 		list: number[],
-		iterator: (element: number, index?: number, list?: number[]) => number,
+		iterator: (memo: number, element: number, index?: number, list?: number[]) => number,
 		memo: number,
 		context?: any): number;
 	foldr(
 		list: any[],
-		iterator: (element: any, index?: number, list?: any[]) => any,
+		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
 		memo: any,
 		context?: any): any;
 
@@ -333,15 +325,15 @@ interface Underscore {
 	**/
 	any(
 		list: string[],
-		iterator: (element: string, index?: number, list?: string[]) => bool,
+		iterator?: (element: string, index?: number, list?: string[]) => bool,
 		context?: any): bool;
 	any(
 		list: number[],
-		iterator: (element: number, index?: number, list?: string[]) => bool,
+		iterator?: (element: number, index?: number, list?: string[]) => bool,
 		context?: any): bool;
 	any(
 		list: any[],
-		iterator: (element: any, index?: number, list?: any[]) => bool,
+		iterator?: (element: any, index?: number, list?: any[]) => bool,
 		context?: any): bool;
 
 	/**
@@ -604,8 +596,11 @@ interface Underscore {
 	* only be flattened a single level.
 	**/
 	flatten(array: string[], shallow?: bool): string[];
+	flatten(array: string[][], shallow?: bool): string[];
 	flatten(array: number[], shallow?: bool): number[];
+	flatten(array: number[][], shallow?: bool): number[];
 	flatten(array: any[], shallow?: bool): any[];
+	flatten(array: any[][], shallow?: bool): any[];
 
 	/**
 	* Returns a copy of the array with all instances of the values removed.
@@ -1078,9 +1073,9 @@ interface Underscore {
 * to 'template()' to overide defaults.
 **/
 interface UnderscoreTemplateSettings {
-	evaluate: RegExp;
-	interpolate: RegExp;
-	escape: RegExp;
+	evaluate?: RegExp;
+	interpolate?: RegExp;
+	escape?: RegExp;
 }
 
 /**
@@ -1287,7 +1282,7 @@ interface UnderscoreStringArrayOOPWrapper {
 	* and index (or key) of the iteration, and finally a reference to the entire list.
 	**/
 	reduce(
-		iterator: (element: string, index?: number, list?: string[]) => string,
+		iterator: (memo: string, element: string, index?: number, list?: string[]) => string,
 		memo: string,
 		context?: any): string;
 
@@ -1295,7 +1290,7 @@ interface UnderscoreStringArrayOOPWrapper {
 	* Alias for 'reduce'.
 	**/
 	inject(
-		iterator: (element: string, index?: number, list?: string[]) => string,
+		iterator: (memo: string, element: string, index?: number, list?: string[]) => string,
 		memo: string,
 		context?: any): string;
 
@@ -1303,7 +1298,7 @@ interface UnderscoreStringArrayOOPWrapper {
 	* Alias for 'reduce'.
 	**/
 	foldl(
-		iterator: (element: string, index?: number, list?: string[]) => string,
+		iterator: (memo: string, element: string, index?: number, list?: string[]) => string,
 		memo: string,
 		context?: any): string;
 
@@ -1313,7 +1308,7 @@ interface UnderscoreStringArrayOOPWrapper {
 	* language with lazy evaluation.
 	**/
 	reduceRight(
-		iterator: (element: string, index?: number, list?: string[]) => string,
+		iterator: (memo: string, element: string, index?: number, list?: string[]) => string,
 		memo: string,
 		context?: any): string;
 
@@ -1321,7 +1316,7 @@ interface UnderscoreStringArrayOOPWrapper {
 	* Alias for 'reduceRight'.
 	**/
 	foldr(
-		iterator: (element: string, index?: number, list?: string[]) => string,
+		iterator: (memo: string, element: string, index?: number, list?: string[]) => string,
 		memo: string,
 		context?: any): string;
 
@@ -1386,7 +1381,7 @@ interface UnderscoreStringArrayOOPWrapper {
 	* stops traversing the list if a true element is found. Delegates to the native method some, if present.
 	**/
 	any(
-		iterator: (element: string, index?: number, list?: string[]) => bool,
+		iterator?: (element: string, index?: number, list?: string[]) => bool,
 		context?: any): bool;
 
 	/**
@@ -1910,7 +1905,7 @@ interface UnderscoreNumberArrayOOPWrapper {
 	* and index (or key) of the iteration, and finally a reference to the entire list.
 	**/
 	reduce(
-		iterator: (element: number, index?: number, list?: number[]) => number,
+		iterator: (memo: number, element: number, index?: number, list?: number[]) => number,
 		memo: number,
 		context?: any): number;
 
@@ -1918,7 +1913,7 @@ interface UnderscoreNumberArrayOOPWrapper {
 	* Alias for 'reduce'.
 	**/
 	inject(
-		iterator: (element: number, index?: number, list?: number[]) => number,
+		iterator: (memo: number, element: number, index?: number, list?: number[]) => number,
 		memo: number,
 		context?: any): number;
 
@@ -1926,7 +1921,7 @@ interface UnderscoreNumberArrayOOPWrapper {
 	* Alias for 'reduce'.
 	**/
 	foldl(
-		iterator: (element: number, index?: number, list?: number[]) => number,
+		iterator: (memo: number, element: number, index?: number, list?: number[]) => number,
 		memo: number,
 		context?: any): number;
 
@@ -1936,7 +1931,7 @@ interface UnderscoreNumberArrayOOPWrapper {
 	* language with lazy evaluation.
 	**/
 	reduceRight(
-		iterator: (element: number, index?: number, list?: number[]) => number,
+		iterator: (memo: number, element: number, index?: number, list?: number[]) => number,
 		memo: number,
 		context?: any): number;
 
@@ -1944,7 +1939,7 @@ interface UnderscoreNumberArrayOOPWrapper {
 	* Alias for 'reduceRight'.
 	**/
 	foldr(
-		iterator: (element: number, index?: number, list?: number[]) => number,
+		iterator: (memo: number, element: number, index?: number, list?: number[]) => number,
 		memo: number,
 		context?: any): number;
 
@@ -2008,7 +2003,7 @@ interface UnderscoreNumberArrayOOPWrapper {
 	* stops traversing the list if a true element is found. Delegates to the native method some, if present.
 	**/
 	any(
-		iterator: (element: number, index?: number, list?: string[]) => bool,
+		iterator?: (element: number, index?: number, list?: string[]) => bool,
 		context?: any): bool;
 
 	/**
@@ -2230,7 +2225,7 @@ interface UnderscoreNumberArrayOOPWrapper {
 	* Create a shallow-copied clone of the object.
 	* Any nested objects or arrays will be copied by reference, not duplicated.
 	**/
-	clone(list: number[]): number[];
+	clone(): number[];
 
 	/**
 	* Returns true if object contains no values.
@@ -2650,7 +2645,7 @@ interface UnderscoreObjectArrayOOPWrapper {
 	* and index (or key) of the iteration, and finally a reference to the entire list.
 	**/
 	reduce(
-		iterator: (element: any, index?: number, list?: any[]) => any,
+		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
 		memo: any,
 		context?: any): any;
 
@@ -2658,7 +2653,7 @@ interface UnderscoreObjectArrayOOPWrapper {
 	* Alias for 'reduce'.
 	**/
 	inject(
-		iterator: (element: any, index?: number, list?: any[]) => any,
+		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
 		memo: any,
 		context?: any): any;
 
@@ -2666,7 +2661,7 @@ interface UnderscoreObjectArrayOOPWrapper {
 	* Alias for 'reduce'.
 	**/
 	foldl(
-		iterator: (element: any, index?: number, list?: any[]) => any,
+		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
 		memo: any,
 		context?: any): any;
 
@@ -2676,7 +2671,7 @@ interface UnderscoreObjectArrayOOPWrapper {
 	* language with lazy evaluation.
 	**/
 	reduceRight(
-		iterator: (element: any, index?: number, list?: any[]) => any,
+		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
 		memo: any,
 		context?: any): any;
 
@@ -2684,7 +2679,7 @@ interface UnderscoreObjectArrayOOPWrapper {
 	* Alias for 'reduceRight'.
 	**/
 	foldr(
-		iterator: (element: any, index?: number, list?: any[]) => any,
+		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
 		memo: any,
 		context?: any): any;
 
@@ -2754,7 +2749,7 @@ interface UnderscoreObjectArrayOOPWrapper {
 	* stops traversing the list if a true element is found. Delegates to the native method some, if present.
 	**/
 	any(
-		iterator: (element: any, index?: number, list?: any[]) => bool,
+		iterator?: (element: any, index?: number, list?: any[]) => bool,
 		context?: any): bool;
 
 	/**
