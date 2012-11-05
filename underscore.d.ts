@@ -411,9 +411,9 @@ interface Underscore {
 	**/
 	max(list: number[]): number;
 	max(
-		list: Object[],
-		iterator: (element: Object, index?: number, list?: Object[]) => number,
-		context?: any): Object;
+		list: any[],
+		iterator: (element: any, index?: number, list?: any[]) => number,
+		context?: any): any;
 
 	/**
 	* Returns the minimum value in list. If iterator is passed, it will be used on each value to generate
@@ -422,8 +422,8 @@ interface Underscore {
 	min(list: number[]): number;
 	min(
 		list: Object[],
-		iterator: (obj: Object, index?: number, list?: Object[]) => number,
-		context?: any): Object;
+		iterator: (obj: any, index?: number, list?: any[]) => number,
+		context?: any): any;
 
 	/**
 	* Returns a sorted copy of list, ranked in ascending order by the results of running each value
@@ -2808,16 +2808,16 @@ interface UnderscoreObjectArrayOOPWrapper {
 	* the criterion by which the value is ranked.
 	**/
 	max(
-		iterator: (element: Object, index?: number, list?: Object[]) => number,
-		context?: any): Object;
+		iterator: (element: any, index?: number, list?: any[]) => number,
+		context?: any): any;
 
 	/**
 	* Returns the minimum value in list. If iterator is passed, it will be used on each value to generate
 	* the criterion by which the value is ranked.
 	**/
 	min(
-		iterator: (obj: Object, index?: number, list?: Object[]) => number,
-		context?: any): Object;
+		iterator: (obj: any, index?: number, list?: any[]) => number,
+		context?: any): any;
 
 	/**
 	* Returns a sorted copy of list, ranked in ascending order by the results of running each value
