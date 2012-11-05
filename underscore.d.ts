@@ -3081,6 +3081,12 @@ interface UnderscoreObjectArrayOOPWrapper {
 	************/
 
 	/**
+	* Returns a wrapped object. Calling methods on this object will continue to return wrapped objects
+	* until value is used.
+	**/
+	chain(): any;
+
+	/**
 	* Extracts the value of a wrapped object.
 	**/
 	value(): any[];
