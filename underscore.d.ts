@@ -1162,28 +1162,63 @@ interface Underscore {
 
 	/**
 	* Returns a wrapped object. Calling methods on this object will continue to return wrapped objects
-	* until value is used.
+	* until value() is used.
+	* @param obj Object to chain.
+	* @return Wrapped `obj`.
 	**/
 	chain(obj: any): any;
 
 	/**
 	* Extracts the value of a wrapped object.
+	* @param obj Wrapped object to extract the value from.
+	* @return Value of `obj`.
 	**/
-	value(s: string): string;
-	value(n: number): number;
-	value(s: string[]): string[];
-	value(n: number[]): number[];
 	value(obj: any): any;
-	value(obj: any[]): any[];
 
 	/**************
 	* OOP Wrapper *
 	**************/
+
+	/**
+	* Underscore string OOP Wrapper, all Underscore functions that take a string
+	* as the first parameter can be invoked through this function.
+	* @param key First argument to Underscore string functions.
+	**/
 	(key: string): UnderscoreStringOOPWrapper;
+
+	/**
+	* Underscore string[] OOP Wrapper, all Underscore functions that take a string[]
+	* as the first parameter can be invoked through this function.
+	* @param list First argument to Underscore string[] functions.
+	**/
 	(list: string[]): UnderscoreStringArrayOOPWrapper;
+
+	/**
+	* Underscore number OOP Wrapper, all Underscore functions that take a number
+	* as the first parameter can be invoked through this function.
+	* @param key First argument to Underscore number functions.
+	**/
 	(n: number): UnderscoreNumberOOPWrapper;
+
+	/**
+	* Underscore number[] OOP Wrapper, all Underscore functions that take a number[]
+	* as the first parameter can be invoked through this function.
+	* @param list First argument to Underscore number[] functions.
+	**/
 	(list: number[]): UnderscoreNumberArrayOOPWrapper;
+
+	/**
+	* Underscore OOP Wrapper, all Underscore functions that take an object
+	* as the first parameter can be invoked through this function.
+	* @param key First argument to Underscore object functions.
+	**/
 	(obj: any): UnderscoreObjectOOPWrapper;
+
+	/**
+	* Underscore any[] OOP Wrapper, all Underscore functions that take a any[]
+	* as the first parameter can be invoked through this function.
+	* @param list First argument to Underscore any[] functions.
+	**/
 	(list: any[]): UnderscoreObjectArrayOOPWrapper;
 }
 
@@ -1192,8 +1227,19 @@ interface Underscore {
 * to 'template()' to overide defaults.
 **/
 interface UnderscoreTemplateSettings {
+	/**
+	* Default value is '/<%([\s\S]+?)%>/g'.
+	**/
 	evaluate?: RegExp;
+
+	/**
+	* Default value is '/<%=([\s\S]+?)%>/g'.
+	**/
 	interpolate?: RegExp;
+
+	/**
+	* Default value is '/<%-([\s\S]+?)%>/g'.
+	**/
 	escape?: RegExp;
 }
 
