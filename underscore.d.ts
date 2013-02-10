@@ -825,28 +825,38 @@ interface Underscore {
 
 	/**
 	* Retrieve all the names of the object's properties.
+	* @param object Retreive the key or property names from this object.
+	* @return List of all the property names on `object`.
 	**/
 	keys(object: any): string[];
 
 	/**
 	* Return all of the values of the object's properties.
+	* @param object Retreive the values of all the properties on this object.
+	* @return List of all the values on `object`.
 	**/
 	values(object: any): any[];
 
 	/**
 	* Convert an object into a list of [key, value] pairs.
+	* @param object Convert this object to a list of [key, value] pairs.
+	* @return List of [key, value] pairs on `object`.
 	**/
 	pairs(object: any): any[][];
 
 	/**
 	* Returns a copy of the object where the keys have become the values and the values the keys.
 	* For this to work, all of your object's values should be unique and string serializable.
+	* @param object Object to invert key/value pairs.
+	* @return An inverted key/value paired version of `object`.
 	**/
 	invert(object: any): any;
 
 	/**
 	* Returns a sorted list of the names of every method in an object — that is to say,
 	* the name of every function property of the object.
+	* @param object Object to pluck all function property names from.
+	* @return List of all the function names on `object`.
 	**/
 	functions(object: any): string[];
 
@@ -854,112 +864,168 @@ interface Underscore {
 	* Copy all of the properties in the source objects over to the destination object, and return
 	* the destination object. It's in-order, so the last source will override properties of the
 	* same name in previous arguments.
+	* @param destination Object to extend all the properties from `sources`.
+	* @param sources Extends `destination` with all properties from these source objects.
+	* @return `destination` extended with all the properties from the `sources` objects.
 	**/
 	extend(destination: any, ...sources: any[]): any;
 
 	/**
 	* Return a copy of the object, filtered to only have values for the whitelisted keys
 	* (or array of valid keys).
+	* @param object Object to strip unwanted key/value pairs.
+	* @keys The key/value pairs to keep on `object`.
+	* @return Copy of `object` with only the `keys` properties.
 	**/
 	pick(object: any, ...keys: string[]): any;
 
 	/**
 	* Return a copy of the object, filtered to omit the blacklisted keys (or array of keys).
+	* @param object Object to strip unwanted key/value pairs.
+	* @param keys The key/value pairs to remove on `object`.
+	* @return Copy of `object` without the `keys` properties.
 	**/
 	omit(object: any, ...keys: string[]): any;
 
 	/**
 	* Fill in null and undefined properties in object with values from the defaults objects,
 	* and return the object. As soon as the property is filled, further defaults will have no effect.
+	* @param object Fill this object with default values.
+	* @param defaults The default values to add to `object`.
+	* @return `object` with added `defaults` values.
 	**/
 	defaults(object: any, ...defaults: any[]): any;
 
 	/**
 	* Create a shallow-copied clone of the object.
 	* Any nested objects or arrays will be copied by reference, not duplicated.
+	* @param object Object to clone.
+	* @return Copy of `object`.
 	**/
 	clone(object: any): any;
-	clone(list: string[]): string[];
-	clone(list: number[]): number[];
+	/**
+	* Create a shallow-copied clone of the object.
+	* Any nested objects or arrays will be copied by reference, not duplicated.
+	* @param list List to clone.
+	* @return Copy of `list`.
+	**/
 	clone(list: any[]): any[];
 
 	/**
 	* Invokes interceptor with the object, and then returns object. The primary purpose of this method
 	* is to "tap into" a method chain, in order to perform operations on intermediate results within the chain.
+	* @param object Argument to `interceptor`.
+	* @param intercepter The function to modify `object` before continuing the method chain.
+	* @return Modified `object`.
 	**/
 	tap(object: any, intercepter: Function): any;
 
 	/**
 	* Does the object contain the given key? Identical to object.hasOwnProperty(key), but uses a safe
 	* reference to the hasOwnProperty function, in case it's been overridden accidentally.
+	* @param object Object to check for `key`.
+	* @param key The key to check for on `object`.
+	* @return True if `key` is a property on `object`, otherwise false.
 	**/
 	has(object: any, key: string): bool;
 
 	/**
 	* Performs an optimized deep comparison between the two objects,
 	* to determine if they should be considered equal.
+	* @param object Compare to `other`.
+	* @param other Compare to `object`.
+	* @return True if `object` is equal to `other`.
 	**/
 	isEqual(object: any, other: any): bool;
 
 	/**
 	* Returns true if object contains no values.
+	* @param object Check if this object has no properties or values.
+	* @return True if `object` is empty.
 	**/
 	isEmpty(object: any): bool;
+	/**
+	* Returns true if the list contains no values.
+	* @param object Check if this list has no elements.
+	* @return True if `list` is empty.
+	**/
 	isEmpty(list: any[]): bool;
 
 	/**
 	* Returns true if object is a DOM element.
+	* @param object Check if this object is a DOM element.
+	* @return True if `object` is a DOM element, otherwise false.
 	**/
 	isElement(object: any): bool;
 
 	/**
 	* Returns true if object is an Array.
+	* @param object Check if this object is an Array.
+	* @return True if `object` is an Array, otherwise false.
 	**/
 	isArray(object: any): bool;
 
 	/**
-	* Returns true if value is an any. Note that JavaScript arrays and functions are objects,
+	* Returns true if value is an Object. Note that JavaScript arrays and functions are objects,
 	* while (normal) strings and numbers are not.
+	* @param object Check if this object is an Object.
+	* @return True of `object` is an Object, otherwise false.
 	**/
 	isObject(object: any): bool;
 
 	/**
 	* Returns true if object is an Arguments object.
+	* @param object Check if this object is an Arguments object.
+	* @return True if `object` is an Arguments object, otherwise false.
 	**/
 	isArguments(object: any): bool;
 
 	/**
 	* Returns true if object is a Function.
+	* @param object Check if this object is a Function.
+	* @return True if `object` is a Function, otherwise false.
 	**/
 	isFunction(object: any): bool;
 
 	/**
 	* Returns true if object is a String.
+	* @param object Check if this object is a String.
+	* @return True if `object` is a String, otherwise false.
 	**/
 	isString(object: any): bool;
 
 	/**
 	* Returns true if object is a Number (including NaN).
+	* @param object Check if this object is a Number.
+	* @return True if `object` is a Number, otherwise false.
 	**/
 	isNumber(object: any): bool;
 
 	/**
 	* Returns true if object is a finite Number.
+	* @param object Check if this object is a finite Number.
+	* @return True if `object` is a finite Number.
 	**/
 	isFinite(object: any): bool;
 
 	/**
 	* Returns true if object is either true or false.
+	* @param object Check if this object is a bool.
+	* @return True if `object` is a bool, otherwise false.
 	**/
 	isBoolean(object: any): bool;
 
 	/**
 	* Returns true if object is a Date.
+	* @param object Check if this object is a Date.
+	* @return True if `object` is a Date, otherwise false.
 	**/
 	isDate(object: any): bool;
 
 	/**
 	* Returns true if object is a RegExp.
+	* @param object Check if this object is a RegExp.
+	* @return True if `object` is a RegExp, otherwise false.
 	**/
 	isRegExp(object: any): bool;
 
@@ -967,16 +1033,22 @@ interface Underscore {
 	* Returns true if object is NaN.
 	* Note: this is not the same as the native isNaN function,
 	* which will also return true if the variable is undefined.
+	* @param object Check if this object is NaN.
+	* @return True if `object` is NaN, otherwise false.
 	**/
 	isNaN(object: any): bool;
 
 	/**
 	* Returns true if the value of object is null.
+	* @param object Check if this object is null.
+	* @return True if `object` is null, otherwise false.
 	**/
 	isNull(object: any): bool;
 
 	/**
 	* Returns true if value is undefined.
+	* @param object Check if this object is undefined.
+	* @return True if `object` is undefined, otherwise false.
 	**/
 	isUndefined(object: any): bool;
 
