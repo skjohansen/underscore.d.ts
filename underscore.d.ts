@@ -1059,68 +1059,77 @@ interface Underscore {
 	/**
 	* Give control of the "_" variable back to its previous owner.
 	* Returns a reference to the Underscore object.
+	* @return Underscore object reference.
 	**/
 	noConflict(): Underscore;
 
 	/**
 	* Returns the same value that is used as the argument. In math: f(x) = x
 	* This function looks useless, but is used throughout Underscore as a default iterator.
+	* @param value Identity of this object.
+	* @return `value`.
 	**/
-	identity(value: string): string;
-	identity(value: string[]): string[];
-	identity(value: number): number;
-	identity(value: number[]): number[];
-	identity(value: bool): bool;
 	identity(value: any): any;
 
 	/**
 	* Invokes the given iterator function n times.
-	* Each invocation of iterator is called with an index argument.
-	* @example
-	*
-	* _(3).times(function(n){ genie.grantWishNumber(n); });
-	*
+	* Each invocation of iterator is called with an index argument
+	* @param n Number of times to invoke `iterator`.
+	* @param iterator Function iterator to invoke `n` times.
+	* @param context `this` object in `iterator`, optional.
 	**/
 	times(n: number, iterator: (n: number) => void , context?: any): void;
 
 	/**
 	* Returns a random integer between min and max, inclusive. If you only pass one argument,
 	* it will return a number between 0 and that number.
+	* @param max The maximum random number.
+	* @return A random number between 0 and `max`.
 	**/
 	random(max: number): number;
+	/**
+	* Returns a random integer between min and max, inclusive. If you only pass one argument,
+	* it will return a number between 0 and that number.
+	* @param min The minimum random number.
+	* @param max The maximum random number.
+	* @return A random number between `min` and `max`.
+	**/
 	random(min: number, max: number): number;
 
 	/**
 	* Allows you to extend Underscore with your own utility functions. Pass a hash of
 	* {name: function} definitions to have your functions added to the Underscore object,
 	* as well as the OOP wrapper.
-	* @example
-	*
-	* _.mixin({
-	*     capitalize : function(string) {
-	*         return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
-	*     }
-	* });
-	* _("fabio").capitalize();
-	* => "Fabio"
-	*
+	* @param object Mixin object containing key/function pairs to add to the Underscore object.
 	**/
 	mixin(object: any): void;
 
 	/**
 	* Generate a globally-unique id for client-side models or DOM elements that need one.
 	* If prefix is passed, the id will be appended to it. Without prefix, returns an integer.
+	* @return Unique number ID.
 	**/
 	uniqueId(): number;
+	/**
+	* Generate a globally-unique id for client-side models or DOM elements that need one.
+	* If prefix is passed, the id will be appended to it. Without prefix, returns an integer.
+	* @param prefix A prefix string to start the unique ID with.
+	* @return Unique string ID beginning with `prefix`.
+	**/
 	uniqueId(prefix: string): string;
 
 	/**
 	* Escapes a string for insertion into HTML, replacing &, <, >, ", ', and / characters.
+	* @param str Raw string to escape.
+	* @return `str` HTML escaped.
 	**/
 	escape(str: string): string;
 
 	/**
 	* If the value of the named property is a function then invoke it; otherwise, return it.
+	* @param object Object to maybe invoke function `property` on.
+	* @param property The function by name to invoke on `object`.
+	* @return The result of invoking the function `property` on `object.
 	**/
 	result(object: any, property: string): any;
 
@@ -1134,11 +1143,17 @@ interface Underscore {
 	* the second parameter to template in order to render immediately instead of returning a template
 	* function. The settings argument should be a hash containing any _.templateSettings that should
 	* be overridden.
+	* @param templateString Underscore HTML template.
+	* @param data Data to use when compiling `templateString`.
+	* @param settings Settings to use while compiling.
+	* @return Returns the compiled Underscore HTML template.
 	**/
 	template(templateString: string, data?: any, settings?: UnderscoreTemplateSettings): any;
 
-	// By default, Underscore uses ERB-style template delimiters, change the
-	// following template settings to use alternative delimiters.
+	/**
+	* By default, Underscore uses ERB-style template delimiters, change the
+	* following template settings to use alternative delimiters.
+	**/
 	templateSettings: UnderscoreTemplateSettings;
 
 	/***********
