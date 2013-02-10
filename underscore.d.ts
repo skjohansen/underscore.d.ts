@@ -707,6 +707,10 @@ interface Underscore {
 	/**
 	* Bind a function to an object, meaning that whenever the function is called, the value of this will
 	* be the object. Optionally, bind arguments to the function to pre-fill them, also known as partial application.
+	* @param fn The function to bind `this` to `object`.
+	* @param object The `this` pointer whenever `fn` is called.
+	* @param arguments Additional arguments to pass to `fn` when called.
+	* @return `fn` with `this` bound to `object`.
 	**/
 	bind(fn: Function, object: any, ...arguments: any[]): Function;
 
@@ -716,6 +720,9 @@ interface Underscore {
 	* whenever they are invoked. Very handy for binding functions that are going to be used as event handlers,
 	* which would otherwise be invoked with a fairly useless this. If no methodNames are provided, all of the
 	* object's function properties will be bound to it.
+	* @param object The object to bind the methods `methodName` to.
+	* @param methodNames The methods to bind to `object`, optional and if not provided all of `object`'s 
+	*                    methods are bound.
 	**/
 	bindAll(object: any, ...methodNames: string[]): void;
 
@@ -724,12 +731,18 @@ interface Underscore {
 	* If passed an optional hashFunction, it will be used to compute the hash key for storing the result, based
 	* on the arguments to the original function. The default hashFunction just uses the first argument to the
 	* memoized function as the key.
+	* @param fn Computationally expensive function that will now memoized results.
+	* @param hashFn Hash function for storing the result of `fn`.
+	* @return Memoized version of `fn`.
 	**/
 	memoize(fn: Function, hashFn?: (n: any) => string): Function;
 
 	/**
 	* Much like setTimeout, invokes function after wait milliseconds. If you pass the optional arguments,
 	* they will be forwarded on to the function when it is invoked.
+	* @param fn Function to delay `waitMS` amount of ms.
+	* @param waitMS The amount of milliseconds to delay `fn`.
+	* @arguments Additional arguments to pass to `fn`.
 	**/
 	delay(fn: Function, waitMS: number, ...arguments: any[]): void;
 
@@ -738,6 +751,8 @@ interface Underscore {
 	* with a delay of 0. Useful for performing expensive computations or HTML rendering in chunks without
 	* blocking the UI thread from updating. If you pass the optional arguments, they will be forwarded on
 	* to the function when it is invoked.
+	* @param fn The function to defer.
+	* @param arguments Additional arguments to pass to `fn`.
 	**/
 	defer(fn: Function, ...arguments: any[]): void;
 
@@ -745,6 +760,9 @@ interface Underscore {
 	* Creates and returns a new, throttled version of the passed function, that, when invoked repeatedly,
 	* will only actually call the original function at most once per every wait milliseconds. Useful for
 	* rate-limiting events that occur faster than you can keep up with.
+	* @param fn Function to throttle `waitMS` ms.
+	* @param waitMS The number of milliseconds to wait before `fn` can be invoked again.
+	* @return `fn` with a throttle of `waitMS`.
 	**/
 	throttle(fn: Function, waitMS: number): Function;
 
@@ -757,6 +775,10 @@ interface Underscore {
 	* Pass true for the immediate parameter to cause debounce to trigger the function on the leading instead
 	* of the trailing edge of the wait interval. Useful in circumstances like preventing accidental double
 	*-clicks on a "submit" button from firing a second time.
+	* @param fn Function to debounce `waitMS` ms.
+	* @param waitMS The number of milliseconds to wait before `fn` can be invoked again.
+	* @param immediate True if `fn` should be invoked on the leading edge of `waitMS` instead of the trailing edge.
+	* @return Debounced version of `fn` that waits `waitMS` ms when invoked.
 	**/
 	debounce(fn: Function, waitMS: number, immediate?: bool): Function;
 
@@ -764,6 +786,8 @@ interface Underscore {
 	* Creates a version of the function that can only be called one time. Repeated calls to the modified
 	* function will have no effect, returning the value from the original call. Useful for initialization
 	* functions, instead of having to set a boolean flag and then check it later.
+	* @param fn Function to only execute once.
+	* @return Copy of `fn` that can only be invoked once.
 	**/
 	once(fn: Function): Function;
 
@@ -771,6 +795,9 @@ interface Underscore {
 	* Creates a version of the function that will only be run after first being called count times. Useful
 	* for grouping asynchronous responses, where you want to be sure that all the async calls have finished,
 	* before proceeding.
+	* @param count Number of times to be called before actually executing.
+	* @fn The function to defer execution `count` times.
+	* @return Copy of `fn` that will not execute until it is invoked `count` times.
 	**/
 	after(count: number, fn: Function): Function;
 
@@ -778,12 +805,17 @@ interface Underscore {
 	* Wraps the first function inside of the wrapper function, passing it as the first argument. This allows
 	* the wrapper to execute code before and after the function runs, adjust the arguments, and execute it
 	* conditionally.
+	* @param fn Function to wrap.
+	* @param wrapper The function that will wrap `fn`.
+	* @return Wrapped version of `fn.
 	**/
 	wrap(fn: Function, wrapper: (fn: Function, ...args: any[]) => any): Function;
 
 	/**
 	* Returns the composition of a list of functions, where each function consumes the return value of the
 	* function that follows. In math terms, composing the functions f(), g(), and h() produces f(g(h())).
+	* @param functions List of functions to compose.
+	* @return Composition of `functions`.
 	**/
 	compose(...functions: Function[]): Function;
 
