@@ -63,12 +63,11 @@ _.rest([5, 4, 3, 2, 1]);
 _.compact([0, 1, false, 2, '', 3]);
 
 _.flatten([1,2,3,4]);
-_.flatten([1, [2]]);
+_.flatten([1, <any>[2]]);
 
-// typescript doesn't like the elements being different,
-// declaration for flatten only goes up to 2 arrays
-_.flatten([1, [2], [3, <any>[[4]]]]);
-_.flatten([1, [2], [3, <any>[[4]]]], true);
+// typescript doesn't like the elements being different
+_.flatten([1, [2], <any>[3, <any>[[4]]]]);
+_.flatten([1, [2], <any>[3, <any>[[4]]]], true);
 _.without([1, 2, 1, 0, 3, 1, 4], 0, 1);
 _.union([1, 2, 3], [101, 2, 1, 10], [2, 1]);
 _.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1]);

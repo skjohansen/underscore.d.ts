@@ -473,154 +473,178 @@ interface Underscore {
 
 	/**
 	* Returns the first element of an array. Passing n will return the first n elements of the array.
+	* @param array Retrieves the first element of this array.
+	* @return Returns the first element of `array`.
 	**/
-	first(array: string[]): string;
-	first(array: string[], n: number): string[];
-	first(array: number[]): number;
-	first(array: number[], n: number): number[];
 	first(array: any[]): any;
+	/**
+	* Returns the first element of an array. Passing n will return the first n elements of the array.
+	* @param array Retreives the first `n` elements of this array.
+	* @param n Return more than one element from `array`.
+	* @return Returns the first `n` elements from `array.
+	**/
 	first(array: any[], n: number): any[];
 
 	/**
 	* Alias for 'first'.
+	* @see first
 	**/
-	head(array: string[]): string;
-	head(array: string[], n: number): string[];
-	head(array: number[]): number;
-	head(array: number[], n: number): number[];
 	head(array: any[]): any;
+	/**
+	* Alias for 'first'.
+	* @see first
+	**/
 	head(array: any[], n: number): any[];
 
 	/**
 	* Alias for 'first'.
+	* @see first
 	**/
-	take(array: string[]): string;
-	take(array: string[], n: number): string[];
-	take(array: number[]): number;
-	take(array: number[], n: number): number[];
 	take(array: any[]): any;
+	/**
+	* Alias for 'first'.
+	* @see first
+	**/
 	take(array: any[], n: number): any[];
 
 	/**
 	* Returns everything but the last entry of the array. Especially useful on the arguments object.
 	* Pass n to exclude the last n elements from the result.
+	* @param array Retreive all elements except the last `n`.
+	* @param n Leaves this many elements behind, optional.
+	* @return Returns everything but the last `n` elements of `array`.
 	**/
-	initial(array: string[], n?: number): string[];
-	initial(array: number[], n?: number): number[];
 	initial(array: any[], n?: number): any[];
 
 	/**
 	* Returns the last element of an array. Passing n will return the last n elements of the array.
+	* @param array Retrieves the last element of this array.
+	* @return Returns the last element of `array`.
 	**/
-	last(array: string[]): string;
-	last(array: string[], n: number): string[];
-	last(array: number[]): number;
-	last(array: number[], n: number): number[];
 	last(array: any[]): any;
+	/**
+	* Returns the last element of an array. Passing n will return the last n elements of the array.
+	* @param array Retreives the last `n` elements of this array.
+	* @param n Return more than one element from `array`.
+	* @return Returns the last `n` elements from `array.
+	**/
 	last(array: any[], n: number): any[];
 
 	/**
 	* Returns the rest of the elements in an array. Pass an index to return the values of the array
 	* from that index onward.
+	* @param array The array to retrieve all but the first `index` elements.
+	* @param index The index to start retrieving elements forward from, optional, default = 1.
+	* @return Returns the elements of `array` from `index` to the end of `array`.
 	**/
-	rest(array: string[], index?: number): string[];
-	rest(array: number[], index?: number): number[];
 	rest(array: any[], index?: number): any[];
 
 	/**
 	* Alias for 'rest'.
+	* @see rest
 	**/
-	tail(array: string[], index?: number): string[];
-	tail(array: number[], index?: number): number[];
 	tail(array: any[], index?: number): any[];
 
 	/**
 	* Alias for 'rest'.
+	* @see rest
 	**/
-	drop(array: string[], index?: number): string[];
-	drop(array: number[], index?: number): number[];
 	drop(array: any[], index?: number): any[];
 
 	/**
 	* Returns a copy of the array with all falsy values removed. In JavaScript, false, null, 0, "",
 	* undefined and NaN are all falsy.
+	* @param array Array to compact.
+	* @return Copy of `array` without false values.
 	**/
-	compact(array: string[]): string[];
-	compact(array: number[]): number[];
-	compact(array: bool[]): bool[];
 	compact(array: any[]): any[];
 
 	/**
 	* Flattens a nested array (the nesting can be to any depth). If you pass shallow, the array will
 	* only be flattened a single level.
+	* @param array The array to flatten.
+	* @param shallow If true then only flatten one level, optional, default = false.
+	* @return `array` flattened.
 	**/
-	flatten(array: string[], shallow?: bool): string[];
-	flatten(array: string[][], shallow?: bool): string[];
-	flatten(array: number[], shallow?: bool): number[];
-	flatten(array: number[][], shallow?: bool): number[];
-	flatten(array: any[], shallow?: bool): any[];
-	flatten(array: any[][], shallow?: bool): any[];
+	flatten(array: any, shallow?: bool): any;
 
 	/**
 	* Returns a copy of the array with all instances of the values removed.
+	* @param array The array to remove `values` from.
+	* @param values The values to remove from `array`.
+	* @return Copy of `array` without `values`.
 	**/
-	without(array: string[], ...values: string[]): string[];
-	without(array: number[], ...values: number[]): number[];
 	without(array: any[], ...values: any[]): any[];
 
 	/**
 	* Computes the union of the passed-in arrays: the list of unique items, in order, that are
 	* present in one or more of the arrays.
+	* @param arrays Array of arrays to compute the union of.
+	* @return The union of elements within `arrays`.
 	**/
-	union(...arrays: string[][]): string[];
-	union(...arrays: number[][]): number[];
 	union(...arrays: any[][]): any[];
 
 	/**
 	* Computes the list of values that are the intersection of all the arrays. Each value in the result
 	* is present in each of the arrays.
+	* @param arrays Array of arrays to compute the intersection of.
+	* @return The intersection of elements within `arrays`.
 	**/
-	intersection(...arrays: string[][]): string[];
-	intersection(...arrays: number[][]): number[];
 	intersection(...arrays: any[][]): any[];
 
 	/**
 	* Similar to without, but returns the values from array that are not present in the other arrays.
+	* @param array Keeps values that are within `others`.
+	* @param others The values to keep within `array`.
+	* @return Copy of `array` with only `others` values.
 	**/
-	difference(array: string[], ...others: string[]): string[];
-	difference(array: number[], ...others: number[]): number[];
 	difference(array: any[], ...others: any[]): any[];
 
 	/**
 	* Produces a duplicate-free version of the array, using === to test object equality. If you know in
 	* advance that the array is sorted, passing true for isSorted will run a much faster algorithm. If
 	* you want to compute unique items based on a transformation, pass an iterator function.
+	* @param array Array to remove duplicates from.
+	* @param isSorted True if `array` is already sorted, optiona, default = false.
+	* @param iterator Transform the elements of `array` before comparisons for uniqueness.
+	* @return Copy of `array` where all elements are unique.
 	**/
-	uniq(array: string[], isSorted?: bool, iterator?: (element: string, index?: number, list?: string[]) => string): string[];
-	uniq(array: number[], isSorted?: bool, iterator?: (element: number, index?: number, list?: number[]) => number): number[];
-	uniq(array: any[], isSorted?: bool, iterator?: (element: any, index?: number, list?: any[]) => any): any[];
+	uniq(
+		array: any[],
+		isSorted?: bool,
+		iterator?: (element: any, index?: number, list?: any[]) => any): any[];
 
 	/**
 	* Alias for 'uniq'.
+	* @see uniq
 	**/
-	unique(array: string[], isSorted?: bool, iterator?: (element: string, index?: number, list?: string[]) => string): string[];
-	unique(array: number[], isSorted?: bool, iterator?: (element: number, index?: number, list?: number[]) => number): number[];
-	unique(array: any[], isSorted?: bool, iterator?: (element: any, index?: number, list?: any[]) => any): any[];
+	unique(array: any[],
+		isSorted?: bool,
+		iterator?: (element: any, index?: number, list?: any[]) => any): any[];
 
 	/**
 	* Merges together the values of each of the arrays with the values at the corresponding position.
 	* Useful when you have separate data sources that are coordinated through matching array indexes.
 	* If you're working with a matrix of nested arrays, zip.apply can transpose the matrix in a similar fashion.
+	* @param arrays The arrays to merge/zip.
+	* @return Zipped version of `arrays`.
 	**/
-	zip(...arrays: string[][]): string[][];
-	zip(...arrays: number[][]): number[][];
 	zip(...arrays: any[][]): any[][];
 
 	/**
 	* Converts arrays into objects. Pass either a single list of [key, value] pairs, or a
 	* list of keys, and a list of values.
+	* @param keys Key array.
+	* @param values Value array.
+	* @return An object containing the `keys` as properties and `values` as the property values.
 	**/
 	object(keys: string[], values: any[]): any;
+	/**
+	* Converts arrays into objects. Pass either a single list of [key, value] pairs, or a
+	* list of keys, and a list of values.
+	* @param keyValuePairs Array of [key, value] pairs.
+	* @return An object containing the `keys` as properties and `values` as the property values.
+	**/
 	object(...keyValuePairs: any[][]): any;
 
 	/**
@@ -628,35 +652,52 @@ interface Underscore {
 	* Uses the native indexOf function unless it's missing. If you're working with a large array, and you know
 	* that the array is already sorted, pass true for isSorted to use a faster binary search ... or, pass a number
 	* as the third argument in order to look for the first matching value in the array after the given index.
+	* @param array The array to search for the index of `value`.
+	* @param value The value to search for within `array`.
+	* @param isSorted True if the array is already sorted, optional, default = false.
+	* @return The index of `value` within `array`.
 	**/
-	indexOf(array: string[], value: string, isSorted?: bool): number;
-	indexOf(array: number[], value: number, isSorted?: bool): number;
 	indexOf(array: any[], value: any, isSorted?: bool): number;
 
 	/**
 	* Returns the index of the last occurrence of value in the array, or -1 if value is not present. Uses the
 	* native lastIndexOf function if possible. Pass fromIndex to start your search at a given index.
+	* @param array The array to search for the last index of `value`.
+	* @param value The value to search for within `array`.
+	* @param from The starting index for the search, optional.
+	* @return The index of the last occurance of `value` within `array`.
 	**/
-	lastIndexOf(array: string[], value: string, from?: number): number;
-	lastIndexOf(array: number[], value: number, from?: number): number;
 	lastIndexOf(array: any[], value: any, from?: number): number;
 
 	/**
 	* Uses a binary search to determine the index at which the value should be inserted into the list in order
 	* to maintain the list's sorted order. If an iterator is passed, it will be used to compute the sort ranking
 	* of each value, including the value you pass.
+	* @param list The sorted list.
+	* @param value The value to determine its index within `list`.
+	* @param iterator Iterator to compute the sort ranking of each value, optional.
+	* @return The index where `value` should be inserted into `list`.
 	**/
-	sortedIndex(list: string[], value: string, iterator?: (element: string) => number): number;
-	sortedIndex(list: number[], value: number, iterator?: (element: number) => number): number;
 	sortedIndex(list: any[], value: any, iterator?: (element: any) => number): number;
 
 	/**
 	* A function to create flexibly-numbered lists of integers, handy for each and map loops. start, if omitted,
 	* defaults to 0; step defaults to 1. Returns a list of integers from start to stop, incremented (or decremented)
 	* by step, exclusive.
+	* @param start Start here.
+	* @param stop Stop here.
+	* @param step The number to count up by each iteration, optional, default = 1.
+	* @return Array of numbers from `start` to `stop` with increments of `step`.
 	**/
 	range(start: number, stop: number, step?: number): number[];
-	// If start is not specified the implementation will never pull the step (step = arguments[2] || 0)
+	/**
+	* A function to create flexibly-numbered lists of integers, handy for each and map loops. start, if omitted,
+	* defaults to 0; step defaults to 1. Returns a list of integers from start to stop, incremented (or decremented)
+	* by step, exclusive.
+	* @param stop Stop here.
+	* @return Array of numbers from 0 to `stop` with increments of 1.
+	* @note If start is not specified the implementation will never pull the step (step = arguments[2] || 0)
+	**/
 	range(stop: number): number[];
 
 	/************
