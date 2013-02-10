@@ -26,6 +26,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 interface Underscore {
 
+	/**************
+	* Collections *
+	**************/
+
 	/**
 	* Iterates over a list of elements, yielding each in turn to an iterator function. The iterator is
 	* bound to the context object, if one is passed. Each invocation of iterator is called with three
@@ -325,20 +329,38 @@ interface Underscore {
 	pluck(list: any[], propertyName: string): any[];
 
 	/**
-	* Returns the maximum value in list. If iterator is passed, it will be used on each value to generate
-	* the criterion by which the value is ranked.
+	* Returns the maximum value in list.
+	* @param list Finds the maximum value in this list.
+	* @return Maximum value in `list`.
 	**/
 	max(list: number[]): number;
+	/**
+	* Returns the maximum value in list. If iterator is passed, it will be used on each value to generate
+	* the criterion by which the value is ranked.
+	* @param list Finds the maximum value in this list.
+	* @param iterator Compares each element in `list` to find the maximum value.
+	* @param context `this` object in `iterator`, optional.
+	* @return The maximum element within `list`.
+	**/
 	max(
 		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => number,
 		context?: any): any;
 
 	/**
-	* Returns the minimum value in list. If iterator is passed, it will be used on each value to generate
-	* the criterion by which the value is ranked.
+	* Returns the minimum value in list.
+	* @param list Finds the minimum value in this list.
+	* @return Minimum value in `list`.
 	**/
 	min(list: number[]): number;
+	/**
+	* Returns the minimum value in list. If iterator is passed, it will be used on each value to generate
+	* the criterion by which the value is ranked.
+	* @param list Finds the minimum value in this list.
+	* @param iterator Compares each element in `list` to find the minimum value.
+	* @param context `this` object in `iterator`, optional.
+	* @return The minimum element within `list`.
+	**/
 	min(
 		list: any[],
 		iterator: (obj: any, index?: number, list?: any[]) => number,
@@ -347,27 +369,23 @@ interface Underscore {
 	/**
 	* Returns a sorted copy of list, ranked in ascending order by the results of running each value
 	* through iterator. Iterator may also be the string name of the property to sort by (eg. length).
+	* @param list Sorts this list.
+	* @param iterator Sort iterator for each element within `list`.
+	* @param context `this` object in `iterator`, optional.
+	* @return A sorted copy of `list`.
 	**/
-	sortBy(
-		list: string[],
-		iterator: (element: string, index?: number, list?: string[]) => number,
-		context?: any): string[];
-	sortBy(
-		list: number[],
-		iterator: (element: number, index?: number, list?: number[]) => number,
-		context?: any): number[];
 	sortBy(
 		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => number,
 		context?: any): any[];
-	sortBy(
-		list: string[],
-		iterator: string,
-		context?: any): string[];
-	sortBy(
-		list: number[],
-		iterator: string,
-		context?: any): number[];
+	/**
+	* Returns a sorted copy of list, ranked in ascending order by the results of running each value
+	* through iterator. Iterator may also be the string name of the property to sort by (eg. length).
+	* @param list Sorts this list.
+	* @param iterator Sort iterator for each element within `list`.
+	* @param context `this` object in `iterator`, optional.
+	* @return A sorted copy of `list`.
+	**/
 	sortBy(
 		list: any[],
 		iterator: string,
@@ -377,27 +395,24 @@ interface Underscore {
 	* Splits a collection into sets, grouped by the result of running each value through iterator.
 	* If iterator is a string instead of a function, groups by the property named by iterator on
 	* each of the values.
+	* @param list Groups this list.
+	* @param iterator Group iterator for each element within `list`, return the key to group the element by.
+	* @param context `this` object in `iterator`, optional.
+	* @return An object with the group names as properties where each property contains the grouped elements from `list`.
 	**/
-	groupBy(
-		list: string[],
-		iterator: (element: string, index?: number, list?: string[]) => string,
-		context?: any): { [key: string]: string[]; };
-	groupBy(
-		list: number[],
-		iterator: (element: number, index?: number, list?: number[]) => string,
-		context?: any): { [key: string]: number[]; };
 	groupBy(
 		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => string,
 		context?: any): { [key: string]: any[]; };
-	groupBy(
-		list: string[],
-		iterator: string,
-		context?: any): { [key: string]: string[]; };
-	groupBy(
-		list: number[],
-		iterator: string,
-		context?: any): { [key: string]: number[]; };
+	/**
+	* Splits a collection into sets, grouped by the result of running each value through iterator.
+	* If iterator is a string instead of a function, groups by the property named by iterator on
+	* each of the values.
+	* @param list Groups this list.
+	* @param iterator Group iterator for each element within `list`, return the key to group the element by.
+	* @param context `this` object in `iterator`, optional.
+	* @return An object with the group names as properties where each property contains the grouped elements from `list`.
+	**/
 	groupBy(
 		list: any[],
 		iterator: string,
@@ -407,27 +422,24 @@ interface Underscore {
 	* Sorts a list into groups and returns a count for the number of objects in each group. Similar
 	* to groupBy, but instead of returning a list of values, returns a count for the number of values
 	* in that group.
+	* @param list Group elements in this list and then count the number of elements in each group.
+	* @param iterator Group iterator for each element within `list`, return the key to group the element by.
+	* @param context `this` object in `iterator`, optional.
+	* @return An object with the group names as properties where each property contains the number of elements in that group.
 	**/
-	countBy(
-		list: string[],
-		iterator: (element: string, index?: number, list?: string[]) => string,
-		context?: any): { [key: string]: number; };
-	countBy(
-		list: number[],
-		iterator: (element: number, index?: number, list?: number[]) => string,
-		context?: any): { [key: string]: number; };
 	countBy(
 		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => string,
 		context?: any): { [key: string]: number; };
-	countBy(
-		list: string[],
-		iterator: string,
-		context?: any): { [key: string]: number; };
-	countBy(
-		list: number[],
-		iterator: string,
-		context?: any): { [key: string]: number; };
+	/**
+	* Sorts a list into groups and returns a count for the number of objects in each group. Similar
+	* to groupBy, but instead of returning a list of values, returns a count for the number of values
+	* in that group.
+	* @param list Group elements in this list and then count the number of elements in each group.
+	* @param iterator Group iterator for each element within `list`, return the key to group the element by.
+	* @param context `this` object in `iterator`, optional.
+	* @return An object with the group names as properties where each property contains the number of elements in that group.
+	**/
 	countBy(
 		list: any[],
 		iterator: string,
@@ -435,19 +447,23 @@ interface Underscore {
 
 	/**
 	* Returns a shuffled copy of the list, using a version of the Fisher-Yates shuffle.
+	* @param list List to shuffle.
+	* @return Shuffled copy of `list`.
 	**/
-	shuffle(list: string[]): string[];
-	shuffle(list: number[]): number[];
 	shuffle(list: any[]): any[];
 
 	/**
 	* Converts the list (anything that can be iterated over), into a real Array. Useful for transmuting
 	* the arguments object.
+	* @param list object to transform into an array.
+	* @return `list` as an array.
 	**/
 	toArray(list: any): any[];
 
 	/**
 	* Return the number of values in the list.
+	* @param list Count the number of values/elements in this list.
+	* @return Number of values in `list`.
 	**/
 	size(list: any): number;
 
