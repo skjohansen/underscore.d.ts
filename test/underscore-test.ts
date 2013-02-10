@@ -1,4 +1,4 @@
-/// <reference path="underscore.d.ts" />
+/// <reference path="../underscore.d.ts" />
 
 declare var $;
 
