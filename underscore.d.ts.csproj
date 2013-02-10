@@ -51,6 +51,13 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptSourceMap> --sourcemap</TypeScriptSourceMap>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="underscore-test.js">
+      <DependentUpon>underscore-test.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="underscore-test.ts" />
+    <Content Include="underscore.d.ts" />
+  </ItemGroup>
   <Target Name="BeforeBuild">
     <Message Text="Compiling TypeScript files" />
     <Message Text="Executing tsc$(TypeScriptSourceMap) @(TypeScriptCompile ->'&quot;%(fullpath)&quot;', ' ')" />
