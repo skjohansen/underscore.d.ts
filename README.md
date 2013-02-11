@@ -1,20 +1,26 @@
 underscore.d.ts
 ===============
 
-This is a typescript definitions file for underscore-1.4.3.js.
+This is a typescript definitions file for underscore-1.4.4.js.
 
-This definitions file aims to have full documentation and as much type annotations for basic types like string, number, and arrays as possible.  When generics are available within typescript this definitions library will be updated to reflect those changes.
+This definitions file aims to have full documentation and as much type annotations as possible.  When generics are available within typescript this definitions library will be updated to reflect those changes.
 
 Change log
 ========
 
-v1.4.3
+v1.4.4 - 2013/02/10
+---------
+
+* Added _.findWhere, for finding the first element in a list that matches a particular set of keys and values.
+* Added _.partial, for partially applying a function without changing its dynamic reference to this.
+
+v1.4.3 - 2013/02/10
 ---------
 
 * The uniq function can now take `array, iterator, context` as the argument list.
 * The times function now returns the mapped array of iterator results.
 
-v1.4.2 
+v1.4.2
 ---------
 Initial version
 
@@ -22,7 +28,7 @@ Initial version
 License
 =======
 
-underscore-1.4.3.d.ts may be freely distributed under the MIT license.
+underscore-1.4.4.d.ts may be freely distributed under the MIT license.
 
 Copyright (c) 2013 Josh Baldwin https://github.com/jbaldwin/underscore.d.ts
 
