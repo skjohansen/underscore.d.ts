@@ -43,7 +43,6 @@ interface Underscore {
 		list: any[],
 		iterator: (element: any, index?: number, list?: any[]) => any,
 		context?: any): void;
-
 	/**
 	* Iterates over a list of elements, yielding each in turn to an iterator function. The iterator is
 	* bound to the context object, if one is passed. Each invocation of iterator is called with three
@@ -1180,46 +1179,11 @@ interface Underscore {
 	**************/
 
 	/**
-	* Underscore string OOP Wrapper, all Underscore functions that take a string
-	* as the first parameter can be invoked through this function.
-	* @param key First argument to Underscore string functions.
-	**/
-	(key: string): UnderscoreStringOOPWrapper;
-
-	/**
-	* Underscore string[] OOP Wrapper, all Underscore functions that take a string[]
-	* as the first parameter can be invoked through this function.
-	* @param list First argument to Underscore string[] functions.
-	**/
-	(list: string[]): UnderscoreStringArrayOOPWrapper;
-
-	/**
-	* Underscore number OOP Wrapper, all Underscore functions that take a number
-	* as the first parameter can be invoked through this function.
-	* @param key First argument to Underscore number functions.
-	**/
-	(n: number): UnderscoreNumberOOPWrapper;
-
-	/**
-	* Underscore number[] OOP Wrapper, all Underscore functions that take a number[]
-	* as the first parameter can be invoked through this function.
-	* @param list First argument to Underscore number[] functions.
-	**/
-	(list: number[]): UnderscoreNumberArrayOOPWrapper;
-
-	/**
 	* Underscore OOP Wrapper, all Underscore functions that take an object
 	* as the first parameter can be invoked through this function.
 	* @param key First argument to Underscore object functions.
 	**/
-	(obj: any): UnderscoreObjectOOPWrapper;
-
-	/**
-	* Underscore any[] OOP Wrapper, all Underscore functions that take a any[]
-	* as the first parameter can be invoked through this function.
-	* @param list First argument to Underscore any[] functions.
-	**/
-	(list: any[]): UnderscoreObjectArrayOOPWrapper;
+	(obj: any): UnderscoreOOPWrapper;
 }
 
 /**
@@ -1243,379 +1207,309 @@ interface UnderscoreTemplateSettings {
 	escape?: RegExp;
 }
 
-/**
-* Returned interface when calling the Underscore String OOP Wrapper.  All "string" functions are
-* available except the first argument is missing since that is the object being wrapped.
-*
-* If a function only works on lists then it is not included.
-**/
-interface UnderscoreStringOOPWrapper {
+interface UnderscoreOOPWrapper {
+
 	/**************
 	* Collections *
-	***************/
-
-	// There are no Collection OOP wrappers for String
-
-	/*********
-	* Arrays *
-	**********/
-
-	// There are no Array OOP wrappers for String
-
-	/************
-	* Functions *
-	*************/
-
-	// There are no Function OOP wrappers for String
-
-	/**********
-	* Objects *
-	***********/
-
-	// These don't seem entirely useful since it is known to be a string
-	// but I have included them since they are all generic on "objects".
-
-	/**
-	* Returns true if object is a DOM element.
-	**/
-	isElement(): bool;
-
-	/**
-	* Returns true if object is an Array.
-	**/
-	isArray(): bool;
-
-	/**
-	* Returns true if value is an any. Note that JavaScript arrays and functions are objects,
-	* while (normal) strings and numbers are not.
-	**/
-	isObject(): bool;
-
-	/**
-	* Returns true if object is an Arguments object.
-	**/
-	isArguments(): bool;
-
-	/**
-	* Returns true if object is a Function.
-	**/
-	isFunction(): bool;
-
-	/**
-	* Returns true if object is a String.
-	**/
-	isString(): bool;
-
-	/**
-	* Returns true if object is a Number (including NaN).
-	**/
-	isNumber(): bool;
-
-	/**
-	* Returns true if object is a finite Number.
-	**/
-	isFinite(): bool;
-
-	/**
-	* Returns true if object is either true or false.
-	**/
-	isBoolean(): bool;
-
-	/**
-	* Returns true if object is a Date.
-	**/
-	isDate(): bool;
-
-	/**
-	* Returns true if object is a RegExp.
-	**/
-	isRegExp(): bool;
-
-	/**
-	* Returns true if object is NaN.
-	* Note: this is not the same as the native isNaN function,
-	* which will also return true if the variable is undefined.
-	**/
-	isNaN(): bool;
-
-	/**
-	* Returns true if the value of object is null.
-	**/
-	isNull(): bool;
-
-	/**
-	* Returns true if value is undefined.
-	**/
-	isUndefined(): bool;
-
-	/**********
-	* Utility *
-	***********/
-
-	/**
-	* Returns the same value that is used as the argument. In math: f(x) = x
-	* This function looks useless, but is used throughout Underscore as a default iterator.
-	**/
-	identity(): string;
-
-
-	/**
-	* Generate a globally-unique id for client-side models or DOM elements that need one.
-	* If prefix is passed, the id will be appended to it. Without prefix, returns an integer.
-	**/
-	uniqueId(): string;
-
-	/**
-	* Escapes a string for insertion into HTML, replacing &, <, >, ", ', and / characters.
-	**/
-	escape(): string;
-
-	/**
-	* Compiles JavaScript templates into functions that can be evaluated for rendering. Useful
-	* for rendering complicated bits of HTML from JSON data sources. Template functions can both
-	* interpolate variables, using <%= … %>, as well as execute arbitrary JavaScript code, with
-	* <% … %>. If you wish to interpolate a value, and have it be HTML-escaped, use <%- … %> When
-	* you evaluate a template function, pass in a data object that has properties corresponding to
-	* the template's free variables. If you're writing a one-off, you can pass the data object as
-	* the second parameter to template in order to render immediately instead of returning a template
-	* function. The settings argument should be a hash containing any _.templateSettings that should
-	* be overridden.
-	**/
-	template(data?: any, settings?: UnderscoreTemplateSettings): any;
-
-	/***********
-	* Chaining *
-	************/
-
-	// There are no Chaining OOP wrappers for String
-
-	/**
-	* Extracts the value of a wrapped object.
-	**/
-	value(): string;
-
-	/**************
-	* OOP Wrapper *
 	**************/
 
-	// There are no base OOP Wrappers for String
-}
-
-interface UnderscoreStringArrayOOPWrapper {
-	
-	/**************
-	* Collections *
-	***************/
-
 	/**
-	* Iterates over a list of elements, yielding each in turn to an iterator function. The iterator is
-	* bound to the context object, if one is passed. Each invocation of iterator is called with three
-	* arguments: (element, index, list). If list is a JavaScript object, iterator's arguments will be
-	* (value, key, list). Delegates to the native forEach function if it exists.
-	**/	
+	* Wrapped type `any[]`.
+	* @see _.each
+	**/
 	each(
-		iterator: (element: string, index?: number, list?: string[]) => any,
+		iterator: (element: any, index?: number, list?: any[]) => any,
+		context?: any): void;
+	/**
+	* Wrapped type `object`.
+	* @see _.each
+	**/
+	each(
+		iterator: (value: any, key?: string, object?: Object) => any,
 		context?: any): void;
 
 	/**
 	* Alias for 'each'.
+	* @see each
 	**/
 	forEach(
-		iterator: (element: string, index?: number, list?: string[]) => any,
+		iterator: (element: any, index?: number, list?: any[]) => any,
+		context?: any): void;
+	/**
+	* Alias for 'each'.
+	* @see each
+	**/
+	forEach(
+		iterator: (value: any, key?: string, object?: Object) => any,
 		context?: any): void;
 
 	/**
-	* Produces a new array of values by mapping each value in list through a transformation function
-	* (iterator). If the native map method exists, it will be used instead. If list is a JavaScript
-	* object, iterator's arguments will be (value, key, list).
+	* Wrapped type `any[]`.
+	* @see _.map
 	**/
 	map(
-		iterator: (element: string, index?: number, list?: string[]) => string,
-		context?: any): string[];
+		iterator: (element: any, index?: number, list?: any[]) => any,
+		context?: any): any[];
+	/**
+	* Wrapped type `object`.
+	* @see _.map
+	**/
+	map(
+		iterator: (value: any, key?: string, object?: Object) => any,
+		context?: any): any[];
 
 	/**
 	* Alias for 'map'.
+	* @see map
 	**/
 	collect(
-		iterator: (element: string, index?: number, list?: string[]) => string,
-		context?: any): string[];
+		iterator: (element: any, index?: number, list?: any[]) => any,
+		context?: any): any[];
+	/**
+	* Alias for 'map'.
+	* @see map
+	**/
+	collect(
+		iterator: (value: any, key?: string, object?: Object) => any,
+		context?: any): any[];
 
 	/**
-	* Also known as inject and foldl, reduce boils down a list of values into a single value.
-	* Memo is the initial state of the reduction, and each successive step of it should be
-	* returned by iterator. The iterator is passed four arguments: the memo, then the value
-	* and index (or key) of the iteration, and finally a reference to the entire list.
+	* Wrapped type `any[]`.
+	* @see _.reduce
 	**/
 	reduce(
-		iterator: (memo: string, element: string, index?: number, list?: string[]) => string,
-		memo: string,
-		context?: any): string;
+		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
+		memo: any,
+		context?: any): any;
 
 	/**
 	* Alias for 'reduce'.
+	* @see reduce
 	**/
 	inject(
-		iterator: (memo: string, element: string, index?: number, list?: string[]) => string,
-		memo: string,
-		context?: any): string;
+		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
+		memo: any,
+		context?: any): any;
 
 	/**
 	* Alias for 'reduce'.
+	* @see reduce
 	**/
 	foldl(
-		iterator: (memo: string, element: string, index?: number, list?: string[]) => string,
-		memo: string,
-		context?: any): string;
+		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
+		memo: any,
+		context?: any): any;
 
 	/**
-	* The right-associative version of reduce. Delegates to the JavaScript 1.8 version of
-	* reduceRight, if it exists. Foldr is not as useful in JavaScript as it would be in a
-	* language with lazy evaluation.
+	* Wrapped type `any[]`.
+	* @see _.reduceRight
 	**/
 	reduceRight(
-		iterator: (memo: string, element: string, index?: number, list?: string[]) => string,
-		memo: string,
-		context?: any): string;
+		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
+		memo: any,
+		context?: any): any;
 
 	/**
 	* Alias for 'reduceRight'.
+	* @see reduceRight
 	**/
 	foldr(
-		iterator: (memo: string, element: string, index?: number, list?: string[]) => string,
-		memo: string,
-		context?: any): string;
+		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
+		memo: any,
+		context?: any): any;
 
 	/**
-	* Looks through each value in the list, returning the first one that passes a truth
-	* test (iterator). The function returns as soon as it finds an acceptable element,
-	* and doesn't traverse the entire list.
+	* Wrapped type `any[]`.
+	* @see _.find
 	**/
 	find(
-		iterator: (element: string, index?: number, list?: string[]) => bool,
-		context?: any): string;
+		iterator: (element: any, index?: number, list?: any[]) => bool,
+		context?: any): any;
 
 	/**
 	* Alias for 'find'.
+	* @see find
 	**/
 	detect(
-		iterator: (element: string, index?: number, list?: string[]) => bool,
-		context?: any): string;
+		iterator: (element: any, index?: number, list?: any[]) => bool,
+		context?: any): any;
 
 
 	/**
-	* Looks through each value in the list, returning an array of all the values that pass a truth
-	* test (iterator). Delegates to the native filter method, if it exists.
+	* Wrapped type `any[]`.
+	* @see _.filter
 	**/
 	filter(
-		iterator: (element: string, index?: number, list?: string[]) => bool,
-		context?: any): string[];
+		iterator: (element: any, index?: number, list?: any[]) => bool,
+		context?: any): any[];
 
 	/**
 	* Alias for 'filter'.
+	* @see filter
 	**/
 	select(
-		iterator: (element: string, index?: number, list?: string[]) => bool,
-		context?: any): string[];
-
+		iterator: (element: any, index?: number, list?: any[]) => bool,
+		context?: any): any[];
 
 	/**
-	* Returns the values in list without the elements that the truth test (iterator) passes.
-	* The opposite of filter.
+	* Wrapped type `any[]`.
+	* @see _.where
+	**/
+	where(list: any[], properties: any): any[];
+
+	/**
+	* Wrapped type `any[]`.
+	* @see _.reject
 	**/
 	reject(
-		iterator: (element: string, index?: number, list?: string[]) => bool,
-		context?: any): string[];
+		list: any[],
+		iterator: (element: any, index?: number, list?: any[]) => bool,
+		context?: any): any[];
 
 	/**
-	* Returns true if all of the values in the list pass the iterator truth test. Delegates to the
-	* native method every, if present.
+	* Wrapped type `any[]`.
+	* @see _.all
 	**/
 	all(
-		iterator: (element: string, index?: number, list?: string[]) => bool,
+		iterator: (element: any, index?: number, list?: any[]) => bool,
 		context?: any): bool;
 
 	/**
 	* Alias for 'all'.
+	* @see all
 	**/
 	every(
-		iterator: (element: string, index?: number, list?: string[]) => bool,
+		iterator: (element: any, index?: number, list?: any[]) => bool,
 		context?: any): bool;
 
 	/**
-	* Returns true if any of the values in the list pass the iterator truth test. Short-circuits and
-	* stops traversing the list if a true element is found. Delegates to the native method some, if present.
+	* Wrapped type `any[]`.
+	* @see _.any
 	**/
 	any(
-		iterator?: (element: string, index?: number, list?: string[]) => bool,
+		list: any[],
+		iterator?: (element: any, index?: number, list?: any[]) => bool,
 		context?: any): bool;
 
 	/**
 	* Alias for 'any'.
+	* @see any
 	**/
 	some(
-		iterator: (element: string, index?: number, list?: string[]) => bool,
+		list: any[],
+		iterator: (element: any, index?: number, list?: any[]) => bool,
 		context?: any): bool;
 
 	/**
-	* Returns true if the value is present in the list. Uses indexOf internally,
-	* if list is an Array.
+	* Wrapped type `any[]`.
+	* @see _.contains
 	**/
-	contains(value: string): bool;
+	contains(value: any): bool;
 
 	/**
 	* Alias for 'contains'.
+	* @see contains
 	**/
-	include(value: string): bool;
+	include(value: any): bool;
 
 	/**
-	* Calls the method named by methodName on each value in the list. Any extra arguments passed to
-	* invoke will be forwarded on to the method invocation.
+	* Wrapped type `any[]`.
+	* @see _.invoke
 	**/
 	invoke(methodName: string, ...arguments: any[]): void;
 
+	/**
+	* Wrapped type `any[]`.
+	* @see _.pluck
+	**/
+	pluck(propertyName: string): any[];
 
 	/**
-	* Returns a sorted copy of list, ranked in ascending order by the results of running each value
-	* through iterator. Iterator may also be the string name of the property to sort by (eg. length).
+	* Wrapped type `number[]`.
+	* @see _.max
+	**/
+	max(): number;
+	/**
+	* Wrapped type `any[]`.
+	* @see _.max
+	**/
+	max(
+		iterator: (element: any, index?: number, list?: any[]) => number,
+		context?: any): any;
+
+	/**
+	* Wrapped type `number[]`.
+	* @see _.min
+	**/
+	min(): number;
+	/**
+	* Wrapped type `any[]`.
+	* @see _.min
+	**/
+	min(
+		iterator: (obj: any, index?: number, list?: any[]) => number,
+		context?: any): any;
+
+	/**
+	* Wrapped type `any[]`.
+	* @see _.sortBy
 	**/
 	sortBy(
-		iterator: (element: string, index?: number, list?: string[]) => number,
-		context?: any): string[];
-	sortBy(iterator: string, context?: any): string[];
+		iterator: (element: any, index?: number, list?: any[]) => number,
+		context?: any): any[];
+	/**
+	* Wrapped type `any[]`.
+	* @see _.sortBy
+	**/
+	sortBy(
+		iterator: string,
+		context?: any): any[];
 
 	/**
-	* Splits a collection into sets, grouped by the result of running each value through iterator.
-	* If iterator is a string instead of a function, groups by the property named by iterator on
-	* each of the values.
+	* Wrapped type `any[]`.
+	* @see _.groupBy
 	**/
 	groupBy(
-		iterator: (element: string, index?: number, list?: string[]) => string,
-		context?: any): { [key: string]: string[]; };
-	groupBy(iterator: string, context?: any): { [key: string]: string[]; };
+		iterator: (element: any, index?: number, list?: any[]) => string,
+		context?: any): { [key: string]: any[]; };
+	/**
+	* Wrapped type `any[]`.
+	* @see _.groupBy
+	**/
+	groupBy(
+		iterator: string,
+		context?: any): { [key: string]: any[]; };
 
 	/**
-	* Sorts a list into groups and returns a count for the number of objects in each group. Similar
-	* to groupBy, but instead of returning a list of values, returns a count for the number of values
-	* in that group.
+	* Wrapped type `any[]`.
+	* @see _.countBy
 	**/
 	countBy(
-		iterator: (element: string, index?: number, list?: string[]) => string,
+		iterator: (element: any, index?: number, list?: any[]) => string,
 		context?: any): { [key: string]: number; };
-	countBy(iterator: string, context?: any): { [key: string]: number; };
-
 	/**
-	* Returns a shuffled copy of the list, using a version of the Fisher-Yates shuffle.
+	* Wrapped type `any[]`.
+	* @see _.countBy
 	**/
-	shuffle(): string[];
+	countBy(
+		iterator: string,
+		context?: any): { [key: string]: number; };
 
 	/**
-	* Converts the list (anything that can be iterated over), into a real Array. Useful for transmuting
-	* the arguments object.
+	* Wrapped type `any[]`.
+	* @see _.shuffle
 	**/
-	toArray(): string[];
+	shuffle(): any[];
 
 	/**
-	* Return the number of values in the list.
+	* Wrapped type `any`.
+	* @see _.toArray
+	**/
+	toArray(): any[];
+
+	/**
+	* Wrapped type `any`.
+	* @see _.size
 	**/
 	size(): number;
 
@@ -1624,271 +1518,164 @@ interface UnderscoreStringArrayOOPWrapper {
 	**********/
 
 	/**
-	* Returns the first element of an array. Passing n will return the first n elements of the array.
+	* Wrapped type `any[]`.
+	* @see _.first
 	**/
-	first(): string;
-	first(n: number): string[];
+	first(): any;
+	/**
+	* Wrapped type `any[]`.
+	* @see _.first
+	**/
+	first(n: number): any[];
 
 	/**
 	* Alias for 'first'.
+	* @see first
 	**/
-	head(): string;
-	head(n: number): string[];
+	head(): any;
+	/**
+	* Alias for 'first'.
+	* @see first
+	**/
+	head(n: number): any[];
 
 	/**
 	* Alias for 'first'.
+	* @see first
 	**/
-	take(): string;
-	take(n: number): string[];
+	take(): any;
+	/**
+	* Alias for 'first'.
+	* @see first
+	**/
+	take(n: number): any[];
 
 	/**
-	* Returns everything but the last entry of the array. Especially useful on the arguments object.
-	* Pass n to exclude the last n elements from the result.
+	* Wrapped type `any[]`.
+	* @see _.initial
 	**/
-	initial(n?: number): string[];
+	initial(n?: number): any[];
 
 	/**
-	* Returns the last element of an array. Passing n will return the last n elements of the array.
+	* Wrapped type `any[]`.
+	* @see _.last
 	**/
-	last(): string;
-	last(n: number): string[];
+	last(): any;
+	/**
+	* Wrapped type `any[]`.
+	* @see _.last
+	**/
+	last(n: number): any[];
 
 	/**
-	* Returns the rest of the elements in an array. Pass an index to return the values of the array
-	* from that index onward.
+	* Wrapped type `any[]`.
+	* @see _.rest
 	**/
-	rest(index?: number): string[];
+	rest(index?: number): any[];
 
 	/**
 	* Alias for 'rest'.
+	* @see rest
 	**/
-	tail(index?: number): string[];
+	tail(index?: number): any[];
 
 	/**
 	* Alias for 'rest'.
+	* @see rest
 	**/
-	drop(index?: number): string[];
+	drop(index?: number): any[];
 
 	/**
-	* Returns a copy of the array with all falsy values removed. In JavaScript, false, null, 0, "",
-	* undefined and NaN are all falsy.
+	* Wrapped type `any[]`.
+	* @see _.compact
 	**/
-	compact(): string[];
+	compact(): any[];
 
 	/**
-	* Flattens a nested array (the nesting can be to any depth). If you pass shallow, the array will
-	* only be flattened a single level.
+	* Wrapped type `any`.
+	* @see _.flatten
 	**/
-	flatten(shallow?: bool): string[];
+	flatten(shallow?: bool): any;
 
 	/**
-	* Returns a copy of the array with all instances of the values removed.
+	* Wrapped type `any[]`.
+	* @see _.without
 	**/
-	without(...values: string[]): string[];
+	without(...values: any[]): any[];
 
 	/**
-	* Computes the union of the passed-in arrays: the list of unique items, in order, that are
-	* present in one or more of the arrays.
+	* Wrapped type `any[][]`.
+	* @see _.union
 	**/
-	union(...arrays: string[][]): string[];
+	union(...arrays: any[][]): any[];
 
 	/**
-	* Computes the list of values that are the intersection of all the arrays. Each value in the result
-	* is present in each of the arrays.
+	* Wrapped type `any[][]`.
+	* @see _.intersection
 	**/
-	intersection(...arrays: string[][]): string[];
+	intersection(...arrays: any[][]): any[];
 
 	/**
-	* Similar to without, but returns the values from array that are not present in the other arrays.
+	* Wrapped type `any[]`.
+	* @see _.difference
 	**/
-	difference(...others: string[]): string[];
+	difference(...others: any[]): any[];
 
 	/**
-	* Produces a duplicate-free version of the array, using === to test object equality. If you know in
-	* advance that the array is sorted, passing true for isSorted will run a much faster algorithm. If
-	* you want to compute unique items based on a transformation, pass an iterator function.
+	* Wrapped type `any[]`.
+	* @see _.uniq
 	**/
-	uniq(isSorted?: bool, iterator?: (element: string, index?: number, list?: string[]) => string): string[];
+	uniq(
+		isSorted?: bool,
+		iterator?: (element: any, index?: number, list?: any[]) => any): any[];
 
 	/**
 	* Alias for 'uniq'.
+	* @see uniq
 	**/
-	unique(isSorted?: bool, iterator?: (element: string, index?: number, list?: string[]) => string): string[];
+	unique(
+		isSorted?: bool,
+		iterator?: (element: any, index?: number, list?: any[]) => any): any[];
 
 	/**
-	* Merges together the values of each of the arrays with the values at the corresponding position.
-	* Useful when you have separate data sources that are coordinated through matching array indexes.
-	* If you're working with a matrix of nested arrays, zip.apply can transpose the matrix in a similar fashion.
+	* Wrapped type `any[][]`.
+	* @see _.zip
 	**/
-	zip(...arrays: string[][]): string[][];
+	zip(...arrays: any[][]): any[][];
 
 	/**
-	* Converts arrays into objects. Pass either a single list of [key, value] pairs, or a
-	* list of keys, and a list of values.
+	* Wrapped type `any[][]`.
+	* @see _.object
 	**/
-	object(values: any[]): any;
+	object(...keyValuePairs: any[][]): any;
 
 	/**
-	* Returns the index at which value can be found in the array, or -1 if value is not present in the array.
-	* Uses the native indexOf function unless it's missing. If you're working with a large array, and you know
-	* that the array is already sorted, pass true for isSorted to use a faster binary search ... or, pass a number
-	* as the third argument in order to look for the first matching value in the array after the given index.
+	* Wrapped type `any[]`.
+	* @see _.indexOf
 	**/
-	indexOf(value: string, isSorted?: bool): number;
+	indexOf(value: any, isSorted?: bool): number;
 
 	/**
-	* Returns the index of the last occurrence of value in the array, or -1 if value is not present. Uses the
-	* native lastIndexOf function if possible. Pass fromIndex to start your search at a given index.
+	* Wrapped type `any[]`.
+	* @see _.lastIndexOf
 	**/
-	lastIndexOf(value: string, from?: number): number;
+	lastIndexOf(value: any, from?: number): number;
 
 	/**
-	* Uses a binary search to determine the index at which the value should be inserted into the list in order
-	* to maintain the list's sorted order. If an iterator is passed, it will be used to compute the sort ranking
-	* of each value, including the value you pass.
+	* Wrapped type `any[]`.
+	* @see _.sortedIndex
 	**/
-	sortedIndex(value: string, iterator?: (element: string) => number): number;
-
-	/************
-	* Functions *
-	*************/
-
-	// There are no Function OOP Wrappers for String[]
-
-	/**********
-	* Objects *
-	***********/
-	
-	/**
-	* Create a shallow-copied clone of the object.
-	* Any nested objects or arrays will be copied by reference, not duplicated.
-	**/
-	clone(): string[];
+	sortedIndex(value: any, iterator?: (element: any) => number): number;
 
 	/**
-	* Returns true if object contains no values.
+	* Wrapped type `number`.
+	* @see _.range
 	**/
-	isEmpty(): bool;
-
-	/**
-	* Returns true if object is a DOM element.
-	**/
-	isElement(): bool;
-
-	/**
-	* Returns true if object is an Array.
-	**/
-	isArray(): bool;
-
-	/**
-	* Returns true if value is an any. Note that JavaScript arrays and functions are objects,
-	* while (normal) strings and numbers are not.
-	**/
-	isObject(): bool;
-
-	/**
-	* Returns true if object is an Arguments object.
-	**/
-	isArguments(): bool;
-
-	/**
-	* Returns true if object is a Function.
-	**/
-	isFunction(): bool;
-
-	/**
-	* Returns true if object is a String.
-	**/
-	isString(): bool;
-
-	/**
-	* Returns true if object is a Number (including NaN).
-	**/
-	isNumber(): bool;
-
-	/**
-	* Returns true if object is a finite Number.
-	**/
-	isFinite(): bool;
-
-	/**
-	* Returns true if object is either true or false.
-	**/
-	isBoolean(): bool;
-
-	/**
-	* Returns true if object is a Date.
-	**/
-	isDate(): bool;
-
-	/**
-	* Returns true if object is a RegExp.
-	**/
-	isRegExp(): bool;
-
-	/**
-	* Returns true if object is NaN.
-	* Note: this is not the same as the native isNaN function,
-	* which will also return true if the variable is undefined.
-	**/
-	isNaN(): bool;
-
-	/**
-	* Returns true if the value of object is null.
-	**/
-	isNull(): bool;
-
-	/**
-	* Returns true if value is undefined.
-	**/
-	isUndefined(): bool;
-
-	/**********
-	* Utility *
-	***********/
-
-	/**
-	* Returns the same value that is used as the argument. In math: f(x) = x
-	* This function looks useless, but is used throughout Underscore as a default iterator.
-	**/
-	identity(value: string[]): string[];
-
-	/***********
-	* Chaining *
-	************/
-
-	/**
-	* Extracts the value of a wrapped object.
-	**/
-	value(): string[];
-
-	/**************
-	* OOP Wrapper *
-	**************/
-
-	// There are no base OOP Wrappers for String[]
-}
-
-interface UnderscoreNumberOOPWrapper {
-	
-	/**************
-	* Collections *
-	***************/
-
-	// There are no Collection OOP Wrappers for Number
-
-	/*********
-	* Arrays *
-	**********/
-
-	/**
-	* A function to create flexibly-numbered lists of integers, handy for each and map loops. start, if omitted,
-	* defaults to 0; step defaults to 1. Returns a list of integers from start to stop, incremented (or decremented)
-	* by step, exclusive.
-	**/
-	// start is the OOP wrapped object
 	range(stop: number, step?: number): number[];
-	// stop is the OOP wrapped object, cannot have step provided in this case.
+	/**
+	* Wrapped type `number`.
+	* @see _.range
+	**/
 	range(): number[];
 
 	/************
@@ -1896,1333 +1683,251 @@ interface UnderscoreNumberOOPWrapper {
 	*************/
 
 	/**
-	* Creates a version of the function that will only be run after first being called count times. Useful
-	* for grouping asynchronous responses, where you want to be sure that all the async calls have finished,
-	* before proceeding.
+	* Wrapped type `Function`.
+	* @see _.bind
 	**/
-	after(fn: Function): Function;
+	bind(object: any, ...arguments: any[]): Function;
 
-	/**********
-	* Objects *
-	***********/
 
 	/**
-	* Returns true if object is a DOM element.
-	**/
-	isElement(): bool;
-
-	/**
-	* Returns true if object is an Array.
-	**/
-	isArray(): bool;
-
-	/**
-	* Returns true if value is an any. Note that JavaScript arrays and functions are objects,
-	* while (normal) strings and numbers are not.
-	**/
-	isObject(): bool;
-
-	/**
-	* Returns true if object is an Arguments object.
-	**/
-	isArguments(): bool;
-
-	/**
-	* Returns true if object is a Function.
-	**/
-	isFunction(): bool;
-
-	/**
-	* Returns true if object is a String.
-	**/
-	isString(): bool;
-
-	/**
-	* Returns true if object is a Number (including NaN).
-	**/
-	isNumber(): bool;
-
-	/**
-	* Returns true if object is a finite Number.
-	**/
-	isFinite(): bool;
-
-	/**
-	* Returns true if object is either true or false.
-	**/
-	isBoolean(): bool;
-
-	/**
-	* Returns true if object is a Date.
-	**/
-	isDate(): bool;
-
-	/**
-	* Returns true if object is a RegExp.
-	**/
-	isRegExp(): bool;
-
-	/**
-	* Returns true if object is NaN.
-	* Note: this is not the same as the native isNaN function,
-	* which will also return true if the variable is undefined.
-	**/
-	isNaN(): bool;
-
-	/**
-	* Returns true if the value of object is null.
-	**/
-	isNull(): bool;
-
-	/**
-	* Returns true if value is undefined.
-	**/
-	isUndefined(): bool;
-
-	/**********
-	* Utility *
-	***********/
-
-	/**
-	* Returns the same value that is used as the argument. In math: f(x) = x
-	* This function looks useless, but is used throughout Underscore as a default iterator.
-	**/
-	identity(value: number): number;
-
-	/**
-	* Invokes the given iterator function n times.
-	* Each invocation of iterator is called with an index argument.
-	* @example
-	*
-	* _(3).times(function(n){ genie.grantWishNumber(n); });
-	*
-	**/
-	times(iterator: (n: number) => void , context?: any): void;
-
-	/**
-	* Returns a random integer between min and max, inclusive. If you only pass one argument,
-	* it will return a number between 0 and that number.
-	**/
-	// max is OOP wrapped
-	random(): number;
-	// min is OOP wrapped
-	random(max: number): number;
-
-	/***********
-	* Chaining *
-	************/
-
-	/**
-	* Extracts the value of a wrapped object.
-	**/
-	value(): number;
-
-	/**************
-	* OOP Wrapper *
-	**************/
-
-	// There are no base OOP Wrappers for Number
-}
-
-interface UnderscoreNumberArrayOOPWrapper {
-	
-	/**************
-	* Collections *
-	***************/
-
-	/**
-	* Iterates over a list of elements, yielding each in turn to an iterator function. The iterator is
-	* bound to the context object, if one is passed. Each invocation of iterator is called with three
-	* arguments: (element, index, list). If list is a JavaScript object, iterator's arguments will be
-	* (value, key, list). Delegates to the native forEach function if it exists.
-	**/	
-	each(
-		iterator: (element: number, index?: number, list?: number[]) => any,
-		context?: any): void;
-
-	/**
-	* Alias for 'each'.
-	**/
-	forEach(
-		iterator: (element: number, index?: number, list?: number[]) => any,
-		context?: any): void;
-
-	/**
-	* Produces a new array of values by mapping each value in list through a transformation function
-	* (iterator). If the native map method exists, it will be used instead. If list is a JavaScript
-	* object, iterator's arguments will be (value, key, list).
-	**/
-	map(
-		iterator: (element: number, index?: number, list?: number[]) => number,
-		context?: any): number[];
-
-	/**
-	* Alias for 'map'.
-	**/
-	collect(
-		iterator: (element: number, index?: number, list?: number[]) => number,
-		context?: any): number[];
-
-	/**
-	* Also known as inject and foldl, reduce boils down a list of values into a single value.
-	* Memo is the initial state of the reduction, and each successive step of it should be
-	* returned by iterator. The iterator is passed four arguments: the memo, then the value
-	* and index (or key) of the iteration, and finally a reference to the entire list.
-	**/
-	reduce(
-		iterator: (memo: number, element: number, index?: number, list?: number[]) => number,
-		memo: number,
-		context?: any): number;
-
-	/**
-	* Alias for 'reduce'.
-	**/
-	inject(
-		iterator: (memo: number, element: number, index?: number, list?: number[]) => number,
-		memo: number,
-		context?: any): number;
-
-	/**
-	* Alias for 'reduce'.
-	**/
-	foldl(
-		iterator: (memo: number, element: number, index?: number, list?: number[]) => number,
-		memo: number,
-		context?: any): number;
-
-	/**
-	* The right-associative version of reduce. Delegates to the JavaScript 1.8 version of
-	* reduceRight, if it exists. Foldr is not as useful in JavaScript as it would be in a
-	* language with lazy evaluation.
-	**/
-	reduceRight(
-		iterator: (memo: number, element: number, index?: number, list?: number[]) => number,
-		memo: number,
-		context?: any): number;
-
-	/**
-	* Alias for 'reduceRight'.
-	**/
-	foldr(
-		iterator: (memo: number, element: number, index?: number, list?: number[]) => number,
-		memo: number,
-		context?: any): number;
-
-	/**
-	* Looks through each value in the list, returning the first one that passes a truth
-	* test (iterator). The function returns as soon as it finds an acceptable element,
-	* and doesn't traverse the entire list.
-	**/
-	find(
-		iterator: (element: number, index?: number, list?: number[]) => bool,
-		context?: any): number;
-
-	/**
-	* Alias for 'find'.
-	**/
-	detect(
-		iterator: (element: number, index?: number, list?: number[]) => bool,
-		context?: any): number;
-
-
-	/**
-	* Looks through each value in the list, returning an array of all the values that pass a truth
-	* test (iterator). Delegates to the native filter method, if it exists.
-	**/
-	filter(
-		iterator: (element: number, index?: number, list?: number[]) => bool,
-		context?: any): number[];
-
-	/**
-	* Alias for 'filter'.
-	**/
-	select(
-		iterator: (element: number, index?: number, list?: number[]) => bool,
-		context?: any): number[];
-
-	/**
-	* Returns the values in list without the elements that the truth test (iterator) passes.
-	* The opposite of filter.
-	**/
-	reject(
-		iterator: (element: number, index?: number, list?: number[]) => bool,
-		context?: any): number[];
-
-	/**
-	* Returns true if all of the values in the list pass the iterator truth test. Delegates to the
-	* native method every, if present.
-	**/
-	all(
-		iterator: (element: number, index?: number, list?: string[]) => bool,
-		context?: any): bool;
-
-	/**
-	* Alias for 'all'.
-	**/
-	every(
-		iterator: (element: number, index?: number, list?: string[]) => bool,
-		context?: any): bool;
-
-	/**
-	* Returns true if any of the values in the list pass the iterator truth test. Short-circuits and
-	* stops traversing the list if a true element is found. Delegates to the native method some, if present.
-	**/
-	any(
-		iterator?: (element: number, index?: number, list?: string[]) => bool,
-		context?: any): bool;
-
-	/**
-	* Alias for 'any'.
-	**/
-	some(
-		iterator: (element: number, index?: number, list?: string[]) => bool,
-		context?: any): bool;
-
-	/**
-	* Returns true if the value is present in the list. Uses indexOf internally,
-	* if list is an Array.
-	**/
-	contains(value: number): bool;
-
-	/**
-	* Alias for 'contains'.
-	**/
-	include(value: number): bool;
-
-	/**
-	* Calls the method named by methodName on each value in the list. Any extra arguments passed to
-	* invoke will be forwarded on to the method invocation.
-	**/
-	invoke(methodName: string, ...arguments: any[]): void;
-
-	/**
-	* Returns the maximum value in list. If iterator is passed, it will be used on each value to generate
-	* the criterion by which the value is ranked.
-	**/
-	max(): number;
-
-	/**
-	* Returns the minimum value in list. If iterator is passed, it will be used on each value to generate
-	* the criterion by which the value is ranked.
-	**/
-	min(): number;
-
-	/**
-	* Returns a sorted copy of list, ranked in ascending order by the results of running each value
-	* through iterator. Iterator may also be the string name of the property to sort by (eg. length).
-	**/
-	sortBy(
-		iterator: (element: number, index?: number, list?: number[]) => number,
-		context?: any): number[];
-	sortBy(iterator: string, context?: any): number[];
-
-	/**
-	* Splits a collection into sets, grouped by the result of running each value through iterator.
-	* If iterator is a string instead of a function, groups by the property named by iterator on
-	* each of the values.
-	**/
-	groupBy(
-		iterator: (element: number, index?: number, list?: number[]) => string,
-		context?: any): { [key: string]: number[]; };
-	groupBy(iterator: string, context?: any): { [key: string]: number[]; };
-
-	/**
-	* Sorts a list into groups and returns a count for the number of objects in each group. Similar
-	* to groupBy, but instead of returning a list of values, returns a count for the number of values
-	* in that group.
-	**/
-	countBy(
-		iterator: (element: number, index?: number, list?: number[]) => string,
-		context?: any): { [key: string]: number; };
-	countBy(iterator: string, context?: any): { [key: string]: number; };
-
-	/**
-	* Returns a shuffled copy of the list, using a version of the Fisher-Yates shuffle.
-	**/
-	shuffle(): number[];
-
-	/**
-	* Converts the list (anything that can be iterated over), into a real Array. Useful for transmuting
-	* the arguments object.
-	**/
-	toArray(): number[];
-
-	/**
-	* Return the number of values in the list.
-	**/
-	size(): number;
-
-	/*********
-	* Arrays *
-	**********/
-
-	/**
-	* Returns the first element of an array. Passing n will return the first n elements of the array.
-	**/
-	first(): number;
-	first(n: number): number[];
-
-	/**
-	* Alias for 'first'.
-	**/
-	head(): number;
-	head(n: number): number[];
-
-	/**
-	* Alias for 'first'.
-	**/
-	take(): number;
-	take(n: number): number[];
-
-	/**
-	* Returns everything but the last entry of the array. Especially useful on the arguments object.
-	* Pass n to exclude the last n elements from the result.
-	**/
-	initial(n?: number): number[];
-
-	/**
-	* Returns the last element of an array. Passing n will return the last n elements of the array.
-	**/
-	last(): number;
-	last(n: number): number[];
-
-	/**
-	* Returns the rest of the elements in an array. Pass an index to return the values of the array
-	* from that index onward.
-	**/
-	rest(index?: number): number[];
-
-	/**
-	* Alias for 'rest'.
-	**/
-	tail(index?: number): number[];
-
-	/**
-	* Alias for 'rest'.
-	**/
-	drop(index?: number): number[];
-
-	/**
-	* Returns a copy of the array with all falsy values removed. In JavaScript, false, null, 0, "",
-	* undefined and NaN are all falsy.
-	**/
-	compact(): number[];
-
-	/**
-	* Flattens a nested array (the nesting can be to any depth). If you pass shallow, the array will
-	* only be flattened a single level.
-	**/
-	flatten(shallow?: bool): number[];
-
-	/**
-	* Returns a copy of the array with all instances of the values removed.
-	**/
-	without(...values: number[]): number[];
-
-	/**
-	* Computes the union of the passed-in arrays: the list of unique items, in order, that are
-	* present in one or more of the arrays.
-	**/
-	union(...arrays: number[][]): number[];
-
-	/**
-	* Computes the list of values that are the intersection of all the arrays. Each value in the result
-	* is present in each of the arrays.
-	**/
-	intersection(...arrays: number[][]): number[];
-
-	/**
-	* Similar to without, but returns the values from array that are not present in the other arrays.
-	**/
-	difference(...others: number[]): number[];
-
-	/**
-	* Produces a duplicate-free version of the array, using === to test object equality. If you know in
-	* advance that the array is sorted, passing true for isSorted will run a much faster algorithm. If
-	* you want to compute unique items based on a transformation, pass an iterator function.
-	**/
-	uniq(isSorted?: bool, iterator?: (element: number, index?: number, list?: number[]) => number): number[];
-
-	/**
-	* Alias for 'uniq'.
-	**/
-	unique(isSorted?: bool, iterator?: (element: number, index?: number, list?: number[]) => number): number[];
-
-	/**
-	* Merges together the values of each of the arrays with the values at the corresponding position.
-	* Useful when you have separate data sources that are coordinated through matching array indexes.
-	* If you're working with a matrix of nested arrays, zip.apply can transpose the matrix in a similar fashion.
-	**/
-	zip(...arrays: number[][]): number[][];
-
-	/**
-	* Returns the index at which value can be found in the array, or -1 if value is not present in the array.
-	* Uses the native indexOf function unless it's missing. If you're working with a large array, and you know
-	* that the array is already sorted, pass true for isSorted to use a faster binary search ... or, pass a number
-	* as the third argument in order to look for the first matching value in the array after the given index.
-	**/
-	indexOf(value: number, isSorted?: bool): number;
-
-	/**
-	* Returns the index of the last occurrence of value in the array, or -1 if value is not present. Uses the
-	* native lastIndexOf function if possible. Pass fromIndex to start your search at a given index.
-	**/
-	lastIndexOf(value: number, from?: number): number;
-
-	/**
-	* Uses a binary search to determine the index at which the value should be inserted into the list in order
-	* to maintain the list's sorted order. If an iterator is passed, it will be used to compute the sort ranking
-	* of each value, including the value you pass.
-	**/
-	sortedIndex(value: number, iterator?: (element: number) => number): number;
-
-	/************
-	* Functions *
-	*************/
-
-	// There are no Function OOP Wrappers for Number[]
-
-	/**********
-	* Objects *
-	***********/
-	
-	/**
-	* Create a shallow-copied clone of the object.
-	* Any nested objects or arrays will be copied by reference, not duplicated.
-	**/
-	clone(): number[];
-
-	/**
-	* Returns true if object contains no values.
-	**/
-	isEmpty(): bool;
-
-	/**
-	* Returns true if object is a DOM element.
-	**/
-	isElement(): bool;
-
-	/**
-	* Returns true if object is an Array.
-	**/
-	isArray(): bool;
-
-	/**
-	* Returns true if value is an any. Note that JavaScript arrays and functions are objects,
-	* while (normal) strings and numbers are not.
-	**/
-	isObject(): bool;
-
-	/**
-	* Returns true if object is an Arguments object.
-	**/
-	isArguments(): bool;
-
-	/**
-	* Returns true if object is a Function.
-	**/
-	isFunction(): bool;
-
-	/**
-	* Returns true if object is a String.
-	**/
-	isString(): bool;
-
-	/**
-	* Returns true if object is a Number (including NaN).
-	**/
-	isNumber(): bool;
-
-	/**
-	* Returns true if object is a finite Number.
-	**/
-	isFinite(): bool;
-
-	/**
-	* Returns true if object is either true or false.
-	**/
-	isBoolean(): bool;
-
-	/**
-	* Returns true if object is a Date.
-	**/
-	isDate(): bool;
-
-	/**
-	* Returns true if object is a RegExp.
-	**/
-	isRegExp(): bool;
-
-	/**
-	* Returns true if object is NaN.
-	* Note: this is not the same as the native isNaN function,
-	* which will also return true if the variable is undefined.
-	**/
-	isNaN(): bool;
-
-	/**
-	* Returns true if the value of object is null.
-	**/
-	isNull(): bool;
-
-	/**
-	* Returns true if value is undefined.
-	**/
-	isUndefined(): bool;
-
-	/**********
-	* Utility *
-	***********/
-
-	/**
-	* Returns the same value that is used as the argument. In math: f(x) = x
-	* This function looks useless, but is used throughout Underscore as a default iterator.
-	**/
-	identity(): number[];
-
-	/***********
-	* Chaining *
-	************/
-
-	/**
-	* Extracts the value of a wrapped object.
-	**/
-	value(): number[];
-
-	/**************
-	* OOP Wrapper *
-	**************/
-
-	// There are no base OOP Wrappers for Number[]
-}
-
-interface UnderscoreObjectOOPWrapper {
-	
-	/**************
-	* Collections *
-	***************/
-
-	/**
-	* Iterates over a list of elements, yielding each in turn to an iterator function. The iterator is
-	* bound to the context object, if one is passed. Each invocation of iterator is called with three
-	* arguments: (element, index, list). If list is a JavaScript object, iterator's arguments will be
-	* (value, key, list). Delegates to the native forEach function if it exists.
-	**/	
-	each(
-		iterator: (value: any, key?: string, object?: any) => any,
-		context?: any): void;
-
-	/**
-	* Alias for 'each'.
-	**/
-	forEach(
-		iterator: (value: any, key?: string, object?: any) => any,
-		context?: any): void;
-
-	/**
-	* Produces a new array of values by mapping each value in list through a transformation function
-	* (iterator). If the native map method exists, it will be used instead. If list is a JavaScript
-	* object, iterator's arguments will be (value, key, list).
-	**/
-	map(
-		iterator: (value: any, key?: string, object?: any) => any,
-		context?: any): any[];
-
-	/**
-	* Alias for 'map'.
-	**/
-	collect(
-		iterator: (value: any, key?: string, object?: any) => any,
-		context?: any): any[];
-
-	/*********
-	* Arrays *
-	**********/
-
-	// There are no Array OOP Wrappers for any
-
-	/************
-	* Functions *
-	*************/
-
-	/**
-	* Binds a number of methods on the object, specified by methodNames, to be run in the context of that object
-	* whenever they are invoked. Very handy for binding functions that are going to be used as event handlers,
-	* which would otherwise be invoked with a fairly useless this. If no methodNames are provided, all of the
-	* object's function properties will be bound to it.
+	* Wrapped type `object`.
+	* @see _.bindAll
 	**/
 	bindAll(...methodNames: string[]): void;
 
+	/**
+	* Wrapped type `Function`.
+	* @see _.memoize
+	**/
+	memoize(hashFn?: (n: any) => string): Function;
+
+	/**
+	* Wrapped type `Function`.
+	* @see _.delay
+	**/
+	delay(waitMS: number, ...arguments: any[]): void;
+
+	/**
+	* Wrapped type `Function`.
+	* @see _.defer
+	**/
+	defer(...arguments: any[]): void;
+
+	/**
+	* Wrapped type `Function`.
+	* @see _.throttle
+	**/
+	throttle(waitMS: number): Function;
+
+	/**
+	* Wrapped type `Function`.
+	* @see _.debounce
+	**/
+	debounce(waitMS: number, immediate?: bool): Function;
+
+	/**
+	* Wrapped type `Function`.
+	* @see _.once
+	**/
+	once(): Function;
+
+	/**
+	* Wrapped type `number`.
+	* @see _.after
+	**/
+	after(fn: Function): Function;
+
+	/**
+	* Wrapped type `Function`.
+	* @see _.wrap
+	**/
+	wrap(wrapper: (fn: Function, ...args: any[]) => any): Function;
+
+	/**
+	* Wrapped type `Function[]`.
+	* @see _.compose
+	**/
+	compose(...functions: Function[]): Function;
+
 	/**********
 	* Objects *
 	***********/
 
 	/**
-	* Retrieve all the names of the object's properties.
+	* Wrapped type `object`.
+	* @see _.keys
 	**/
 	keys(): string[];
 
 	/**
-	* Return all of the values of the object's properties.
+	* Wrapped type `object`.
+	* @see _.values
 	**/
 	values(): any[];
 
 	/**
-	* Convert an object into a list of [key, value] pairs.
+	* Wrapped type `object`.
+	* @see _.pairs
 	**/
 	pairs(): any[][];
 
 	/**
-	* Returns a copy of the object where the keys have become the values and the values the keys.
-	* For this to work, all of your object's values should be unique and string serializable.
+	* Wrapped type `object`.
+	* @see _.invert
 	**/
 	invert(): any;
 
 	/**
-	* Returns a sorted list of the names of every method in an object — that is to say,
-	* the name of every function property of the object.
+	* Wrapped type `object`.
+	* @see _.functions
 	**/
 	functions(): string[];
 
 	/**
-	* Copy all of the properties in the source objects over to the destination object, and return
-	* the destination object. It's in-order, so the last source will override properties of the
-	* same name in previous arguments.
+	* Wrapped type `object`.
+	* @see _.extend
 	**/
 	extend(...sources: any[]): any;
 
 	/**
-	* Return a copy of the object, filtered to only have values for the whitelisted keys
-	* (or array of valid keys).
+	* Wrapped type `object`.
+	* @see _.pick
 	**/
 	pick(...keys: string[]): any;
 
 	/**
-	* Return a copy of the object, filtered to omit the blacklisted keys (or array of keys).
+	* Wrapped type `object`.
+	* @see _.omit
 	**/
 	omit(...keys: string[]): any;
 
 	/**
-	* Fill in null and undefined properties in object with values from the defaults objects,
-	* and return the object. As soon as the property is filled, further defaults will have no effect.
+	* Wrapped type `object`.
+	* @see _.defaults
 	**/
 	defaults(...defaults: any[]): any;
 
 	/**
-	* Create a shallow-copied clone of the object.
-	* Any nested objects or arrays will be copied by reference, not duplicated.
+	* Wrapped type `object`.
+	* @see _.clone
 	**/
-	clone(): any;
-
+	clone(object: any): any;
 	/**
-	* Invokes interceptor with the object, and then returns object. The primary purpose of this method
-	* is to "tap into" a method chain, in order to perform operations on intermediate results within the chain.
-	**/
-	tap(intercepter: Function): any;
-
-	/**
-	* Does the object contain the given key? Identical to object.hasOwnProperty(key), but uses a safe
-	* reference to the hasOwnProperty function, in case it's been overridden accidentally.
-	**/
-	has(key: string): bool;
-
-	/**
-	* Performs an optimized deep comparison between the two objects,
-	* to determine if they should be considered equal.
-	**/
-	isEqual(other: any): bool;
-
-	/**
-	* Returns true if object contains no values.
-	**/
-	isEmpty(): bool;
-
-	/**
-	* Returns true if object is a DOM element.
-	**/
-	isElement(): bool;
-
-	/**
-	* Returns true if object is an Array.
-	**/
-	isArray(): bool;
-
-	/**
-	* Returns true if value is an any. Note that JavaScript arrays and functions are objects,
-	* while (normal) strings and numbers are not.
-	**/
-	isObject(): bool;
-
-	/**
-	* Returns true if object is an Arguments object.
-	**/
-	isArguments(): bool;
-
-	/**
-	* Returns true if object is a Function.
-	**/
-	isFunction(): bool;
-
-	/**
-	* Returns true if object is a String.
-	**/
-	isString(): bool;
-
-	/**
-	* Returns true if object is a Number (including NaN).
-	**/
-	isNumber(): bool;
-
-	/**
-	* Returns true if object is a finite Number.
-	**/
-	isFinite(): bool;
-
-	/**
-	* Returns true if object is either true or false.
-	**/
-	isBoolean(): bool;
-
-	/**
-	* Returns true if object is a Date.
-	**/
-	isDate(): bool;
-
-	/**
-	* Returns true if object is a RegExp.
-	**/
-	isRegExp(): bool;
-
-	/**
-	* Returns true if object is NaN.
-	* Note: this is not the same as the native isNaN function,
-	* which will also return true if the variable is undefined.
-	**/
-	isNaN(): bool;
-
-	/**
-	* Returns true if the value of object is null.
-	**/
-	isNull(): bool;
-
-	/**
-	* Returns true if value is undefined.
-	**/
-	isUndefined(): bool;
-
-	/**********
-	* Utility *
-	***********/
-
-	/**
-	* Returns the same value that is used as the argument. In math: f(x) = x
-	* This function looks useless, but is used throughout Underscore as a default iterator.
-	**/
-	identity(value: any): any;
-
-	/**
-	* Allows you to extend Underscore with your own utility functions. Pass a hash of
-	* {name: function} definitions to have your functions added to the Underscore object,
-	* as well as the OOP wrapper.
-	* @example
-	*
-	* _.mixin({
-	*     capitalize : function(string) {
-	*         return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
-	*     }
-	* });
-	* _("fabio").capitalize();
-	* => "Fabio"
-	*
-	**/
-	mixin(): void;
-
-	/**
-	* If the value of the named property is a function then invoke it; otherwise, return it.
-	**/
-	result(property: string): any;
-
-	/***********
-	* Chaining *
-	************/
-
-	/**
-	* Returns a wrapped object. Calling methods on this object will continue to return wrapped objects
-	* until value is used.
-	**/
-	chain(): any;
-
-	/**
-	* Extracts the value of a wrapped object.
-	**/
-	value(): any;
-
-	/**************
-	* OOP Wrapper *
-	**************/
-
-	// There are no base OOP Wrappers for any
-}
-
-interface UnderscoreObjectArrayOOPWrapper {
-	
-	/**************
-	* Collections *
-	***************/
-
-	/**
-	* Iterates over a list of elements, yielding each in turn to an iterator function. The iterator is
-	* bound to the context object, if one is passed. Each invocation of iterator is called with three
-	* arguments: (element, index, list). If list is a JavaScript object, iterator's arguments will be
-	* (value, key, list). Delegates to the native forEach function if it exists.
-	**/	
-	each(
-		iterator: (element: any, index?: number, list?: any[]) => any,
-		context?: any): void;
-
-	/**
-	* Alias for 'each'.
-	**/
-	forEach(
-		iterator: (element: any, index?: number, list?: any[]) => any,
-		context?: any): void;
-
-	/**
-	* Produces a new array of values by mapping each value in list through a transformation function
-	* (iterator). If the native map method exists, it will be used instead. If list is a JavaScript
-	* object, iterator's arguments will be (value, key, list).
-	**/
-	map(
-		iterator: (element: any, index?: number, list?: any[]) => any,
-		context?: any): any[];
-
-	/**
-	* Alias for 'map'.
-	**/
-	collect(
-		iterator: (element: any, index?: number, list?: any[]) => any,
-		context?: any): any[];
-
-	/**
-	* Also known as inject and foldl, reduce boils down a list of values into a single value.
-	* Memo is the initial state of the reduction, and each successive step of it should be
-	* returned by iterator. The iterator is passed four arguments: the memo, then the value
-	* and index (or key) of the iteration, and finally a reference to the entire list.
-	**/
-	reduce(
-		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
-		memo: any,
-		context?: any): any;
-
-	/**
-	* Alias for 'reduce'.
-	**/
-	inject(
-		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
-		memo: any,
-		context?: any): any;
-
-	/**
-	* Alias for 'reduce'.
-	**/
-	foldl(
-		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
-		memo: any,
-		context?: any): any;
-
-	/**
-	* The right-associative version of reduce. Delegates to the JavaScript 1.8 version of
-	* reduceRight, if it exists. Foldr is not as useful in JavaScript as it would be in a
-	* language with lazy evaluation.
-	**/
-	reduceRight(
-		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
-		memo: any,
-		context?: any): any;
-
-	/**
-	* Alias for 'reduceRight'.
-	**/
-	foldr(
-		iterator: (memo: any, element: any, index?: number, list?: any[]) => any,
-		memo: any,
-		context?: any): any;
-
-	/**
-	* Looks through each value in the list, returning the first one that passes a truth
-	* test (iterator). The function returns as soon as it finds an acceptable element,
-	* and doesn't traverse the entire list.
-	**/
-	find(
-		iterator: (element: any, index?: number, list?: any[]) => bool,
-		context?: any): any;
-
-	/**
-	* Alias for 'find'.
-	**/
-	detect(
-		iterator: (element: any, index?: number, list?: any[]) => bool,
-		context?: any): any;
-
-
-	/**
-	* Looks through each value in the list, returning an array of all the values that pass a truth
-	* test (iterator). Delegates to the native filter method, if it exists.
-	**/
-	filter(
-		iterator: (element: any, index?: number, list?: any[]) => bool,
-		context?: any): any[];
-
-	/**
-	* Alias for 'filter'.
-	**/
-	select(
-		iterator: (element: any, index?: number, list?: any[]) => bool,
-		context?: any): any[];
-
-	/**
-	* Looks through each value in the list, returning an array of all the values that contain all
-	* of the key-value pairs listed in properties.
-	**/
-	where(properties: any): any[];
-
-	/**
-	* Returns the values in list without the elements that the truth test (iterator) passes.
-	* The opposite of filter.
-	**/
-	reject(
-		iterator: (element: any, index?: number, list?: any[]) => bool,
-		context?: any): any[];
-
-	/**
-	* Returns true if all of the values in the list pass the iterator truth test. Delegates to the
-	* native method every, if present.
-	**/
-	all(
-		iterator: (element: any, index?: number, list?: any[]) => bool,
-		context?: any): bool;
-
-	/**
-	* Alias for 'all'.
-	**/
-	every(
-		iterator: (element: any, index?: number, list?: any[]) => bool,
-		context?: any): bool;
-
-	/**
-	* Returns true if any of the values in the list pass the iterator truth test. Short-circuits and
-	* stops traversing the list if a true element is found. Delegates to the native method some, if present.
-	**/
-	any(
-		iterator?: (element: any, index?: number, list?: any[]) => bool,
-		context?: any): bool;
-
-	/**
-	* Alias for 'any'.
-	**/
-	some(
-		iterator: (element: any, index?: number, list?: any[]) => bool,
-		context?: any): bool;
-
-	/**
-	* Returns true if the value is present in the list. Uses indexOf internally,
-	* if list is an Array.
-	**/
-	contains(value: any): bool;
-
-	/**
-	* Alias for 'contains'.
-	**/
-	include(value: any): bool;
-
-	/**
-	* Calls the method named by methodName on each value in the list. Any extra arguments passed to
-	* invoke will be forwarded on to the method invocation.
-	**/
-	invoke(methodName: string, ...arguments: any[]): void;
-
-	/**
-	* A convenient version of what is perhaps the most common use-case for map: extracting a list of
-	* property values.
-	**/
-	pluck(propertyName: string): any[];
-
-	/**
-	* Returns the maximum value in list. If iterator is passed, it will be used on each value to generate
-	* the criterion by which the value is ranked.
-	**/
-	max(
-		iterator: (element: any, index?: number, list?: any[]) => number,
-		context?: any): any;
-
-	/**
-	* Returns the minimum value in list. If iterator is passed, it will be used on each value to generate
-	* the criterion by which the value is ranked.
-	**/
-	min(
-		iterator: (obj: any, index?: number, list?: any[]) => number,
-		context?: any): any;
-
-	/**
-	* Returns a sorted copy of list, ranked in ascending order by the results of running each value
-	* through iterator. Iterator may also be the string name of the property to sort by (eg. length).
-	**/
-	sortBy(
-		iterator: (element: any, index?: number, list?: any[]) => number,
-		context?: any): any[];
-	sortBy(iterator: string, context?: any): any[];
-
-	/**
-	* Splits a collection into sets, grouped by the result of running each value through iterator.
-	* If iterator is a string instead of a function, groups by the property named by iterator on
-	* each of the values.
-	**/
-	groupBy(
-		iterator: (element: any, index?: number, list?: any[]) => string,
-		context?: any): { [key: string]: any[]; };
-	groupBy(iterator: string, context?: any): { [key: string]: any[]; };
-
-	/**
-	* Sorts a list into groups and returns a count for the number of objects in each group. Similar
-	* to groupBy, but instead of returning a list of values, returns a count for the number of values
-	* in that group.
-	**/
-	countBy(
-		iterator: (element: any, index?: number, list?: any[]) => string,
-		context?: any): { [key: string]: number; };
-	countBy(iterator: string, context?: any): { [key: string]: number; };
-
-	/**
-	* Returns a shuffled copy of the list, using a version of the Fisher-Yates shuffle.
-	**/
-	shuffle(): any[];
-
-	/**
-	* Converts the list (anything that can be iterated over), into a real Array. Useful for transmuting
-	* the arguments object.
-	**/
-	toArray(): any[];
-
-	/**
-	* Return the number of values in the list.
-	**/
-	size(): number;
-
-	/*********
-	* Arrays *
-	**********/
-
-	/**
-	* Returns the first element of an array. Passing n will return the first n elements of the array.
-	**/
-	first(): any;
-	first(n: number): any[];
-
-	/**
-	* Alias for 'first'.
-	**/
-	head(): any;
-	head(n: number): any[];
-
-	/**
-	* Alias for 'first'.
-	**/
-	take(): any;
-	take(n: number): any[];
-
-	/**
-	* Returns everything but the last entry of the array. Especially useful on the arguments object.
-	* Pass n to exclude the last n elements from the result.
-	**/
-	initial(n?: number): any[];
-
-	/**
-	* Returns the last element of an array. Passing n will return the last n elements of the array.
-	**/
-	last(): any;
-	last(n: number): any[];
-
-	/**
-	* Returns the rest of the elements in an array. Pass an index to return the values of the array
-	* from that index onward.
-	**/
-	rest(index?: number): any[];
-
-	/**
-	* Alias for 'rest'.
-	**/
-	tail(index?: number): any[];
-
-	/**
-	* Alias for 'rest'.
-	**/
-	drop(index?: number): any[];
-
-	/**
-	* Returns a copy of the array with all falsy values removed. In JavaScript, false, null, 0, "",
-	* undefined and NaN are all falsy.
-	**/
-	compact(): any[];
-
-	/**
-	* Flattens a nested array (the nesting can be to any depth). If you pass shallow, the array will
-	* only be flattened a single level.
-	**/
-	flatten(shallow?: bool): any[];
-
-	/**
-	* Returns a copy of the array with all instances of the values removed.
-	**/
-	without(...values: any[]): any[];
-
-	/**
-	* Computes the union of the passed-in arrays: the list of unique items, in order, that are
-	* present in one or more of the arrays.
-	**/
-	union(...arrays: any[][]): any[];
-
-	/**
-	* Computes the list of values that are the intersection of all the arrays. Each value in the result
-	* is present in each of the arrays.
-	**/
-	intersection(...arrays: any[][]): any[];
-
-	/**
-	* Similar to without, but returns the values from array that are not present in the other arrays.
-	**/
-	difference(...others: any[]): any[];
-
-	/**
-	* Produces a duplicate-free version of the array, using === to test object equality. If you know in
-	* advance that the array is sorted, passing true for isSorted will run a much faster algorithm. If
-	* you want to compute unique items based on a transformation, pass an iterator function.
-	**/
-	uniq(isSorted?: bool, iterator?: (element: any, index?: number, list?: any[]) => any): any[];
-
-	/**
-	* Alias for 'uniq'.
-	**/
-	unique(isSorted?: bool, iterator?: (element: any, index?: number, list?: any[]) => any): any[];
-
-	/**
-	* Merges together the values of each of the arrays with the values at the corresponding position.
-	* Useful when you have separate data sources that are coordinated through matching array indexes.
-	* If you're working with a matrix of nested arrays, zip.apply can transpose the matrix in a similar fashion.
-	**/
-	zip(...arrays: any[][]): any[][];
-
-	/**
-	* Returns the index at which value can be found in the array, or -1 if value is not present in the array.
-	* Uses the native indexOf function unless it's missing. If you're working with a large array, and you know
-	* that the array is already sorted, pass true for isSorted to use a faster binary search ... or, pass a number
-	* as the third argument in order to look for the first matching value in the array after the given index.
-	**/
-	indexOf(value: any, isSorted?: bool): number;
-
-	/**
-	* Returns the index of the last occurrence of value in the array, or -1 if value is not present. Uses the
-	* native lastIndexOf function if possible. Pass fromIndex to start your search at a given index.
-	**/
-	lastIndexOf(value: any, from?: number): number;
-
-	/**
-	* Uses a binary search to determine the index at which the value should be inserted into the list in order
-	* to maintain the list's sorted order. If an iterator is passed, it will be used to compute the sort ranking
-	* of each value, including the value you pass.
-	**/
-	sortedIndex(value: any, iterator?: (element: any) => number): number;
-
-	/************
-	* Functions *
-	*************/
-
-	// There are no Function OOP Wrappers for any[]
-
-	/**********
-	* Objects *
-	***********/
-	
-	/**
-	* Create a shallow-copied clone of the object.
-	* Any nested objects or arrays will be copied by reference, not duplicated.
+	* Wrapped type `any[]`.
+	* @see _.clone
 	**/
 	clone(list: any[]): any[];
 
 	/**
-	* Returns true if object contains no values.
+	* Wrapped type `object`.
+	* @see _.tap
 	**/
-	isEmpty(): bool;
+	tap(intercepter: Function): any;
 
 	/**
-	* Returns true if object is a DOM element.
+	* Wrapped type `object`.
+	* @see _.has
+	**/
+	has(key: string): bool;
+
+	/**
+	* Wrapped type `object`.
+	* @see _.isEqual
+	**/
+	isEqual(other: any): bool;
+
+	/**
+	* Wrapped type `object`.
+	* @see _.isEmpty
+	**/
+	isEmpty(object: any): bool;
+	/**
+	* Wrapped type `any[]`.
+	* @see _.isEmpty
+	**/
+	isEmpty(list: any[]): bool;
+
+	/**
+	* Wrapped type `object`.
+	* @see _.isElement
 	**/
 	isElement(): bool;
 
 	/**
-	* Returns true if object is an Array.
+	* Wrapped type `object`.
+	* @see _.isArray
 	**/
 	isArray(): bool;
 
 	/**
-	* Returns true if value is an any. Note that JavaScript arrays and functions are objects,
-	* while (normal) strings and numbers are not.
+	* Wrapped type `object`.
+	* @see _.isObject
 	**/
 	isObject(): bool;
 
 	/**
-	* Returns true if object is an Arguments object.
+	* Wrapped type `object`.
+	* @see _.isArguments
 	**/
 	isArguments(): bool;
 
 	/**
-	* Returns true if object is a Function.
+	* Wrapped type `object`.
+	* @see _.isFunction
 	**/
 	isFunction(): bool;
 
 	/**
-	* Returns true if object is a String.
+	* Wrapped type `object`.
+	* @see _.isString
 	**/
 	isString(): bool;
 
 	/**
-	* Returns true if object is a Number (including NaN).
+	* Wrapped type `object`.
+	* @see _.isNumber
 	**/
 	isNumber(): bool;
 
 	/**
-	* Returns true if object is a finite Number.
+	* Wrapped type `object`.
+	* @see _.isFinite
 	**/
 	isFinite(): bool;
 
 	/**
-	* Returns true if object is either true or false.
+	* Wrapped type `object`.
+	* @see _.isBoolean
 	**/
 	isBoolean(): bool;
 
 	/**
-	* Returns true if object is a Date.
+	* Wrapped type `object`.
+	* @see _.isDate
 	**/
 	isDate(): bool;
 
 	/**
-	* Returns true if object is a RegExp.
+	* Wrapped type `object`.
+	* @see _.isRegExp
 	**/
 	isRegExp(): bool;
 
 	/**
-	* Returns true if object is NaN.
-	* Note: this is not the same as the native isNaN function,
-	* which will also return true if the variable is undefined.
+	* Wrapped type `object`.
+	* @see _.isNaN
 	**/
 	isNaN(): bool;
 
 	/**
-	* Returns true if the value of object is null.
+	* Wrapped type `object`.
+	* @see _.isNull
 	**/
 	isNull(): bool;
 
 	/**
-	* Returns true if value is undefined.
+	* Wrapped type `object`.
+	* @see _.isUndefined
 	**/
 	isUndefined(): bool;
 
@@ -3231,32 +1936,73 @@ interface UnderscoreObjectArrayOOPWrapper {
 	***********/
 
 	/**
-	* Returns the same value that is used as the argument. In math: f(x) = x
-	* This function looks useless, but is used throughout Underscore as a default iterator.
+	* Wrapped type `any`.
+	* @see _.identity
 	**/
-	identity(): any[];
+	identity(): any;
+
+	/**
+	* Wrapped type `number`.
+	* @see _.times
+	**/
+	times(iterator: (n: number) => void , context?: any): void;
+
+	/**
+	* Wrapped type `number`.
+	* @see _.random
+	**/
+	random(): number;
+	/**
+	* Wrapped type `number`.
+	* @see _.random
+	**/
+	random(max: number): number;
+
+	/**
+	* Wrapped type `object`.
+	* @see _.mixin
+	**/
+	mixin(): void;
+
+	/**
+	* Wrapped type `string`.
+	* @see _.uniqueId
+	**/
+	uniqueId(): string;
+
+	/**
+	* Wrapped type `string`.
+	* @see _.escape
+	**/
+	escape(): string;
+
+	/**
+	* Wrapped type `object`.
+	* @see _.result
+	**/
+	result(property: string): any;
+
+	/**
+	* Wrapped type `string`.
+	* @see _.template
+	**/
+	template(data?: any, settings?: UnderscoreTemplateSettings): any;
 
 	/***********
 	* Chaining *
 	************/
 
 	/**
-	* Returns a wrapped object. Calling methods on this object will continue to return wrapped objects
-	* until value is used.
+	* Wrapped type `any`.
+	* @see _.chain
 	**/
 	chain(): any;
 
 	/**
-	* Extracts the value of a wrapped object.
+	* Wrapped type `any`.
+	* @see _.value
 	**/
-	value(): any[];
-
-	/**************
-	* OOP Wrapper *
-	**************/
-
-	// There are no base OOP Wrappers for any[]
+	value(): any;
 }
-
 
 declare var _: Underscore;
