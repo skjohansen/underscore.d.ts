@@ -1,17 +1,30 @@
 underscore.d.ts
 ===============
 
-This is a typescript definitions file for underscore-1.4.2.js.
+This is a typescript definitions file for underscore-1.4.3.js.
 
 This definitions file aims to have full documentation and as much type annotations for basic types like string, number, and arrays as possible.  When generics are available within typescript this definitions library will be updated to reflect those changes.
+
+Change log
+========
+
+v1.4.3
+---------
+
+* The uniq function can now take `array, iterator, context` as the argument list.
+* The times function now returns the mapped array of iterator results.
+
+v1.4.2 
+---------
+Initial version
 
 
 License
 =======
 
-underscore-1.4.2.d.ts may be freely distributed under the MIT license.
+underscore-1.4.3.d.ts may be freely distributed under the MIT license.
 
-Copyright (c) 2012 Josh Baldwin https://github.com/jbaldwin/underscore.d.ts
+Copyright (c) 2013 Josh Baldwin https://github.com/jbaldwin/underscore.d.ts
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation 

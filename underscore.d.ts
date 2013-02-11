@@ -1,7 +1,7 @@
 /* 
-underscore-1.4.2.d.ts may be freely distributed under the MIT license.
+underscore-1.4.3.d.ts may be freely distributed under the MIT license.
 
-Copyright (c) 2012 Josh Baldwin https://github.com/jbaldwin/underscore.d.ts
+Copyright (c) 2013 Josh Baldwin https://github.com/jbaldwin/underscore.d.ts
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation 
@@ -606,12 +606,27 @@ interface Underscore {
 	* @param array Array to remove duplicates from.
 	* @param isSorted True if `array` is already sorted, optiona, default = false.
 	* @param iterator Transform the elements of `array` before comparisons for uniqueness.
+	* @param context 'this' object in `iterator`, optional.
 	* @return Copy of `array` where all elements are unique.
 	**/
 	uniq(
 		array: any[],
 		isSorted?: bool,
-		iterator?: (element: any, index?: number, list?: any[]) => any): any[];
+		iterator?: (element: any, index?: number, list?: any[]) => any,
+		context?: any): any[];
+	/**
+	* Produces a duplicate-free version of the array, using === to test object equality. If you know in
+	* advance that the array is sorted, passing true for isSorted will run a much faster algorithm. If
+	* you want to compute unique items based on a transformation, pass an iterator function.
+	* @param array Array to remove duplicates from.
+	* @param iterator Transform the elements of `array` before comparisons for uniqueness.
+	* @param context 'this' object in `iterator`, optional.
+	* @return Copy of `array` where all elements are unique.
+	**/
+	uniq(
+		array: any[],
+		iterator?: (element: any, index?: number, list?: any[]) => any,
+		context?: any): any[];
 
 	/**
 	* Alias for 'uniq'.
@@ -1077,7 +1092,7 @@ interface Underscore {
 	* @param iterator Function iterator to invoke `n` times.
 	* @param context `this` object in `iterator`, optional.
 	**/
-	times(n: number, iterator: (n: number) => void , context?: any): void;
+	times(n: number, iterator: (n: number) => any , context?: any): any[];
 
 	/**
 	* Returns a random integer between min and max, inclusive. If you only pass one argument,
@@ -1165,7 +1180,7 @@ interface Underscore {
 	* @param obj Object to chain.
 	* @return Wrapped `obj`.
 	**/
-	chain(obj: any): any;
+	chain(obj: any): UnderscoreOOPWrapper;
 
 	/**
 	* Extracts the value of a wrapped object.
@@ -1627,7 +1642,15 @@ interface UnderscoreOOPWrapper {
 	**/
 	uniq(
 		isSorted?: bool,
-		iterator?: (element: any, index?: number, list?: any[]) => any): any[];
+		iterator?: (element: any, index?: number, list?: any[]) => any,
+		context?: any): any[];
+	/**
+	* Wrapped type `any[]`.
+	* @see _.uniq
+	**/
+	uniq(
+		iterator?: (element: any, index?: number, list?: any[]) => any,
+		context?: any): any[];
 
 	/**
 	* Alias for 'uniq'.
@@ -1945,7 +1968,7 @@ interface UnderscoreOOPWrapper {
 	* Wrapped type `number`.
 	* @see _.times
 	**/
-	times(iterator: (n: number) => void , context?: any): void;
+	times(iterator: (n: number) => any, context?: any): any[];
 
 	/**
 	* Wrapped type `number`.
