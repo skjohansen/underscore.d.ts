@@ -383,7 +383,7 @@ interface Underscore {
 	**/
 	sortBy(
 		list: any[],
-		iterator: (element: any, index?: number, list?: any[]) => number,
+		iterator: (element: any, index?: number, list?: any[]) => any,
 		context?: any): any[];
 	/**
 	* Returns a sorted copy of list, ranked in ascending order by the results of running each value
@@ -1493,7 +1493,7 @@ interface UnderscoreOOPWrapper {
 	* @see _.sortBy
 	**/
 	sortBy(
-		iterator: (element: any, index?: number, list?: any[]) => number,
+		iterator: (element: any, index?: number, list?: any[]) => any,
 		context?: any): any[];
 	/**
 	* Wrapped type `any[]`.
