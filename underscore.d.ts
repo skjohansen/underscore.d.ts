@@ -1,5 +1,5 @@
 /* 
-underscore-1.4.3.d.ts may be freely distributed under the MIT license.
+underscore-1.4.4.d.ts may be freely distributed under the MIT license.
 
 Copyright (c) 2013 Josh Baldwin https://github.com/jbaldwin/underscore.d.ts
 
