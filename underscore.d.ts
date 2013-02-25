@@ -1197,7 +1197,7 @@ interface Underscore {
 	* @param obj Object to chain.
 	* @return Wrapped `obj`.
 	**/
-	chain(obj: any): UnderscoreOOPWrapper;
+	chain(obj: any): any;
 
 	/**
 	* Extracts the value of a wrapped object.
