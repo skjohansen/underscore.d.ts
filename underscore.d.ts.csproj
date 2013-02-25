@@ -52,10 +52,10 @@
     <TypeScriptSourceMap> --sourcemap</TypeScriptSourceMap>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="test\underscore-test.js">
-      <DependentUpon>underscore-test.ts</DependentUpon>
+    <TypeScriptCompile Include="test\underscore-tests.ts" />
+    <Content Include="test\underscore-tests.js">
+      <DependentUpon>underscore-tests.ts</DependentUpon>
     </Content>
-    <TypeScriptCompile Include="test\underscore-test.ts" />
     <Content Include="underscore.d.ts" />
   </ItemGroup>
   <Target Name="BeforeBuild">

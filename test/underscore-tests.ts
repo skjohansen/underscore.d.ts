@@ -43,7 +43,7 @@ _.sortBy([1, 2, 3, 4, 5, 6], (num) => Math.sin(num));
 
 // not sure how this is typechecking at all.. Math.floor(e) is number not string..?
 _([1.3, 2.1, 2.4]).groupBy((e: number, i?: number, list?: number[]) => Math.floor(e));
-_.groupBy([1.3, 2.1, 2.4], (num:number) => Math.floor(num));
+_.groupBy([1.3, 2.1, 2.4], (num: number) => Math.floor(num));
 _.groupBy(['one', 'two', 'three'], 'length');
 
 _.countBy([1, 2, 3, 4, 5], (num) => num % 2 == 0 ? 'even' : 'odd');
@@ -62,7 +62,7 @@ _.last([5, 4, 3, 2, 1]);
 _.rest([5, 4, 3, 2, 1]);
 _.compact([0, 1, false, 2, '', 3]);
 
-_.flatten([1,2,3,4]);
+_.flatten([1, 2, 3, 4]);
 _.flatten([1, <any>[2]]);
 
 // typescript doesn't like the elements being different
@@ -75,7 +75,7 @@ _.difference([1, 2, 3, 4, 5], [5, 2, 10]);
 _.uniq([1, 2, 1, 3, 1, 4]);
 _.zip(['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]);
 _.object(['moe', 'larry', 'curly'], [30, 40, 50]);
- _.object([[<any>'moe', 30], [<any>'larry', 40], [<any>'curly', 50]]);
+_.object([[<any>'moe', 30], [<any>'larry', 40], [<any>'curly', 50]]);
 _.indexOf([1, 2, 3], 2);
 _.lastIndexOf([1, 2, 3, 1, 2, 3], 2);
 _.sortedIndex([10, 20, 30, 40, 50], 35);
@@ -94,15 +94,15 @@ var func2 = _.bind(func, { name: 'moe' }, 'hi');
 func2();
 
 var buttonView = {
-    label: 'underscore',
-    onClick: function () { alert('clicked: ' + this.label); },
-    onHover: function () { console.log('hovering: ' + this.label); }
+	label: 'underscore',
+	onClick: function () { alert('clicked: ' + this.label); },
+	onHover: function () { console.log('hovering: ' + this.label); }
 };
 _.bindAll(buttonView);
 $('#underscore_button').bind('click', buttonView.onClick);
 
 var fibonacci = _.memoize(function (n) {
-    return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+	return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
 });
 
 var log = _.bind(console.log, console);
@@ -155,10 +155,10 @@ _.defaults(iceCream, { flavor: "vanilla", sprinkles: "lots" });
 _.clone({ name: 'moe' });
 
 _.chain([1, 2, 3, 200])
-    .filter(function (num) { return num % 2 == 0; })
-    .tap(alert)
-    .map(function (num) { return num * num })
-    .value();
+	.filter(function (num) { return num % 2 == 0; })
+	.tap(alert)
+	.map(function (num) { return num * num })
+	.value();
 
 _.has({ a: 1, b: 2, c: 3 }, "b");
 
@@ -215,14 +215,14 @@ var moe2 = { name: 'moe' };
 moe2 === _.identity(moe);
 
 var genie;
-_(3).times(function(n){ genie.grantWishNumber(n); });
+_(3).times(function (n) { genie.grantWishNumber(n); });
 
 _.random(0, 100);
 
 _.mixin({
-    capitalize: function (string) {
-        return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
-    }
+	capitalize: function (string) {
+		return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+	}
 });
 (<any>_("fabio")).capitalize();
 
@@ -244,7 +244,7 @@ template({ value: '<script>' });
 var compiled2 = _.template("<% print('Hello ' + epithet); %>");
 compiled2({ epithet: "stooge" });
 _.templateSettings = {
-    interpolate: /\{\{(.+?)\}\}/g
+	interpolate: /\{\{(.+?)\}\}/g
 };
 var template2 = _.template("Hello {{ name }}!");
 template2({ name: "Mustache" });
