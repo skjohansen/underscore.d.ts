@@ -8,6 +8,12 @@ This definitions file aims to have full documentation and as much type annotatio
 Change log
 ========
 
+v1.4.4 - 2013/06/28
+---------
+
+* Updated to TypeScript v0.9.
+* Added Generics Support
+
 v1.4.4 - 2013/02/10
 ---------
 
