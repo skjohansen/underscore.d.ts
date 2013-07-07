@@ -3,7 +3,7 @@ underscore.d.ts
 
 This is a typescript definitions file for underscore-1.4.4.js.
 
-This definitions file aims to have full documentation and as much type annotations as possible.  When generics are available within typescript this definitions library will be updated to reflect those changes.
+This definitions file can be found on https://github.com/borisyankov/DefinitelyTyped as underscore-typed.d.ts and additionally includes chained method support as well as jsdoc comments, this does make the definitions file considerably larger than the underscore.d.ts that is also available.
 
 Change log
 ========
