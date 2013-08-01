@@ -305,4 +305,6 @@ _.templateSettings = {
 var template2 = _.template("Hello {{ name }}!");
 template2({ name: "Mustache" });
 _.template("Using 'with': <%= data.answer %>", { answer: 'no' }, { variable: 'data' });
+
+_(['test', 'test']).pick(['test2', 'test2']);
 //@ sourceMappingURL=underscore-tests.js.map

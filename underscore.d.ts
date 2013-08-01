@@ -9,6 +9,7 @@
 //  1) Parameter types may be declared as List<T> and Dictionary<T>.
 //     However, return types must be declared as T[] where possible
 //     otherwise Array<T> functions are not available on returns.
+//  2) Callbacks do not use '?' parameters!
 
 /**
 * Underscore OOP Wrapper, all Underscore functions that take an object
@@ -921,7 +922,7 @@ declare module _ {
 	export function debounce(
 		fn: Function,
 		wait: number,
-		immediate?: bool): Function;
+		immediate?: boolean): Function;
 
 	/**
 	* Creates a version of the function that can only be called one time. Repeated calls to the modified
@@ -1329,22 +1330,22 @@ declare class _<T> {
 	* Wrapped type `any[]`.
 	* @see _.each
 	**/
-	each(iterator: _.ListIterator<T, void >, context?: any): void;
+	each(iterator: _.ListIterator<T, void>, context?: any): void;
 
 	/**
 	* @see _.each
 	**/
-	each(iterator: _.ObjectIterator<T, void >, context?: any): void;
+	each(iterator: _.ObjectIterator<T, void>, context?: any): void;
 
 	/**
 	* @see _.each
 	**/
-	forEach(iterator: _.ListIterator<T, void >, context?: any): void;
+	forEach(iterator: _.ListIterator<T, void>, context?: any): void;
 
 	/**
 	* @see _.each
 	**/
-	forEach(iterator: _.ObjectIterator<T, void >, context?: any): void;
+	forEach(iterator: _.ObjectIterator<T, void>, context?: any): void;
 
 	/**
 	* Wrapped type `any[]`.
@@ -1372,68 +1373,56 @@ declare class _<T> {
 	* Wrapped type `any[]`.
 	* @see _.reduce
 	**/
-	reduce<T, TResult>(iterator: (prev: TResult, curr: T, index: number, list: _.List<T>) => TResult, memo: TResult, context?: any): TResult;
+	reduce<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): TResult;
 
 	/**
 	* @see _.reduce
 	**/
-	inject<T, TResult>(iterator: (prev: TResult, curr: T, index: number, list: _.List<T>) => TResult, memo: TResult, context?: any): TResult;
+	inject<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): TResult;
 
 	/**
 	* @see _.reduce
 	**/
-	foldl<TResult>(
-		iterator: (memo: TResult, element: T, index: number, list: T[]) => TResult,
-		memo: TResult,
-		context?: any): TResult;
+	foldl<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): TResult;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.reduceRight
 	**/
-	reduceRight<TResult>(
-		iterator: (memo: TResult, element: T, index: number, list: T[]) => TResult,
-		memo: TResult,
-		context?: any): TResult;
-	reduceRight<T, TResult>(iterator: (prev: TResult, curr: T, index: number, list: _.List<T>) => TResult, memo: TResult, context?: any): TResult;
+	reduceRight<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): TResult;
 
 	/**
 	* @see _.reduceRight
 	**/
-	foldr<TResult>(
-		iterator: (memo: TResult, element: T, index: number, list: T[]) => TResult,
-		memo: TResult,
-		context?: any): TResult;
-	foldr<T, TResult>(iterator: (prev: TResult, curr: T, index: number, list: _.List<T>) => TResult, memo: TResult, context?: any): TResult;
+	foldr<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): TResult;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.find
 	**/
-	find<T>(iterator: (x: T, index: number, list: _.List<T>) => boolean, context?: any): T;
+	find(iterator: _.ListIterator<T, boolean>, context?: any): T;
 
 	/**
 	* @see _.find
 	**/
-	detect<T>(iterator: (x: T, index: number, list: _.List<T>) => boolean, context?: any): T;
+	detect(iterator: _.ListIterator<T, boolean>, context?: any): T;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.filter
 	**/
-	filter<T>(iterator: (x: T, index: number, list: _.List<T>) => boolean, context?: any): T[];
+	filter(iterator: _.ListIterator<T, boolean>, context?: any): T[];
 
 	/**
 	* @see _.filter
 	**/
-	select<T>(iterator: (x: T, index: number, list: _.List<T>) => boolean, context?: any): T[];
+	select(iterator: _.ListIterator<T, boolean>, context?: any): T[];
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.where
 	**/
 	where<U extends {}>(properties: U): T[];
-	where<T>(properties: any): T[];
 
 	/**
 	* Wrapped type `any[]`.
@@ -1445,68 +1434,53 @@ declare class _<T> {
 	* Wrapped type `any[]`.
 	* @see _.reject
 	**/
-	reject(
-		iterator: (element: T, index: number, list: T[]) => bool,
-		context?: any): T[];
-	reject<T>(iterator: (x: T, index: number, list: _.List<T>) => boolean, context?: any): T[];
+	reject(iterator: _.ListIterator<T, boolean>, context?: any): T[];
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.all
 	**/
-	all(
-		iterator: (element: T, index?: number, list?: T[]) => bool,
-		context?: any): bool;
-	all<T>(iterator: (x: T, index?: number, list?: _.List<T>) => boolean, context?: any): boolean;
+	all(iterator: _.ListIterator<T, boolean>, context?: any): boolean;
 
 	/**
 	* @see _.all
 	**/
-	every(
-		iterator: (element: T, index?: number, list?: T[]) => bool,
-		context?: any): bool;
-	every<T>(iterator: (x: T, index?: number, list?: _.List<T>) => boolean, context?: any): boolean;
+	every(iterator: _.ListIterator<T, boolean>, context?: any): boolean;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.any
 	**/
-	any(
-		iterator?: (element: T, index?: number, list?: T[]) => bool,
-		context?: any): bool;
-	any<T>(iterator?: (x: T, index?: number, list?: _.List<T>) => boolean, context?: any): boolean;
+	any(iterator?: _.ListIterator<T, boolean>, context?: any): boolean;
 
 	/**
 	* @see _.any
 	**/
-	some(
-		iterator: (element: T, index?: number, list?: T[]) => bool,
-		context?: any): bool;
-	some<T>(iterator?: (x: T, index?: number, list?: _.List<T>) => boolean, context?: any): boolean;
+	some(iterator?: _.ListIterator<T, boolean>, context?: any): boolean;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.contains
 	**/
-	contains<T>(value: T): boolean;
+	contains(value: T): boolean;
 
 	/**
 	* Alias for 'contains'.
 	* @see contains
 	**/
-	include<T>(value: T): boolean;
+	include(value: T): boolean;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.invoke
 	**/
-	invoke<T>(methodName: string, ...arguments: any[]): any;
+	invoke(methodName: string, ...arguments: any[]): any;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.pluck
 	**/
-	pluck<T>(propertyName: string): any[];
+	pluck(propertyName: string): any[];
 
 	/**
 	* Wrapped type `number[]`.
@@ -1518,15 +1492,13 @@ declare class _<T> {
 	* Wrapped type `any[]`.
 	* @see _.max
 	**/
-	max(
-		iterator: (element: T, index?: number, list?: T[]) => number,
-		context?: any): T;
+	max(iterator: _.ListIterator<T, number>, context?: any): T;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.max
 	**/
-	max<T>(iterator?: (x: T, index?: number, list?: _.List<T>) => any, context?: any): T;
+	max(iterator?: _.ListIterator<T, any>, context?: any): T;
 
 	/**
 	* Wrapped type `number[]`.
@@ -1538,69 +1510,67 @@ declare class _<T> {
 	* Wrapped type `any[]`.
 	* @see _.min
 	**/
-	min(
-		iterator: (element: T, index?: number, list?: T[]) => number,
-		context?: any): T;
+	min(iterator: _.ListIterator<T, number>, context?: any): T;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.min
 	**/
-	min<T>(iterator?: (x: T, index?: number, list?: _.List<T>) => any, context?: any): T;
+	min(iterator?: _.ListIterator<T, any>, context?: any): T;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.sortBy
 	**/
-	sortBy<T>(iterator?: (x: T, index?: number, list?: _.List<T>) => any, context?: any): T[];
+	sortBy(iterator?: _.ListIterator<T, any>, context?: any): T[];
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.sortBy
 	**/
-	sortBy<T>(iterator: string, context?: any): T[];
+	sortBy(iterator: string, context?: any): T[];
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.groupBy
 	**/
-	groupBy<T>(iterator?: (x: T, index?: number, list?: _.List<T>) => any, context?: any): _.Dictionary<_.List<T>>;
+	groupBy(iterator?: _.ListIterator<T, any>, context?: any): _.Dictionary<_.List<T>>;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.groupBy
 	**/
-	groupBy<T>(iterator: string, context?: any): _.Dictionary<_.List<T>>;
+	groupBy(iterator: string, context?: any): _.Dictionary<T[]>;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.countBy
 	**/
-	countBy<T>(iterator?: (x: T, index?: number, list?: _.List<T>) => any, context?: any): _.Dictionary<_.List<number>>;
+	countBy(iterator?: _.ListIterator<T, any>, context?: any): _.Dictionary<number[]>;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.countBy
 	**/
-	countBy<T>(iterator: string, context?: any): _.Dictionary<_.List<number>>;
+	countBy(iterator: string, context?: any): _.Dictionary<number[]>;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.shuffle
 	**/
-	shuffle<T>(): T[];
+	shuffle(): T[];
 
 	/**
 	* Wrapped type `any`.
 	* @see _.toArray
 	**/
-	toArray<T>(): T[];
+	toArray(): T[];
 
 	/**
 	* Wrapped type `any`.
 	* @see _.size
 	**/
-	size<T>(): number;
+	size(): number;
 
 	/*********
 	* Arrays *
@@ -1616,73 +1586,67 @@ declare class _<T> {
 	* Wrapped type `any[]`.
 	* @see _.first
 	**/
-	first<T>(n?: number): T[];
-
-	/**
-	* Wrapped type `any[]`.
-	* @see _.first
-	**/
 	first(n: number): T[];
 
 	/**
 	* @see _.first
 	**/
 	head(): T;
+
 	/**
 	* @see _.first
 	**/
 	head(n: number): T[];
-	head<T>(n?: number): T[];
 
 	/**
 	* @see _.first
 	**/
 	take(): T;
+
 	/**
 	* @see _.first
 	**/
 	take(n: number): T[];
-	take<T>(n?: number): T[];
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.initial
 	**/
-	initial<T>(n?: number): T[];
+	initial(n?: number): T[];
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.last
 	**/
 	last(): T;
+
 	/**
 	* Wrapped type `any[]`.
 	* @see _.last
 	**/
 	last(n: number): T[];
-	last<T>(n?: number): T[];
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.rest
 	**/
-	rest<T>(n?: number): T[];
+	rest(n?: number): T[];
 
 	/**
 	* @see _.rest
 	**/
-	tail<T>(n?: number): T[];
+	tail(n?: number): T[];
 
 	/**
 	* @see _.rest
 	**/
-	drop<T>(n?: number): T[];
+	drop(n?: number): T[];
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.compact
 	**/
-	compact<T>(): T[];
+	compact(): T[];
 
 	/**
 	* Wrapped type `any`.
@@ -1694,90 +1658,94 @@ declare class _<T> {
 	* Wrapped type `any[]`.
 	* @see _.without
 	**/
-	without<T>(...values: T[]): T[];
+	without(...values: T[]): T[];
 
 	/**
 	* Wrapped type `any[][]`.
 	* @see _.union
 	**/
-	union<T>(...arrays: _.List<T>[]): T[];
+	union(...arrays: _.List<T>[]): T[];
 
 	/**
 	* Wrapped type `any[][]`.
 	* @see _.intersection
 	**/
-	intersection<T>(...arrays: _.List<T>[]): T[];
+	intersection(...arrays: _.List<T>[]): T[];
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.difference
 	**/
-	difference<T>(...others: _.List<T>[]): T[];
+	difference(...others: _.List<T>[]): T[];
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.uniq
 	**/
-	uniq<T>(isSorted?: boolean, iterator?: (x: T, index?: number, list?: _.List<T>) => any): T[];
+	uniq(isSorted?: boolean, iterator?: _.ListIterator<T, any>): T[];
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.uniq
 	**/
-	uniq<TSort>(
-		iterator?: (element: T, index?: number, list?: T[]) => TSort,
-		context?: any): T[];
+	uniq<TSort>(iterator?: _.ListIterator<T, TSort>, context?: any): T[];
 
 	/**
 	* @see _.uniq
 	**/
-	unique<T>(isSorted?: boolean, iterator?: (x: T, index?: number, list?: _.List<T>) => any): T[];
+	unique<TSort>(isSorted?: boolean, iterator?: _.ListIterator<T, TSort>): T[];
 
 	/**
 	* @see _.uniq
 	**/
-	unique<TSort>(
-		iterator?: (element: T, index?: number, list?: T[]) => TSort,
-		context?: any): T[];
+	unique<TSort>(iterator?: _.ListIterator<T, TSort>, context?: any): T[];
 
 	/**
 	* Wrapped type `any[][]`.
 	* @see _.zip
 	**/
 	zip(...arrays: any[][]): any[][];
-	zip(...arrays: any[]): any[];
 
 	/**
 	* Wrapped type `any[][]`.
 	* @see _.object
 	**/
 	object(...keyValuePairs: any[][]): any;
+
+	/**
+	* @see _.object
+	**/
 	object(values?: any): any;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.indexOf
 	**/
-	indexOf<T>(value: T, isSorted?: boolean): number;
-	indexOf<T>(value: T, startFrom: number): number;
+	indexOf(value: T, isSorted?: boolean): number;
+
+	/**
+	* @see _.indexOf
+	**/
+	indexOf(value: T, startFrom: number): number;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.lastIndexOf
 	**/
-	lastIndexOf<T>(value: T, from?: number): number;
+	lastIndexOf(value: T, from?: number): number;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.sortedIndex
 	**/
-	sortedIndex<T>(value: T, iterator?: (x: T) => any, context?: any): number;
+	sortedIndex(value: T, iterator?: (x: T) => any, context?: any): number;
 
 	/**
 	* Wrapped type `number`.
 	* @see _.range
 	**/
 	range(stop: number, step?: number): number[];
+
 	/**
 	* Wrapped type `number`.
 	* @see _.range
@@ -1793,7 +1761,6 @@ declare class _<T> {
 	* @see _.bind
 	**/
 	bind(object: any, ...arguments: any[]): Function;
-	bind(func: (...as: any[]) => any, context: any, ...arguments: any[]): () => any;
 
 	/**
 	* Wrapped type `object`.
@@ -1818,13 +1785,16 @@ declare class _<T> {
 	* @see _.defer
 	**/
 	defer(...arguments: any[]): void;
-	defer();
 
 	/**
 	* Wrapped type `Function`.
 	* @see _.delay
 	**/
 	delay(wait: number, ...arguments: any[]): any;
+
+	/**
+	* @see _.delay
+	**/
 	delay(...arguments: any[]): any;
 
 	/**
@@ -1855,8 +1825,7 @@ declare class _<T> {
 	* Wrapped type `Function`.
 	* @see _.wrap
 	**/
-	wrap(wrapper: (fn: Function, ...args: any[]) => any): Function;
-	wrap(wrapper: any): () => Function;
+	wrap(wrapper: Function): () => Function;
 
 	/**
 	* Wrapped type `Function[]`.
@@ -1878,14 +1847,13 @@ declare class _<T> {
 	* Wrapped type `object`.
 	* @see _.values
 	**/
-	values<T>(): T[];
+	values(): T[];
 
 	/**
 	* Wrapped type `object`.
 	* @see _.pairs
 	**/
 	pairs(): any[][];
-	pairs(): any[];
 
 	/**
 	* Wrapped type `object`.
@@ -1899,6 +1867,9 @@ declare class _<T> {
 	**/
 	functions(): string[];
 
+	/**
+	* @see _.functions
+	**/
 	methods(): string[];
 
 	/**
@@ -1928,15 +1899,9 @@ declare class _<T> {
 	defaults(...defaults: any[]): any;
 
 	/**
-	* Wrapped type `object`.
-	* @see _.clone
-	**/
-	clone(object: T): T;
-	/**
 	* Wrapped type `any[]`.
 	* @see _.clone
 	**/
-	clone(list: T[]): T[];
 	clone(): T;
 
 	/**
@@ -1961,7 +1926,6 @@ declare class _<T> {
 	* Wrapped type `object`.
 	* @see _.isEmpty
 	**/
-	isEmpty(object: any): bool;
 	isEmpty(): boolean;
 
 	/**
@@ -2063,7 +2027,6 @@ declare class _<T> {
 	* @see _.times
 	**/
 	times<TResult>(iterator: (n: number) => TResult, context?: any): TResult[];
-	times(iterator: (index: number) => void , context?: any): void;
 
 	/**
 	* Wrapped type `number`.
@@ -2104,8 +2067,7 @@ declare class _<T> {
 	* Wrapped type `string`.
 	* @see _.template
 	**/
-	template(data?: any, settings?: _.TemplateSettings): any;
-	template(data?: any, settings?: any): (...data: any[]) => string;
+	template(data?: any, settings?: _.TemplateSettings): (...data: any[]) => string;
 
 	/********** *
 	 * Chaining *
@@ -2177,68 +2139,56 @@ interface _Chain<T> {
 	* Wrapped type `any[]`.
 	* @see _.reduce
 	**/
-	reduce<T, TResult>(iterator: (prev: TResult, curr: T, index?: number, list?: _.List<T>) => TResult, memo: TResult, context?: any): _Chain;
+	reduce<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): _Chain;
 
 	/**
 	* @see _.reduce
 	**/
-	inject<T, TResult>(iterator: (prev: TResult, curr: T, index?: number, list?: _.List<T>) => TResult, memo: TResult, context?: any): _Chain;
+	inject<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): _Chain;
 
 	/**
 	* @see _.reduce
 	**/
-	foldl<TResult>(
-		iterator: (memo: TResult, element: T, index?: number, list?: T[]) => TResult,
-		memo: TResult,
-		context?: any): _Chain;
+	foldl<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.reduceRight
 	**/
-	reduceRight<TResult>(
-		iterator: (memo: TResult, element: T, index?: number, list?: T[]) => TResult,
-		memo: TResult,
-		context?: any): _Chain;
-	reduceRight<T, TResult>(iterator: (prev: TResult, curr: T, index?: number, list?: _.List<T>) => TResult, memo: TResult, context?: any): _Chain;
+	reduceRight<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): _Chain;
 
 	/**
 	* @see _.reduceRight
 	**/
-	foldr<TResult>(
-		iterator: (memo: TResult, element: T, index?: number, list?: T[]) => TResult,
-		memo: TResult,
-		context?: any): _Chain;
-	foldr<T, TResult>(iterator: (prev: TResult, curr: T, index?: number, list?: _.List<T>) => TResult, memo: TResult, context?: any): _Chain;
+	foldr<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.find
 	**/
-	find<T>(iterator: (x: T, index?: number, list?: _.List<T>) => boolean, context?: any): _Chain;
+	find(iterator: _.ListIterator<T, boolean>, context?: any): _Chain;
 
 	/**
 	* @see _.find
 	**/
-	detect<T>(iterator: (x: T, index?: number, list?: _.List<T>) => boolean, context?: any): _Chain;
+	detect(iterator: _.ListIterator<T, boolean>, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.filter
 	**/
-	filter<T>(iterator: (x: T, index?: number, list?: _.List<T>) => boolean, context?: any): _Chain;
+	filter(iterator: _.ListIterator<T, boolean>, context?: any): _Chain;
 
 	/**
 	* @see _.filter
 	**/
-	select<T>(iterator: (x: T, index?: number, list?: _.List<T>) => boolean, context?: any): _Chain;
+	select(iterator: _.ListIterator<T, boolean>, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.where
 	**/
 	where<U extends {}>(properties: U): _Chain;
-	where<T>(properties: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
@@ -2250,68 +2200,53 @@ interface _Chain<T> {
 	* Wrapped type `any[]`.
 	* @see _.reject
 	**/
-	reject(
-		iterator: (element: T, index?: number, list?: T[]) => bool,
-		context?: any): _Chain;
-	reject<T>(iterator: (x: T, index?: number, list?: _.List<T>) => boolean, context?: any): _Chain;
+	reject(iterator: _.ListIterator<T, boolean>, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.all
 	**/
-	all(
-		iterator: (element: T, index?: number, list?: T[]) => bool,
-		context?: any): _Chain;
-	all<T>(iterator: (x: T, index?: number, list?: _.List<T>) => boolean, context?: any): _Chain;
+	all(iterator: _.ListIterator<T, boolean>, context?: any): _Chain;
 
 	/**
 	* @see _.all
 	**/
-	every(
-		iterator: (element: T, index?: number, list?: T[]) => bool,
-		context?: any): _Chain;
-	every<T>(iterator: (x: T, index?: number, list?: _.List<T>) => boolean, context?: any): _Chain;
+	every(iterator: _.ListIterator<T, boolean>, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.any
 	**/
-	any(
-		iterator?: (element: T, index?: number, list?: T[]) => bool,
-		context?: any): _Chain;
-	any<T>(iterator?: (x: T, index?: number, list?: _.List<T>) => boolean, context?: any): _Chain;
+	any(iterator?: _.ListIterator<T, boolean>, context?: any): _Chain;
 
 	/**
 	* @see _.any
 	**/
-	some(
-		iterator: (element: T, index?: number, list?: T[]) => bool,
-		context?: any): _Chain;
-	some<T>(iterator?: (x: T, index?: number, list?: _.List<T>) => boolean, context?: any): _Chain;
+	some(iterator?: _.ListIterator<T, boolean>, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.contains
 	**/
-	contains<T>(value: T): _Chain;
+	contains(value: T): _Chain;
 
 	/**
 	* Alias for 'contains'.
 	* @see contains
 	**/
-	include<T>(value: T): _Chain;
+	include(value: T): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.invoke
 	**/
-	invoke<T>(methodName: string, ...arguments: any[]): _Chain;
+	invoke(methodName: string, ...arguments: any[]): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.pluck
 	**/
-	pluck<T>(propertyName: string): _Chain;
+	pluck(propertyName: string): _Chain;
 
 	/**
 	* Wrapped type `number[]`.
@@ -2323,15 +2258,13 @@ interface _Chain<T> {
 	* Wrapped type `any[]`.
 	* @see _.max
 	**/
-	max(
-		iterator: (element: T, index?: number, list?: T[]) => number,
-		context?: any): _Chain;
+	max(iterator: _.ListIterator<T, number>, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.max
 	**/
-	max<T>(iterator?: (x: T, index?: number, list?: _.List<T>) => any, context?: any): _Chain;
+	max(iterator?: _.ListIterator<T, any>, context?: any): _Chain;
 
 	/**
 	* Wrapped type `number[]`.
@@ -2343,69 +2276,67 @@ interface _Chain<T> {
 	* Wrapped type `any[]`.
 	* @see _.min
 	**/
-	min(
-		iterator: (element: T, index?: number, list?: T[]) => number,
-		context?: any): _Chain;
+	min(iterator: _.ListIterator<T, number>, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.min
 	**/
-	min<T>(iterator?: (x: T, index?: number, list?: _.List<T>) => any, context?: any): _Chain;
+	min(iterator?: _.ListIterator<T, any>, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.sortBy
 	**/
-	sortBy<T>(iterator?: (x: T, index?: number, list?: _.List<T>) => any, context?: any): _Chain;
+	sortBy(iterator?: _.ListIterator<T, any>, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.sortBy
 	**/
-	sortBy<T>(iterator: string, context?: any): _Chain;
+	sortBy(iterator: string, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.groupBy
 	**/
-	groupBy<T>(iterator?: (x: T, index?: number, list?: _.List<T>) => any, context?: any): _Chain;
+	groupBy(iterator?: _.ListIterator<T, any>, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.groupBy
 	**/
-	groupBy<T>(iterator: string, context?: any): _Chain;
+	groupBy(iterator: string, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.countBy
 	**/
-	countBy<T>(iterator?: (x: T, index?: number, list?: _.List<T>) => any, context?: any): _Chain;
+	countBy(iterator?: _.ListIterator<T, any>, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.countBy
 	**/
-	countBy<T>(iterator: string, context?: any): _Chain;
+	countBy(iterator: string, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.shuffle
 	**/
-	shuffle<T>(): _Chain;
+	shuffle(): _Chain;
 
 	/**
 	* Wrapped type `any`.
 	* @see _.toArray
 	**/
-	toArray<T>(): _Chain;
+	toArray(): _Chain;
 
 	/**
 	* Wrapped type `any`.
 	* @see _.size
 	**/
-	size<T>(): _Chain;
+	size(): _Chain;
 
 	/*********
 	* Arrays *
@@ -2421,73 +2352,67 @@ interface _Chain<T> {
 	* Wrapped type `any[]`.
 	* @see _.first
 	**/
-	first<T>(n?: number): _Chain;
-
-	/**
-	* Wrapped type `any[]`.
-	* @see _.first
-	**/
 	first(n: number): _Chain;
 
 	/**
 	* @see _.first
 	**/
 	head(): _Chain;
+
 	/**
 	* @see _.first
 	**/
 	head(n: number): _Chain;
-	head<T>(n?: number): _Chain;
 
 	/**
 	* @see _.first
 	**/
 	take(): _Chain;
+
 	/**
 	* @see _.first
 	**/
 	take(n: number): _Chain;
-	take<T>(n?: number): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.initial
 	**/
-	initial<T>(n?: number): _Chain;
+	initial(n?: number): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.last
 	**/
 	last(): _Chain;
+
 	/**
 	* Wrapped type `any[]`.
 	* @see _.last
 	**/
 	last(n: number): _Chain;
-	last<T>(n?: number): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.rest
 	**/
-	rest<T>(n?: number): _Chain;
+	rest(n?: number): _Chain;
 
 	/**
 	* @see _.rest
 	**/
-	tail<T>(n?: number): _Chain;
+	tail(n?: number): _Chain;
 
 	/**
 	* @see _.rest
 	**/
-	drop<T>(n?: number): _Chain;
+	drop(n?: number): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.compact
 	**/
-	compact<T>(): _Chain;
+	compact(): _Chain;
 
 	/**
 	* Wrapped type `any`.
@@ -2499,90 +2424,94 @@ interface _Chain<T> {
 	* Wrapped type `any[]`.
 	* @see _.without
 	**/
-	without<T>(...values: T[]): _Chain;
+	without(...values: T[]): _Chain;
 
 	/**
 	* Wrapped type `any[][]`.
 	* @see _.union
 	**/
-	union<T>(...arrays: _.List<T>[]): _Chain;
+	union(...arrays: _.List<T>[]): _Chain;
 
 	/**
 	* Wrapped type `any[][]`.
 	* @see _.intersection
 	**/
-	intersection<T>(...arrays: _.List<T>[]): _Chain;
+	intersection(...arrays: _.List<T>[]): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.difference
 	**/
-	difference<T>(...others: _.List<T>[]): _Chain;
+	difference(...others: _.List<T>[]): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.uniq
 	**/
-	uniq<T>(isSorted?: boolean, iterator?: (x: T, index?: number, list?: _.List<T>) => any): _Chain;
+	uniq(isSorted?: boolean, iterator?: _.ListIterator<T, any>): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.uniq
 	**/
-	uniq<TSort>(
-		iterator?: (element: T, index?: number, list?: T[]) => TSort,
-		context?: any): _Chain;
+	uniq<TSort>(iterator?: _.ListIterator<T, TSort>, context?: any): _Chain;
 
 	/**
 	* @see _.uniq
 	**/
-	unique<T>(isSorted?: boolean, iterator?: (x: T, index?: number, list?: _.List<T>) => any): _Chain;
+	unique<TSort>(isSorted?: boolean, iterator?: _.ListIterator<T, TSort>): _Chain;
 
 	/**
 	* @see _.uniq
 	**/
-	unique<TSort>(
-		iterator?: (element: T, index?: number, list?: T[]) => TSort,
-		context?: any): _Chain;
+	unique<TSort>(iterator?: _.ListIterator<T, TSort>, context?: any): _Chain;
 
 	/**
 	* Wrapped type `any[][]`.
 	* @see _.zip
 	**/
 	zip(...arrays: any[][]): _Chain;
-	zip(...arrays: any[]): _Chain;
 
 	/**
 	* Wrapped type `any[][]`.
 	* @see _.object
 	**/
 	object(...keyValuePairs: any[][]): _Chain;
+
+	/**
+	* @see _.object
+	**/
 	object(values?: any): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.indexOf
 	**/
-	indexOf<T>(value: T, isSorted?: boolean): _Chain;
-	indexOf<T>(value: T, startFrom: number): _Chain;
+	indexOf(value: T, isSorted?: boolean): _Chain;
+
+	/**
+	* @see _.indexOf
+	**/
+	indexOf(value: T, startFrom: number): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.lastIndexOf
 	**/
-	lastIndexOf<T>(value: T, from?: number): _Chain;
+	lastIndexOf(value: T, from?: number): _Chain;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.sortedIndex
 	**/
-	sortedIndex<T>(value: T, iterator?: (x: T) => any, context?: any): _Chain;
+	sortedIndex(value: T, iterator?: (x: T) => any, context?: any): _Chain;
 
 	/**
 	* Wrapped type `number`.
 	* @see _.range
 	**/
 	range(stop: number, step?: number): _Chain;
+
 	/**
 	* Wrapped type `number`.
 	* @see _.range
@@ -2598,7 +2527,6 @@ interface _Chain<T> {
 	* @see _.bind
 	**/
 	bind(object: any, ...arguments: any[]): _Chain;
-	bind(func: (...as: any[]) => any, context: any, ...arguments: any[]): _Chain;
 
 	/**
 	* Wrapped type `object`.
@@ -2623,13 +2551,16 @@ interface _Chain<T> {
 	* @see _.defer
 	**/
 	defer(...arguments: any[]): _Chain;
-	defer(): _Chain;
 
 	/**
 	* Wrapped type `Function`.
 	* @see _.delay
 	**/
 	delay(wait: number, ...arguments: any[]): _Chain;
+
+	/**
+	* @see _.delay
+	**/
 	delay(...arguments: any[]): _Chain;
 
 	/**
@@ -2660,8 +2591,7 @@ interface _Chain<T> {
 	* Wrapped type `Function`.
 	* @see _.wrap
 	**/
-	wrap(wrapper: (fn: Function, ...args: any[]) => any): _Chain;
-	wrap(wrapper: any): () => _Chain;
+	wrap(wrapper: Function): () => _Chain;
 
 	/**
 	* Wrapped type `Function[]`.
@@ -2683,7 +2613,7 @@ interface _Chain<T> {
 	* Wrapped type `object`.
 	* @see _.values
 	**/
-	values<T>(): _Chain;
+	values(): _Chain;
 
 	/**
 	* Wrapped type `object`.
@@ -2703,6 +2633,9 @@ interface _Chain<T> {
 	**/
 	functions(): _Chain;
 
+	/**
+	* @see _.functions
+	**/
 	methods(): _Chain;
 
 	/**
@@ -2716,14 +2649,12 @@ interface _Chain<T> {
 	* @see _.pick
 	**/
 	pick(...keys: string[]): _Chain;
-	pick(keys: string[]): _Chain;
 
 	/**
 	* Wrapped type `object`.
 	* @see _.omit
 	**/
 	omit(...keys: string[]): _Chain;
-	omit(keys: string[]): _Chain;
 
 	/**
 	* Wrapped type `object`.
@@ -2732,15 +2663,9 @@ interface _Chain<T> {
 	defaults(...defaults: any[]): _Chain;
 
 	/**
-	* Wrapped type `object`.
-	* @see _.clone
-	**/
-	clone(object: T): _Chain;
-	/**
 	* Wrapped type `any[]`.
 	* @see _.clone
 	**/
-	clone(list: T[]): _Chain;
 	clone(): _Chain;
 
 	/**
@@ -2765,7 +2690,6 @@ interface _Chain<T> {
 	* Wrapped type `object`.
 	* @see _.isEmpty
 	**/
-	isEmpty(object: any): _Chain;
 	isEmpty(): _Chain;
 
 	/**
@@ -2778,7 +2702,7 @@ interface _Chain<T> {
 	* Wrapped type `object`.
 	* @see _.isArray
 	**/
-	isArray(): boolean;
+	isArray(): _Chain;
 
 	/**
 	* Wrapped type `object`.
@@ -2867,7 +2791,6 @@ interface _Chain<T> {
 	* @see _.times
 	**/
 	times<TResult>(iterator: (n: number) => TResult, context?: any): _Chain;
-	times(iterator: (index: number) => void , context?: any): _Chain;
 
 	/**
 	* Wrapped type `number`.
@@ -2908,8 +2831,7 @@ interface _Chain<T> {
 	* Wrapped type `string`.
 	* @see _.template
 	**/
-	template(data?: any, settings?: _.TemplateSettings): _Chain;
-	template(data?: any, settings?: any): _Chain;
+	template(data?: any, settings?: _.TemplateSettings): (...data: any[]) => _Chain;
 
 	/********** *
 	 * Chaining *
@@ -2925,7 +2847,7 @@ interface _Chain<T> {
 	* Wrapped type `any`.
 	* @see _.value
 	**/
-	value<TResult>(): TResult;
+	value<TResult>(): _Chain;
 }
 
 declare module "underscore" {
