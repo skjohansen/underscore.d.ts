@@ -51,6 +51,8 @@ _.max(stooges, function (stooge) {
     return stooge.age;
 });
 
+_.max([1, 2, 3, 4, 5]);
+
 var numbers = [10, 5, 100, 2, 1000];
 _.min(numbers);
 
@@ -58,7 +60,7 @@ _.sortBy([1, 2, 3, 4, 5, 6], function (num) {
     return Math.sin(num);
 });
 
-_([1.3, 2.1, 2.4]).groupBy(function (e, i, list) {
+_([1.3, 2.1, 2.4]).groupBy(function (e) {
     return Math.floor(e);
 });
 _.groupBy([1.3, 2.1, 2.4], function (num) {
@@ -67,7 +69,7 @@ _.groupBy([1.3, 2.1, 2.4], function (num) {
 _.groupBy(['one', 'two', 'three'], 'length');
 
 _.countBy([1, 2, 3, 4, 5], function (num) {
-    return num % 2 == 0 ? 'even' : 'odd';
+    return (num % 2 == 0) ? 'even' : 'odd';
 });
 
 _.shuffle([1, 2, 3, 4, 5, 6]);
@@ -195,6 +197,7 @@ var iceCream = { flavor: "chocolate" };
 _.defaults(iceCream, { flavor: "vanilla", sprinkles: "lots" });
 
 _.clone({ name: 'moe' });
+_.clone(['i', 'am', 'an', 'object!']);
 
 _([1, 2, 3, 4]).chain().filter(function (num) {
     return num % 2 == 0;

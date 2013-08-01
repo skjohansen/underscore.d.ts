@@ -35,17 +35,19 @@ _.pluck(stooges, 'name');
 
 _.max(stooges, (stooge) => stooge.age);
 
+_.max([1, 2, 3, 4, 5]);
+
 var numbers = [10, 5, 100, 2, 1000];
 _.min(numbers);
 
 _.sortBy([1, 2, 3, 4, 5, 6], (num) => Math.sin(num));
 
 
-_([1.3, 2.1, 2.4]).groupBy((e, i?: number, list?: any[]) => Math.floor(e));
+_([1.3, 2.1, 2.4]).groupBy((e) => Math.floor(e));
 _.groupBy([1.3, 2.1, 2.4], (num: number) => Math.floor(num).toString());
 _.groupBy(['one', 'two', 'three'], 'length');
 
-_.countBy([1, 2, 3, 4, 5], (num) => num % 2 == 0 ? 'even' : 'odd');
+_.countBy<number>([1, 2, 3, 4, 5], (num) => (num % 2 == 0) ? 'even' : 'odd');
 
 _.shuffle([1, 2, 3, 4, 5, 6]);
 
@@ -152,6 +154,7 @@ var iceCream = { flavor: "chocolate" };
 _.defaults(iceCream, { flavor: "vanilla", sprinkles: "lots" });
 
 _.clone({ name: 'moe' });
+_.clone(['i', 'am', 'an', 'object!']);
 
 _([1, 2, 3, 4])
 	.chain()
