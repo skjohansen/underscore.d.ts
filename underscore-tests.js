@@ -69,7 +69,11 @@ _([1.3, 2.1, 2.4]).groupBy(function (e) {
 _.groupBy([1.3, 2.1, 2.4], function (num) {
     return Math.floor(num).toString();
 });
-_.groupBy(['one', 'two', 'three'], 'length');
+var blah = _.groupBy(['one', 'two', 'three'], 'length');
+
+_.indexBy(stooges, 'age')['40'].age;
+_(stooges).indexBy('age')['40'].name;
+_(stooges).chain().indexBy('age').value()['40'].age;
 
 _.countBy([1, 2, 3, 4, 5], function (num) {
     return (num % 2 == 0) ? 'even' : 'odd';

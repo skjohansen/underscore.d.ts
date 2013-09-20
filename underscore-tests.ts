@@ -46,7 +46,14 @@ _.sortBy([1, 2, 3, 4, 5, 6], (num) => Math.sin(num));
 
 _([1.3, 2.1, 2.4]).groupBy((e) => Math.floor(e));
 _.groupBy([1.3, 2.1, 2.4], (num: number) => Math.floor(num).toString());
-_.groupBy(['one', 'two', 'three'], 'length');
+var blah = _.groupBy(['one', 'two', 'three'], 'length');
+
+_.indexBy(stooges, 'age')['40'].age;
+_(stooges).indexBy('age')['40'].name;
+_(stooges)
+	.chain()
+	.indexBy('age')
+	.value()['40'].age;
 
 _.countBy<number>([1, 2, 3, 4, 5], (num) => (num % 2 == 0) ? 'even' : 'odd');
 

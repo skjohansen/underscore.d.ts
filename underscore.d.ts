@@ -1,15 +1,9 @@
-// Type definitions for Underscore 1.4
+// Type definitions for Underscore 1.5.2
 // Project: http://underscorejs.org/
 // Definitions by:
 // Boris Yankov <https://github.com/borisyankov/>
 // Josh Baldwin <https://github.com/jbaldwin/underscore.d.ts>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
-
-// Notes:
-//  1) Parameter types may be declared as List<T> and Dictionary<T>.
-//     However, return types must be declared as T[] where possible
-//     otherwise Array<T> functions are not available on returns.
-//  2) Callbacks do not use '?' parameters!
 
 /**
 * Underscore OOP Wrapper, all Underscore functions that take an object
@@ -20,6 +14,22 @@ declare function _<T>(value: Array<T>): _<T>;
 declare function _<T>(value: T): _<T>;
 
 declare module _ {
+
+	/**
+	* underscore.js _.throttle options.
+	**/
+	interface ThrottleSettings {
+
+		/**
+		* If you'd like to disable the leading-edge call, pass this as false.
+		**/
+		leading?: boolean;
+
+		/**
+		* If you'd like to disable the execution on the trailing-edge, pass false.
+		**/
+		trailing?: boolean;
+	}
 
 	/**
 	* underscore.js template settings, set templateSettings or pass as an argument
@@ -452,12 +462,30 @@ declare module _ {
 
 	/**
 	* @see _.groupBy
-	* @param iterator Group iterator for each element within `list`, return the key to group the element by.
+	* @param iterator Property on each object to group them by.
 	**/
 	export function groupBy<T>(
 		list: List<T>,
 		iterator: string,
 		context?: any): Dictionary<T[]>;
+
+	/**
+	* Given a `list`, and an `iterator` function that returns a key for each element in the list (or a property name),
+	* returns an object with an index of each item.  Just like _.groupBy, but for when you know your keys are unique.
+	**/
+	export function indexBy<T>(
+		list: List<T>,
+		iterator: ListIterator<T, any>,
+		context?: any): Dictionary<T>;
+
+	/**
+	* @see _.indexBy
+	* @param iterator Property on each object to index them by.
+	**/
+	export function indexBy<T>(
+		list: List<T>,
+		iterator: string,
+		context?: any): Dictionary<T>;
 
 	/**
 	* Sorts a list into groups and returns a count for the number of objects in each group. Similar
@@ -488,6 +516,18 @@ declare module _ {
 	* @return Shuffled copy of `list`.
 	**/
 	export function shuffle<T>(list: Collection<T>): T[];
+
+	/**
+	* Produce a random sample from the `list`.  Pass a number to return `n` random elements from the list.  Otherwise a single random item will be returned.
+	* @param list List to sample.
+	* @return Random sample of `n` elements in `list`.
+	**/
+	export function sample<T>(list: Collection<T>, n: number): T[];
+
+	/**
+	* @see _.sample
+	**/
+	export function sample<T>(list: Collection<T>): T;
 
 	/**
 	* Converts the list (anything that can be iterated over), into a real Array. Useful for transmuting
@@ -897,13 +937,19 @@ declare module _ {
 	* Creates and returns a new, throttled version of the passed function, that, when invoked repeatedly,
 	* will only actually call the original function at most once per every wait milliseconds. Useful for
 	* rate-limiting events that occur faster than you can keep up with.
+	* By default, throttle will execute the function as soon as you call it for the first time, and,
+	* if you call it again any number of times during the wait period, as soon as that period is over.
+	* If you'd like to disable the leading-edge call, pass {leading: false}, and if you'd like to disable
+	* the execution on the trailing-edge, pass {trailing: false}.
 	* @param fn Function to throttle `waitMS` ms.
 	* @param wait The number of milliseconds to wait before `fn` can be invoked again.
+	* @param options Allows for disabling execution of the throttled function on either the leading or trailing edge.
 	* @return `fn` with a throttle of `wait`.
 	**/
 	export function throttle(
 		func: any,
-		wait: number): Function;
+		wait: number,
+		options?: ThrottleSettings): Function;
 
 	/**
 	* Creates and returns a new debounced version of the passed function that will postpone its execution
@@ -1544,6 +1590,18 @@ declare class _<T> {
 
 	/**
 	* Wrapped type `any[]`.
+	* @see _.indexBy
+	**/
+	indexBy(iterator: _.ListIterator<T, any>, context?: any): _.Dictionary<T>;
+
+	/**
+	* Wrapped type `any[]`.
+	* @see _.indexBy
+	**/
+	indexBy(iterator: string, context?: any): _.Dictionary<T>;
+
+	/**
+	* Wrapped type `any[]`.
 	* @see _.countBy
 	**/
 	countBy(iterator?: _.ListIterator<T, any>, context?: any): _.Dictionary<number[]>;
@@ -1559,6 +1617,17 @@ declare class _<T> {
 	* @see _.shuffle
 	**/
 	shuffle(): T[];
+	
+	/**
+	* Wrapped type `any[]`.
+	* @see _.sample
+	**/
+	sample<T>(n: number): T[];
+
+	/**
+	* @see _.sample
+	**/
+	sample<T>(): T;
 
 	/**
 	* Wrapped type `any`.
@@ -1801,7 +1870,7 @@ declare class _<T> {
 	* Wrapped type `Function`.
 	* @see _.throttle
 	**/
-	throttle(wait: number): Function;
+	throttle(wait: number, options?: _.ThrottleSettings): Function;
 
 	/**
 	* Wrapped type `Function`.
@@ -2310,6 +2379,18 @@ interface _Chain<T> {
 
 	/**
 	* Wrapped type `any[]`.
+	* @see _.indexBy
+	**/
+	indexBy(iterator: _.ListIterator<T, any>, context?: any): _Chain<T>;
+
+	/**
+	* Wrapped type `any[]`.
+	* @see _.indexBy
+	**/
+	indexBy(iterator: string, context?: any): _Chain<T>;
+
+	/**
+	* Wrapped type `any[]`.
 	* @see _.countBy
 	**/
 	countBy(iterator?: _.ListIterator<T, any>, context?: any): _Chain<T>;
@@ -2325,6 +2406,17 @@ interface _Chain<T> {
 	* @see _.shuffle
 	**/
 	shuffle(): _Chain<T>;
+
+	/**
+	* Wrapped type `any[]`.
+	* @see _.sample
+	**/
+	sample<T>(n: number): _Chain<T>;
+
+	/**
+	* @see _.sample
+	**/
+	sample<T>(): _Chain<T>;
 
 	/**
 	* Wrapped type `any`.
@@ -2567,7 +2659,7 @@ interface _Chain<T> {
 	* Wrapped type `Function`.
 	* @see _.throttle
 	**/
-	throttle(wait: number): _Chain<T>;
+	throttle(wait: number, options?: _.ThrottleSettings): _Chain<T>;
 
 	/**
 	* Wrapped type `Function`.
