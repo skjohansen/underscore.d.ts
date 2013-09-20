@@ -167,7 +167,7 @@ declare module _ {
 	export function reduce<T, TResult>(
 		list: Collection<T>,
 		iterator: MemoIterator<T, TResult>,
-		memo: TResult,
+		memo?: TResult,
 		context?: any): TResult;
 
 	/**
@@ -176,7 +176,7 @@ declare module _ {
 	export function inject<T, TResult>(
 		list: Collection<T>,
 		iterator: MemoIterator<T, TResult>,
-		memo: TResult,
+		memo?: TResult,
 		context?: any): TResult;
 
 	/**
@@ -185,7 +185,7 @@ declare module _ {
 	export function foldl<T, TResult>(
 		list: Collection<T>,
 		iterator: MemoIterator<T, TResult>,
-		memo: TResult,
+		memo?: TResult,
 		context?: any): TResult;
 
 	/**
@@ -201,7 +201,7 @@ declare module _ {
 	export function reduceRight<T, TResult>(
 		list: Collection<T>,
 		iterator: MemoIterator<T, TResult>,
-		memo: TResult,
+		memo?: TResult,
 		context?: any): TResult;
 
 	/**
@@ -210,7 +210,7 @@ declare module _ {
 	export function foldr<T, TResult>(
 		list: Collection<T>,
 		iterator: MemoIterator<T, TResult>,
-		memo: TResult,
+		memo?: TResult,
 		context?: any): TResult;
 
 	/**
@@ -1373,28 +1373,28 @@ declare class _<T> {
 	* Wrapped type `any[]`.
 	* @see _.reduce
 	**/
-	reduce<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): TResult;
+	reduce<TResult>(iterator: _.MemoIterator<T, TResult>, memo?: TResult, context?: any): TResult;
 
 	/**
 	* @see _.reduce
 	**/
-	inject<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): TResult;
+	inject<TResult>(iterator: _.MemoIterator<T, TResult>, memo?: TResult, context?: any): TResult;
 
 	/**
 	* @see _.reduce
 	**/
-	foldl<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): TResult;
+	foldl<TResult>(iterator: _.MemoIterator<T, TResult>, memo?: TResult, context?: any): TResult;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.reduceRight
 	**/
-	reduceRight<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): TResult;
+	reduceRight<TResult>(iterator: _.MemoIterator<T, TResult>, memo?: TResult, context?: any): TResult;
 
 	/**
 	* @see _.reduceRight
 	**/
-	foldr<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): TResult;
+	foldr<TResult>(iterator: _.MemoIterator<T, TResult>, memo?: TResult, context?: any): TResult;
 
 	/**
 	* Wrapped type `any[]`.
@@ -2139,28 +2139,28 @@ interface _Chain<T> {
 	* Wrapped type `any[]`.
 	* @see _.reduce
 	**/
-	reduce<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): _Chain<T>;
+	reduce<TResult>(iterator: _.MemoIterator<T, TResult>, memo?: TResult, context?: any): _Chain<T>;
 
 	/**
 	* @see _.reduce
 	**/
-	inject<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): _Chain<T>;
+	inject<TResult>(iterator: _.MemoIterator<T, TResult>, memo?: TResult, context?: any): _Chain<T>;
 
 	/**
 	* @see _.reduce
 	**/
-	foldl<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): _Chain<T>;
+	foldl<TResult>(iterator: _.MemoIterator<T, TResult>, memo?: TResult, context?: any): _Chain<T>;
 
 	/**
 	* Wrapped type `any[]`.
 	* @see _.reduceRight
 	**/
-	reduceRight<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): _Chain<T>;
+	reduceRight<TResult>(iterator: _.MemoIterator<T, TResult>, memo?: TResult, context?: any): _Chain<T>;
 
 	/**
 	* @see _.reduceRight
 	**/
-	foldr<TResult>(iterator: _.MemoIterator<T, TResult>, memo: TResult, context?: any): _Chain<T>;
+	foldr<TResult>(iterator: _.MemoIterator<T, TResult>, memo?: TResult, context?: any): _Chain<T>;
 
 	/**
 	* Wrapped type `any[]`.

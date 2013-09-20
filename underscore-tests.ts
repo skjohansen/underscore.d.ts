@@ -9,6 +9,7 @@ _.map([1, 2, 3], (num) => num * 3);
 _.map({ one: 1, two: 2, three: 3 }, (value: number, key?: string) => value * 3);
 
 var sum = _.reduce([1, 2, 3], (memo, num) => memo + num, 0);
+sum = _.reduce([1, 2, 3], (memo, num) => memo + num); // memo is optional #issue 5 github
 
 var list = [[0, 1], [2, 3], [4, 5]];
 var flat = _.reduceRight(list, (a, b) => a.concat(b), []);
