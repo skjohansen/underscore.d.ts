@@ -39,7 +39,8 @@ var odds = _.reject([1, 2, 3, 4, 5, 6], function (num) {
     return num % 2 == 0;
 });
 
-_.all([true, 1, null, 'yes'], _.identity);
+_.every([true, 1, null, 'yes'], _.identity);
+_.every([true, 1, null, 'yes']);
 
 _.any([null, 0, 'yes', false]);
 
@@ -69,7 +70,7 @@ _([1.3, 2.1, 2.4]).groupBy(function (e) {
 _.groupBy([1.3, 2.1, 2.4], function (num) {
     return Math.floor(num).toString();
 });
-var blah = _.groupBy(['one', 'two', 'three'], 'length');
+_.groupBy(['one', 'two', 'three'], 'length');
 
 _.indexBy(stooges, 'age')['40'].age;
 _(stooges).indexBy('age')['40'].name;
@@ -205,7 +206,9 @@ _.invert({ Moe: "Moses", Larry: "Louis", Curly: "Jerome" });
 _.functions(_);
 _.extend({ name: 'moe' }, { age: 50 });
 _.pick({ name: 'moe', age: 50, userid: 'moe1' }, 'name', 'age');
-_.omit({ name: 'moe', age: 50, userid: 'moe1' }, 'userid');
+_.omit({ name: 'moe', age: 50, userid: 'moe1' }, 'name');
+_.omit({ name: 'moe', age: 50, userid: 'moe1' }, 'name', 'age');
+_.omit({ name: 'moe', age: 50, userid: 'moe1' }, ['name', 'age']);
 
 var iceCream = { flavor: "chocolate" };
 _.defaults(iceCream, { flavor: "vanilla", sprinkles: "lots" });
@@ -323,4 +326,25 @@ template2({ name: "Mustache" });
 _.template("Using 'with': <%= data.answer %>", { answer: 'no' }, { variable: 'data' });
 
 _(['test', 'test']).pick(['test2', 'test2']);
+
+//////////////// Chain Tests
+function chain_tests() {
+    var list = _.chain([1, 2, 3, 4, 5, 6, 7, 8]).filter(function (n) {
+        return n % 2 == 0;
+    }).map(function (n) {
+        return n * n;
+    }).value();
+
+    _([1, 2, 3, 4]).chain().filter(function (num) {
+        return num % 2 == 0;
+    }).tap(alert).map(function (num) {
+        return num * num;
+    }).value();
+
+    _.chain([1, 2, 3, 200]).filter(function (num) {
+        return num % 2 == 0;
+    }).tap(alert).map(function (num) {
+        return num * num;
+    }).value();
+}
 //# sourceMappingURL=underscore-tests.js.map

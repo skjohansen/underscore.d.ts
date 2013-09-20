@@ -309,17 +309,17 @@ declare module _ {
 	* @param context `this` object in `iterator`, optional.
 	* @return True if all elements passed the truth test, otherwise false.
 	**/
-	export function all<T>(
+	export function every<T>(
 		list: Collection<T>,
-		iterator: ListIterator<T, boolean>,
+		iterator?: ListIterator<T, boolean>,
 		context?: any): boolean;
 
 	/**
 	* @see _.all
 	**/
-	export function every<T>(
+	export function all<T>(
 		list: Collection<T>,
-		iterator: ListIterator<T, boolean>,
+		iterator?: ListIterator<T, boolean>,
 		context?: any): boolean;
 
 	/**
@@ -1091,6 +1091,13 @@ declare module _ {
 		...keys: string[]): any;
 
 	/**
+	* @see _.omit
+	**/
+	export function omit(
+		object: any,
+		keys: string[]): any;
+
+	/**
 	* Fill in null and undefined properties in object with values from the defaults objects,
 	* and return the object. As soon as the property is filled, further defaults will have no effect.
 	* @param object Fill this object with default values.
@@ -1486,12 +1493,12 @@ declare class _<T> {
 	* Wrapped type `any[]`.
 	* @see _.all
 	**/
-	all(iterator: _.ListIterator<T, boolean>, context?: any): boolean;
+	all(iterator?: _.ListIterator<T, boolean>, context?: any): boolean;
 
 	/**
 	* @see _.all
 	**/
-	every(iterator: _.ListIterator<T, boolean>, context?: any): boolean;
+	every(iterator?: _.ListIterator<T, boolean>, context?: any): boolean;
 
 	/**
 	* Wrapped type `any[]`.
@@ -2275,12 +2282,12 @@ interface _Chain<T> {
 	* Wrapped type `any[]`.
 	* @see _.all
 	**/
-	all(iterator: _.ListIterator<T, boolean>, context?: any): _Chain<T>;
+	all(iterator?: _.ListIterator<T, boolean>, context?: any): _Chain<T>;
 
 	/**
 	* @see _.all
 	**/
-	every(iterator: _.ListIterator<T, boolean>, context?: any): _Chain<T>;
+	every(iterator?: _.ListIterator<T, boolean>, context?: any): _Chain<T>;
 
 	/**
 	* Wrapped type `any[]`.

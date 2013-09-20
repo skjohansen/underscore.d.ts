@@ -23,7 +23,8 @@ _.where(listOfPlays, { author: "Shakespeare", year: 1611 });
 
 var odds = _.reject([1, 2, 3, 4, 5, 6], (num) => num % 2 == 0);
 
-_.all([true, 1, null, 'yes'], _.identity);
+_.every([true, 1, null, 'yes'], _.identity);
+_.every<{}>([true, 1, null, 'yes']);
 
 _.any([null, 0, 'yes', false]);
 
@@ -46,7 +47,7 @@ _.sortBy([1, 2, 3, 4, 5, 6], (num) => Math.sin(num));
 
 _([1.3, 2.1, 2.4]).groupBy((e) => Math.floor(e));
 _.groupBy([1.3, 2.1, 2.4], (num: number) => Math.floor(num).toString());
-var blah = _.groupBy(['one', 'two', 'three'], 'length');
+_.groupBy(['one', 'two', 'three'], 'length');
 
 _.indexBy(stooges, 'age')['40'].age;
 _(stooges).indexBy('age')['40'].name;
@@ -156,7 +157,9 @@ _.invert({ Moe: "Moses", Larry: "Louis", Curly: "Jerome" });
 _.functions(_);
 _.extend({ name: 'moe' }, { age: 50 });
 _.pick({ name: 'moe', age: 50, userid: 'moe1' }, 'name', 'age');
-_.omit({ name: 'moe', age: 50, userid: 'moe1' }, 'userid');
+_.omit({ name: 'moe', age: 50, userid: 'moe1' }, 'name');
+_.omit({ name: 'moe', age: 50, userid: 'moe1' }, 'name', 'age');
+_.omit({ name: 'moe', age: 50, userid: 'moe1' }, ['name', 'age']);
 
 var iceCream = { flavor: "chocolate" };
 _.defaults(iceCream, { flavor: "vanilla", sprinkles: "lots" });
@@ -273,3 +276,27 @@ _.template("Using 'with': <%= data.answer %>", { answer: 'no' }, { variable: 'da
 
 
 _(['test', 'test']).pick(['test2', 'test2']);
+
+//////////////// Chain Tests
+function chain_tests() {
+    var list:number[] = _.chain([1, 2, 3, 4, 5, 6, 7, 8])
+        .filter(n => n % 2 == 0)
+        .map(n => n * n)
+        .value();
+
+    _([1, 2, 3, 4])
+        .chain()
+        .filter((num: number) => {
+            return num % 2 == 0;
+        }).tap(alert)
+        .map((num: number) => {
+            return num * num;
+        })
+        .value();
+
+    _.chain([1, 2, 3, 200])
+        .filter(function (num: number) { return num % 2 == 0; })
+        .tap(alert)
+        .map(function (num: number) { return num * num })
+        .value();
+}
