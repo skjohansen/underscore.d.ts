@@ -8,6 +8,13 @@ This is also hosted on https://github.com/borisyankov/DefinitelyTyped If you fou
 Change log
 ========
 
+v1.5.2 - 2013/09/20
+---------
+
+* Updated to TypeScript v0.9.1.1
+* Added _.indexBy, like _.groupBy but used when keys are known to be unique.
+* Added _.sample, provides a random sample of elements in a collection.
+
 v1.4.4 - 2013/06/28
 ---------
 
