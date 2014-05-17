@@ -1,7 +1,9 @@
+/// <reference path="underscore.d.ts" />
+
 _.each([1, 2, 3], function (num) {
     return alert(num.toString());
 });
-_.each({ one: 1, two: 2, three: 3 }, function (value) {
+_.each({ one: 1, two: 2, three: 3 }, function (value, key) {
     return alert(value.toString());
 });
 
@@ -12,14 +14,17 @@ _.map({ one: 1, two: 2, three: 3 }, function (value, key) {
     return value * 3;
 });
 
+//var sum = _.reduce([1, 2, 3], (memo, num) => memo + num, 0);	// https://typescript.codeplex.com/workitem/1960
 var sum = _.reduce([1, 2, 3], function (memo, num) {
     return memo + num;
 }, 0);
 sum = _.reduce([1, 2, 3], function (memo, num) {
     return memo + num;
-});
+}); // memo is optional #issue 5 github
 
 var list = [[0, 1], [2, 3], [4, 5]];
+
+//var flat = _.reduceRight(list, (a, b) => a.concat(b), []);	// https://typescript.codeplex.com/workitem/1960
 var flat = _.reduceRight(list, function (a, b) {
     return a.concat(b);
 }, []);
@@ -28,8 +33,16 @@ var even = _.find([1, 2, 3, 4, 5, 6], function (num) {
     return num % 2 == 0;
 });
 
+var firstCapitalLetter = _.find({ a: 'a', b: 'B', c: 'C', d: 'd' }, function (l) {
+    return l === l.toUpperCase();
+});
+
 var evens = _.filter([1, 2, 3, 4, 5, 6], function (num) {
     return num % 2 == 0;
+});
+
+var capitalLetters = _.filter({ a: 'a', b: 'B', c: 'C', d: 'd' }, function (l) {
+    return l === l.toUpperCase();
 });
 
 var listOfPlays = [{ title: "Cymbeline", author: "Shakespeare", year: 1611 }, { title: "The Tempest", author: "Shakespeare", year: 1611 }, { title: "Other", author: "Not Shakespeare", year: 2012 }];
@@ -40,7 +53,6 @@ var odds = _.reject([1, 2, 3, 4, 5, 6], function (num) {
 });
 
 _.every([true, 1, null, 'yes'], _.identity);
-_.every([true, 1, null, 'yes']);
 
 _.any([null, 0, 'yes', false]);
 
@@ -87,6 +99,13 @@ _.shuffle([1, 2, 3, 4, 5, 6]);
 })(1, 2, 3, 4);
 
 _.size({ one: 1, two: 2, three: 3 });
+
+_.partition([0, 1, 2, 3, 4, 5], function (num) {
+    return num % 2 == 0;
+});
+
+var isUncleMoe = _.matches({ name: 'moe', relation: 'uncle' });
+_.filter([{ name: 'larry', relation: 'father' }, { name: 'moe', relation: 'uncle' }], isUncleMoe);
 
 ///////////////////////////////////////////////////////////////////////////////////////
 _.first([5, 4, 3, 2, 1]);
@@ -248,6 +267,8 @@ _.isArray([1, 2, 3]);
 _.isObject({});
 _.isObject(1);
 
+_.property('name')(moe);
+
 // (() => { return _.isArguments(arguments); })(1, 2, 3);
 _.isArguments([1, 2, 3]);
 
@@ -274,9 +295,14 @@ _.isNaN(undefined);
 _.isNull(null);
 _.isNull(undefined);
 
-_.isUndefined((window).missingVariable);
+_.isUndefined(window.missingVariable);
 
 ///////////////////////////////////////////////////////////////////////////////////////
+var UncleMoe = { name: 'moe' };
+_.constant(UncleMoe)();
+
+typeof _.now() === "number";
+
 var underscore = _.noConflict();
 
 var moe2 = { name: 'moe' };
@@ -297,7 +323,7 @@ _.mixin({
         return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
     }
 });
-(_("fabio")).capitalize();
+_("fabio").capitalize();
 
 _.uniqueId('contact_');
 
@@ -329,22 +355,29 @@ _(['test', 'test']).pick(['test2', 'test2']);
 
 //////////////// Chain Tests
 function chain_tests() {
-    var list = _.chain([1, 2, 3, 4, 5, 6, 7, 8]).filter(function (n) {
-        return n % 2 == 0;
-    }).map(function (n) {
-        return n * n;
-    }).value();
-
-    _([1, 2, 3, 4]).chain().filter(function (num) {
+    // https://typescript.codeplex.com/workitem/1960
+    var numArray = _.chain([1, 2, 3, 4, 5, 6, 7, 8]).filter(function (num) {
         return num % 2 == 0;
-    }).tap(alert).map(function (num) {
+    }).map(function (num) {
         return num * num;
     }).value();
 
-    _.chain([1, 2, 3, 200]).filter(function (num) {
+    var strArray = _([1, 2, 3, 4]).chain().filter(function (num) {
+        return num % 2 == 0;
+    }).tap(alert).map(function (num) {
+        return "string" + num;
+    }).value();
+
+    var n = _.chain([1, 2, 3, 200]).filter(function (num) {
         return num % 2 == 0;
     }).tap(alert).map(function (num) {
         return num * num;
+    }).max().value();
+
+    var hoverOverValueShouldBeNumberNotAny = _([1, 2, 3]).chain().map(function (num) {
+        return [num, num + 1];
+    }).flatten().find(function (num) {
+        return num % 2 == 0;
     }).value();
 }
 //# sourceMappingURL=underscore-tests.js.map
