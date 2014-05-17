@@ -8,6 +8,17 @@ This is also hosted on https://github.com/borisyankov/DefinitelyTyped If you fou
 Change log
 ========
 
+v1.6.0 - 2014/05/17
+---------
+
+* Updated to TypeScript v1.0.1
+* Added _.partition, a way to split a collection into two lists of results -- those that pass and those that fail a particular predicate.
+* Added _.property, for easy creation of iterators that pull specific properties from objects.
+* Added _.matches, a function that will give you a predicate that can be used to tell if a given object matches a list of specified key/value properties.
+* Added _.constant, as a higher-order _.identity.
+* Added _.now, an optimized way to get a timestamp -- used internally to speed up debounce and throttle.
+* The _.each function now returns the original iterated list (just like it used to), for better chaining.
+
 v1.5.2 - 2013/09/20
 ---------
 

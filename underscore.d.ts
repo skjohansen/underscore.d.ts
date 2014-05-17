@@ -917,7 +917,8 @@ interface UnderscoreStatic {
 
 	/**
 	* Partially apply a function by filling in any number of its arguments, without changing its dynamic this value.
-	* A close cousin of bind.
+	* A close cousin of bind.  You may pass _ in your list of arguments to specify an argument that should not be 
+	* pre-filled, but left open to supply at call-time. 
 	* @param fn Function to partially fill in arguments.
 	* @param arguments The partial arguments.
 	* @return `fn` with partially filled in arguments.
@@ -2181,6 +2182,12 @@ interface Underscore<T> {
 	identity(): any;
 
 	/**
+	* Wrapped type `any`.
+	* @see _.constant
+	**/
+	constant(): () => T;
+
+	/**
 	* Wrapped type `number`.
 	* @see _.times
 	**/
@@ -2996,6 +3003,12 @@ interface _Chain<T> {
 	* @see _.identity
 	**/
 	identity(): _Chain<T>;
+
+	/**
+	* Wrapped type `any`.
+	* @see _.constant
+	**/
+	constant(): _Chain<T>;
 
 	/**
 	* Wrapped type `number`.
