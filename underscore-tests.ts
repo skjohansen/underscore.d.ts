@@ -325,3 +325,19 @@ function chain_tests() {
 		.find(num => num % 2 == 0)
 		.value();
 }
+
+_.all<number>([1, 2, 3], x => x % 2 == 0)
+
+class PowerUp {
+	public name: string;
+}
+
+var pu: PowerUp;
+var powerUps: PowerUp[];
+var puArr: PowerUp[] = _.where<PowerUp, any>(powerUps, { name: pu.name });
+
+var truthy = _.any(['one', 'two', 'three']);
+truthy = _.any(['one', 'two', 'three'], (el) => { return el === 'two'; });
+
+var strings = _.map(['one', 'two', 'three'], (el) => { return el + "_appended"; });
+var objects = _.map(powerUps, (el) => { return el.name; });

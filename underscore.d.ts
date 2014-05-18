@@ -73,8 +73,13 @@ interface UnderscoreStatic {
 	* as the first parameter can be invoked through this function.
 	* @param key First argument to Underscore object functions.
 	**/
-	<T>(value: Array<T>): Underscore<T>;
 	<T>(value: T): Underscore<T>;
+
+	/**
+	* Underscore OOP Array Wrapper.
+	**/
+	<T>(value: _.List<T>): Underscore<T>;
+	
 
 	/* *************
 	 * Collections *
@@ -96,9 +101,6 @@ interface UnderscoreStatic {
 
 	/**
 	* @see _.each
-	* @param object Iterators over this object's properties.
-	* @param iterator Iterator function for each property on `obj`.
-	* @param context 'this' object in `iterator`, optional.
 	**/
 	each<T>(
 		object: _.Dictionary<T>,
@@ -137,10 +139,6 @@ interface UnderscoreStatic {
 
 	/**
 	* @see _.map
-	* @param object Maps the properties of this object.
-	* @param iterator Map iterator function for each property on `obj`.
-	* @param context `this` object in `iterator`, optional.
-	* @return The mapped object result.
 	**/
 	map<T, TResult>(
 		object: _.Dictionary<T>,
@@ -151,8 +149,8 @@ interface UnderscoreStatic {
 	* @see _.map
 	**/
 	collect<T, TResult>(
-		list: _.List<T>, iterator:
-		_.ListIterator<T, TResult>,
+		list: _.List<T>,
+		iterator: _.ListIterator<T, TResult>,
 		context?: any): TResult[];
 
 	/**
@@ -175,7 +173,7 @@ interface UnderscoreStatic {
 	* @return Reduced object result.
 	**/
 	reduce<T, TResult>(
-		list: _.Collection<T>,
+		list: _.List<T>,
 		iterator: _.MemoIterator<T, TResult>,
 		memo?: TResult,
 		context?: any): TResult;
@@ -184,7 +182,7 @@ interface UnderscoreStatic {
 	* @see _.reduce
 	**/
 	inject<T, TResult>(
-		list: _.Collection<T>,
+		list: _.List<T>,
 		iterator: _.MemoIterator<T, TResult>,
 		memo?: TResult,
 		context?: any): TResult;
@@ -193,7 +191,7 @@ interface UnderscoreStatic {
 	* @see _.reduce
 	**/
 	foldl<T, TResult>(
-		list: _.Collection<T>,
+		list: _.List<T>,
 		iterator: _.MemoIterator<T, TResult>,
 		memo?: TResult,
 		context?: any): TResult;
@@ -209,7 +207,7 @@ interface UnderscoreStatic {
 	* @return Reduced object result.
 	**/
 	reduceRight<T, TResult>(
-		list: _.Collection<T>,
+		list: _.List<T>,
 		iterator: _.MemoIterator<T, TResult>,
 		memo?: TResult,
 		context?: any): TResult;
@@ -218,7 +216,7 @@ interface UnderscoreStatic {
 	* @see _.reduceRight
 	**/
 	foldr<T, TResult>(
-		list: _.Collection<T>,
+		list: _.List<T>,
 		iterator: _.MemoIterator<T, TResult>,
 		memo?: TResult,
 		context?: any): TResult;
@@ -242,6 +240,14 @@ interface UnderscoreStatic {
 	**/
 	find<T>(
 		list: _.Dictionary<T>,
+		iterator: _.ObjectIterator<T, boolean>,
+		context?: any): T;
+
+	/**
+	* @see _.find
+	**/
+	detect<T>(
+		list: _.List<T>,
 		iterator: _.ListIterator<T, boolean>,
 		context?: any): T;
 
@@ -249,8 +255,8 @@ interface UnderscoreStatic {
 	* @see _.find
 	**/
 	detect<T>(
-		list: _.Collection<T>,
-		iterator: _.ListIterator<T, boolean>,
+		list: _.Dictionary<T>,
+		iterator: _.ObjectIterator<T, boolean>,
 		context?: any): T;
 
 	/**
@@ -271,6 +277,14 @@ interface UnderscoreStatic {
 	**/
 	filter<T>(
 		list: _.Dictionary<T>,
+		iterator: _.ObjectIterator<T, boolean>,
+		context?: any): T[];
+
+	/**
+	* @see _.filter
+	**/
+	select<T>(
+		list: _.List<T>,
 		iterator: _.ListIterator<T, boolean>,
 		context?: any): T[];
 
@@ -278,8 +292,8 @@ interface UnderscoreStatic {
 	* @see _.filter
 	**/
 	select<T>(
-		list: _.Collection<T>,
-		iterator: _.ListIterator<T, boolean>,
+		list: _.Dictionary<T>,
+		iterator: _.ObjectIterator<T, boolean>,
 		context?: any): T[];
 
 	/**
@@ -290,7 +304,7 @@ interface UnderscoreStatic {
 	* @return The elements within `list` that contain the required `properties`.
 	**/
 	where<T, U extends {}>(
-		list: _.Collection<T>,
+		list: _.List<T>,
 		properties: U): T[];
 
 	/**
@@ -322,7 +336,7 @@ interface UnderscoreStatic {
 	**/
 	reject<T>(
 		list: _.Dictionary<T>,
-		iterator: _.ListIterator<T, boolean>,
+		iterator: _.ObjectIterator<T, boolean>,
 		context?: any): T[];
 
 	/**
@@ -334,15 +348,15 @@ interface UnderscoreStatic {
 	* @return True if all elements passed the truth test, otherwise false.
 	**/
 	every<T>(
-		list: _.Collection<T>,
+		list: _.List<T>,
 		iterator?: _.ListIterator<T, boolean>,
 		context?: any): boolean;
 
 	/**
-	* @see _.all
+	* @see _.every
 	**/
 	all<T>(
-		list: _.Collection<T>,
+		list: _.List<T>,
 		iterator?: _.ListIterator<T, boolean>,
 		context?: any): boolean;
 
@@ -355,7 +369,7 @@ interface UnderscoreStatic {
 	* @return True if any elements passed the truth test, otherwise false.
 	**/
 	any<T>(
-		list: _.Collection<T>,
+		list: _.List<T>,
 		iterator?: _.ListIterator<T, boolean>,
 		context?: any): boolean;
 
@@ -363,7 +377,7 @@ interface UnderscoreStatic {
 	* @see _.any
 	**/
 	some<T>(
-		list: _.Collection<T>,
+		list: _.List<T>,
 		iterator?: _.ListIterator<T, boolean>,
 		context?: any): boolean;
 
@@ -375,14 +389,14 @@ interface UnderscoreStatic {
 	* @return True if `value` is present in `list`, otherwise false.
 	**/
 	contains<T>(
-		list: _.Collection<T>,
+		list: _.List<T>,
 		value: T): boolean;
 
 	/**
 	* @see _.contains
 	**/
 	include<T>(
-		list: _.Collection<T>,
+		list: _.List<T>,
 		value: T): boolean;
 
 	/**
@@ -393,7 +407,7 @@ interface UnderscoreStatic {
 	* @param arguments Additional arguments to pass to the method `methodName`.
 	**/
 	invoke<T extends {}>(
-		list: _.Collection<T>,
+		list: _.List<T>,
 		methodName: string,
 		...arguments: any[]): any;
 
@@ -405,7 +419,7 @@ interface UnderscoreStatic {
 	* @return The list of elements within `list` that have the property `propertyName`.
 	**/
 	pluck<T extends {}>(
-		list: _.Collection<T>,
+		list: _.List<T>,
 		propertyName: string): any[];
 
 	/**
@@ -424,7 +438,7 @@ interface UnderscoreStatic {
 	* @return The maximum element within `list`.
 	**/
 	max<T>(
-		list: _.Collection<T>,
+		list: _.List<T>,
 		iterator?: _.ListIterator<T, any>,
 		context?: any): T;
 
@@ -444,7 +458,7 @@ interface UnderscoreStatic {
 	* @return The minimum element within `list`.
 	**/
 	min<T>(
-		list: _.Collection<T>,
+		list: _.List<T>,
 		iterator?: _.ListIterator<T, any>,
 		context?: any): T;
 
@@ -530,7 +544,7 @@ interface UnderscoreStatic {
 	* @param iterator Function name
 	**/
 	countBy<T>(
-		list: _.Dictionary<T>,
+		list: _.List<T>,
 		iterator: string,
 		context?: any): _.Dictionary<number>;
 
@@ -539,19 +553,19 @@ interface UnderscoreStatic {
 	* @param list List to shuffle.
 	* @return Shuffled copy of `list`.
 	**/
-	shuffle<T>(list: _.Collection<T>): T[];
+	shuffle<T>(list: _.List<T>): T[];
 
 	/**
 	* Produce a random sample from the `list`.  Pass a number to return `n` random elements from the list.  Otherwise a single random item will be returned.
 	* @param list List to sample.
 	* @return Random sample of `n` elements in `list`.
 	**/
-	sample<T>(list: _.Collection<T>, n: number): T[];
+	sample<T>(list: _.List<T>, n: number): T[];
 
 	/**
 	* @see _.sample
 	**/
-	sample<T>(list: _.Collection<T>): T;
+	sample<T>(list: _.List<T>): T;
 
 	/**
 	* Converts the list (anything that can be iterated over), into a real Array. Useful for transmuting
@@ -559,14 +573,19 @@ interface UnderscoreStatic {
 	* @param list object to transform into an array.
 	* @return `list` as an array.
 	**/
-	toArray<T>(list: _.Collection<T>): T[];
+	toArray<T>(list: any): T[];
 
 	/**
 	* Return the number of values in the list.
 	* @param list Count the number of values/elements in this list.
 	* @return Number of values in `list`.
 	**/
-	size<T>(list: _.Collection<T>): number;
+	size<T>(list: _.List<T>): number;
+
+	/**
+	* @see _.size
+	**/
+	size(list: {}): number;
 
 	/**
 	* Split array into two arrays: 
@@ -577,7 +596,7 @@ interface UnderscoreStatic {
 	* @return Array where Array[0] are the elements in `array` that satisfies the predicate, and Array[1] the elements that did not.
 	**/
 	partition<T>(
-		array: Array<T>,
+		array: _.List<T>,
 		iterator: _.ListIterator<T, boolean>,
 		context?: any): T[][];
 

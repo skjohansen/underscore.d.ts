@@ -380,4 +380,30 @@ function chain_tests() {
         return num % 2 == 0;
     }).value();
 }
+
+_.all([1, 2, 3], function (x) {
+    return x % 2 == 0;
+});
+
+var PowerUp = (function () {
+    function PowerUp() {
+    }
+    return PowerUp;
+})();
+
+var pu;
+var powerUps;
+var puArr = _.where(powerUps, { name: pu.name });
+
+var truthy = _.any(['one', 'two', 'three']);
+truthy = _.any(['one', 'two', 'three'], function (el) {
+    return el === 'two';
+});
+
+var strings = _.map(['one', 'two', 'three'], function (el) {
+    return el + "_appended";
+});
+var objects = _.map(powerUps, function (el) {
+    return el.name;
+});
 //# sourceMappingURL=underscore-tests.js.map
